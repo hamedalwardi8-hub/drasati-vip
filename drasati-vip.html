@@ -316,6 +316,129 @@
             line-height: 1.6;
         }
 
+        /* Pending Message Modal */
+        .pending-message-modal {
+            max-width: 700px;
+            text-align: center;
+            padding: 60px 50px;
+        }
+
+        .pending-message-modal .modal-close {
+            display: none;
+        }
+
+        .pending-icon-large {
+            font-size: 5rem;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .pending-message-modal h2 {
+            font-size: 2.2rem;
+            color: var(--black);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .pending-message-modal p {
+            font-size: 1.1rem;
+            color: #666;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .pending-highlight {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 1.15rem;
+        }
+
+        .steps-timeline {
+            margin: 40px 0;
+            padding: 30px 0;
+            border-top: 2px solid #E0E0E0;
+            border-bottom: 2px solid #E0E0E0;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 20px 0;
+            text-align: right;
+        }
+
+        .timeline-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--cream);
+            border: 2px solid var(--gold);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .timeline-text h4 {
+            color: var(--black);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+
+        .timeline-text p {
+            color: #666;
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .pending-actions {
+            margin-top: 40px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-pending {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-pending-primary {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .btn-pending-primary:hover {
+            background: #B8955E;
+            transform: translateY(-2px);
+        }
+
+        .btn-pending-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-pending-secondary:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
         /* Success Code Modal */
         .success-code-modal {
             max-width: 600px;
@@ -1402,6 +1525,70 @@
         </div>
     </div>
 
+    <!-- Pending Message Modal (رسالة الانتظار) -->
+    <div class="modal-overlay" id="pendingMessageModal">
+        <div class="modal pending-message-modal">
+            <div class="pending-icon-large">⏳</div>
+
+            <h2>شكراً لك على التسجيل! 🎉</h2>
+
+            <p>
+                سيتم إرسال <span class="pending-highlight">كودك الشخصي</span> في <span class="pending-highlight">واتساب</span>
+            </p>
+
+            <p style="font-size: 1rem; color: var(--gold); font-weight: 600;">
+                في أقل من 24 ساعة
+            </p>
+
+            <div class="steps-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-icon">1️⃣</div>
+                    <div class="timeline-text">
+                        <h4>تحقق من البنك</h4>
+                        <p>سيتحقق فريق خدمة العملاء من تحويلك البنكي</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">2️⃣</div>
+                    <div class="timeline-text">
+                        <h4>تفعيل الكود</h4>
+                        <p>بعد التأكد من الدفع، سيتم تفعيل حسابك</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">3️⃣</div>
+                    <div class="timeline-text">
+                        <h4>رسالة واتساب</h4>
+                        <p>ستتلقى رسالة واتساب تؤكد تفعيل حسابك مع كودك</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-icon">4️⃣</div>
+                    <div class="timeline-text">
+                        <h4>ابدأ التعلم</h4>
+                        <p>استخدم الكود للدخول وابدأ رحلتك التعليمية</p>
+                    </div>
+                </div>
+            </div>
+
+            <p style="color: #666; font-size: 0.95rem; margin: 30px 0;">
+                ⏰ <strong>متوسط الوقت:</strong> من 1 إلى 24 ساعة
+            </p>
+
+            <div class="pending-actions">
+                <button class="btn-pending btn-pending-primary" onclick="closePendingMessageModal();">
+                    ✓ تم، سأنتظر
+                </button>
+                <a href="https://wa.me/968" target="_blank" class="btn-pending btn-pending-secondary">
+                    💬 تواصل معنا
+                </a>
+            </div>
+        </div>
+    </div>
+
     <!-- Success Code Modal (بعد التسجيل) -->
     <div class="modal-overlay" id="successCodeModal">
         <div class="modal success-code-modal">
@@ -1602,6 +1789,10 @@
             document.getElementById("successCodeModal").classList.add("show");
         }
 
+        function closePendingMessageModal() {
+            document.getElementById("pendingMessageModal").classList.remove("show");
+        }
+
         function closeSuccessCodeModal() {
             document.getElementById("successCodeModal").classList.remove("show");
         }
@@ -1705,8 +1896,8 @@
                 // إغلاق modal التسجيل فوراً
                 closeRegisterModal();
 
-                // عرض الكود في alert كبير وواضح
-                alert(`🎉 تم التسجيل بنجاح!\n\nكودك الشخصي:\n\n${code}\n\n⭐ احتفظ بهذا الكود\n⏳ انتظر تفعيل حسابك عبر واتساب`);
+                // عرض رسالة الانتظار الجميلة
+                document.getElementById("pendingMessageModal").classList.add("show");
 
                 // إعادة تعيين النموذج
                 document.getElementById("registerForm").reset();
