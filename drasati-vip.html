@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>أكاديمية دراستي VIP</title>
+    <title>أكاديمية دراستي VIP - منصة تعليمية عمانية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -19,6 +19,7 @@
             --gold: #C9A84C;
             --black: #1C1C2E;
             --white: #FFFFFF;
+            --teal: #17A2B8;
         }
 
         body {
@@ -29,109 +30,294 @@
             direction: rtl;
         }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--black) 0%, #2A2A3E 100%);
+        /* Navbar */
+        .navbar {
+            background: var(--white);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            direction: rtl;
+        }
+
+        .navbar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+
+        .navbar-logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%);
             color: var(--white);
-            padding: 60px 20px;
-            text-align: center;
-            margin-bottom: 0;
-        }
-
-        .hero-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 10px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
             font-weight: 700;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .navbar-logo-text {
+            color: var(--black);
+        }
+
+        .navbar-logo-text .gold {
+            color: var(--gold);
+        }
+
+        .navbar-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .navbar-nav a {
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .navbar-nav a:hover {
+            color: var(--gold);
+        }
+
+        .navbar-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .btn-code {
+            padding: 10px 20px;
+            background: transparent;
+            color: var(--teal);
+            border: 2px solid var(--teal);
+            border-radius: 6px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-code:hover {
+            background: var(--teal);
+            color: var(--white);
+        }
+
+        .btn-register-nav {
+            padding: 10px 20px;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-register-nav:hover {
+            background: #B8955E;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 30px;
+        }
+
+        .hero-left {
+            padding: 30px 0;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-title .gold {
+            color: var(--gold);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #666;
             margin-bottom: 30px;
-            opacity: 0.9;
+            line-height: 1.8;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 20px;
-            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
         }
 
         .btn-primary {
-            padding: 16px 40px;
+            padding: 14px 30px;
             background: var(--gold);
             color: var(--white);
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
+            font-size: 0.95rem;
         }
 
         .btn-primary:hover {
+            background: #B8955E;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4);
         }
 
         .btn-secondary {
-            padding: 16px 40px;
+            padding: 14px 30px;
             background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
-            border-radius: 8px;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+            border-radius: 6px;
             font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            font-weight: 700;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-secondary:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        /* Code Login Section */
+        .code-login {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            border: 2px solid var(--light-border);
+            margin-bottom: 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .code-login-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .code-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .code-input-group input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #E0E0E0;
+            border-radius: 6px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .code-input-group input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+        }
+
+        .code-input-group button {
+            padding: 12px 25px;
+            background: var(--gold);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .btn-secondary:hover {
-            background: var(--white);
-            color: var(--black);
+        .code-input-group button:hover {
+            background: #B8955E;
         }
 
         /* Stats Section */
-        .stats {
-            background: var(--white);
-            padding: 40px 20px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            margin-bottom: 60px;
+        .hero-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #E0E0E0;
         }
 
-        .stats-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
+        .stat-item {
             text-align: center;
         }
 
-        .stat-item h3 {
-            font-size: 2.5rem;
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
             color: var(--gold);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
-        .stat-item p {
-            color: var(--black);
-            font-weight: 600;
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .hero-right {
+            display: none;
         }
 
         /* Container */
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 30px;
+        }
+
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--black);
+            margin-bottom: 50px;
+        }
+
+        .section-title .gold {
+            color: var(--gold);
         }
 
         /* Features Section */
@@ -139,28 +325,20 @@
             margin-bottom: 80px;
         }
 
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            color: var(--black);
-            margin-bottom: 50px;
-        }
-
         .features-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            margin-bottom: 60px;
         }
 
         .feature-card {
             background: var(--white);
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            padding: 35px;
+            border-radius: 10px;
             border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            text-align: right;
         }
 
         .feature-card:hover {
@@ -169,105 +347,240 @@
             box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
         }
 
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
         .feature-card h3 {
             color: var(--gold);
-            margin-bottom: 12px;
-            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-size: 1.15rem;
         }
 
         .feature-card p {
             color: #666;
             font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        /* Grades Section */
+        .grades {
+            margin-bottom: 80px;
+        }
+
+        .grades-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .grade-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            border: 2px solid #E0E0E0;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .grade-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 15px rgba(201, 168, 76, 0.15);
+        }
+
+        .grade-card.active {
+            background: var(--gold);
+            color: var(--white);
+            border-color: var(--gold);
+        }
+
+        .grade-card.active h3 {
+            color: var(--white);
+        }
+
+        .grade-card h3 {
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+            transition: color 0.3s;
+        }
+
+        .grade-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .grade-card.active p {
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Steps Section */
+        .steps {
+            margin-bottom: 80px;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            position: relative;
+        }
+
+        .step-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--gold);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 20px;
+        }
+
+        .step-card h3 {
+            color: var(--black);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .step-card p {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.8;
+        }
+
+        .step-connector {
+            display: none;
         }
 
         /* Pricing Section */
         .pricing {
             margin-bottom: 80px;
+            text-align: center;
         }
 
         .pricing-card {
             background: var(--white);
             border: 3px solid var(--gold);
-            border-radius: 12px;
+            border-radius: 15px;
             padding: 50px;
-            max-width: 500px;
+            max-width: 600px;
             margin: 0 auto;
-            text-align: center;
             box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
+            text-align: right;
         }
 
-        .price {
-            font-size: 3rem;
-            color: var(--gold);
+        .pricing-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .pricing-price {
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            color: var(--gold);
+            margin-bottom: 10px;
         }
 
-        .price-subtitle {
-            color: #999;
+        .pricing-duration {
+            color: #666;
+            font-size: 0.95rem;
             margin-bottom: 30px;
-            font-weight: 500;
         }
 
-        .price-features {
+        .pricing-features {
             text-align: right;
             margin-bottom: 30px;
+            padding: 25px 0;
+            border-top: 2px solid #E0E0E0;
+            border-bottom: 2px solid #E0E0E0;
         }
 
-        .price-features p {
+        .pricing-features p {
+            margin: 12px 0;
             color: var(--black);
-            margin: 10px 0;
             font-size: 0.95rem;
         }
 
-        .price-features p:before {
+        .pricing-features p:before {
             content: "✓ ";
             color: var(--gold);
             font-weight: 700;
             margin-left: 10px;
         }
 
-        /* Registration Section */
-        .registration {
-            margin-bottom: 60px;
-        }
-
-        .registration-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.6);
+            z-index: 2000;
             align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
             background: var(--white);
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 550px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border-right: 4px solid var(--gold);
+            position: relative;
         }
 
-        .registration-form {
-            order: 2;
-        }
-
-        .registration-text {
-            order: 1;
-        }
-
-        .registration-text h2 {
-            color: var(--gold);
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             font-size: 1.8rem;
-            margin-bottom: 20px;
+            cursor: pointer;
+            color: #999;
+            background: none;
+            border: none;
+            transition: color 0.3s;
         }
 
-        .registration-text p {
-            color: #666;
-            margin-bottom: 15px;
-            line-height: 1.8;
+        .modal-close:hover {
+            color: var(--black);
         }
 
+        .modal-title {
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+            margin-top: 10px;
+        }
+
+        /* Form */
         .form-group {
             margin-bottom: 20px;
         }
@@ -277,7 +590,7 @@
             margin-bottom: 8px;
             color: var(--black);
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .form-group input,
@@ -285,7 +598,7 @@
             width: 100%;
             padding: 12px 15px;
             border: 2px solid #E0E0E0;
-            border-radius: 8px;
+            border-radius: 6px;
             font-family: 'Cairo', sans-serif;
             font-size: 0.95rem;
             transition: all 0.3s ease;
@@ -300,290 +613,72 @@
             box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
         }
 
+        .bank-info {
+            background: var(--cream);
+            padding: 20px;
+            border-radius: 8px;
+            border-right: 4px solid var(--gold);
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .bank-info h4 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .bank-info p {
+            margin: 8px 0;
+            color: var(--black);
+            font-size: 0.9rem;
+        }
+
+        .bank-info strong {
+            display: block;
+            color: var(--gold);
+        }
+
         .form-submit {
             width: 100%;
             padding: 14px;
             background: var(--gold);
             color: var(--white);
             border: none;
-            border-radius: 8px;
+            border-radius: 6px;
             font-family: 'Cairo', sans-serif;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-        }
-
-        .form-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-overlay.show {
-            display: flex;
-        }
-
-        .modal {
-            background: var(--white);
-            border-radius: 12px;
-            padding: 40px;
-            max-width: 450px;
-            width: 90%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--gold);
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: #999;
-            background: none;
-            border: none;
-            transition: color 0.3s;
-        }
-
-        .modal-close:hover {
-            color: var(--black);
-        }
-
-        .modal-title {
-            text-align: center;
-            font-size: 1.8rem;
-            color: var(--gold);
-            margin-bottom: 30px;
             margin-top: 10px;
         }
 
-        /* Success Modal */
-        .success-modal {
-            text-align: center;
-        }
-
-        .success-icon {
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
-
-        .success-modal h3 {
-            color: var(--black);
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-        }
-
-        .code-box {
-            background: var(--cream);
-            border: 2px solid var(--gold);
-            padding: 20px;
-            border-radius: 8px;
-            margin: 25px 0;
-        }
-
-        .code-label {
-            color: #999;
-            font-size: 0.85rem;
-            margin-bottom: 10px;
-        }
-
-        .code-display {
-            font-size: 1.8rem;
-            color: var(--gold);
-            font-weight: 700;
-            font-family: 'Courier New', monospace;
-            letter-spacing: 2px;
-        }
-
-        .warning-section {
-            background: #FFF3CD;
-            border-right: 4px solid #FFB800;
-            padding: 15px;
-            border-radius: 8px;
-            margin: 20px 0;
-            text-align: right;
-        }
-
-        .warning-section h4 {
-            color: #856404;
-            margin-bottom: 8px;
-            font-size: 0.95rem;
-        }
-
-        .warning-section p {
-            color: #856404;
-            font-size: 0.85rem;
-            margin: 5px 0;
-        }
-
-        .modal-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 25px;
-        }
-
-        .btn-modal {
-            flex: 1;
-            padding: 12px;
-            border: none;
-            border-radius: 8px;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-modal-primary {
-            background: var(--gold);
-            color: var(--white);
-        }
-
-        .btn-modal-primary:hover {
+        .form-submit:hover {
+            background: #B8955E;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
         }
 
-        /* Student Portal */
-        .student-portal {
-            display: none;
-        }
-
-        /* Navbar */
-        .navbar {
-            background: linear-gradient(135deg, var(--black) 0%, #2A2A3E 100%);
-            color: var(--white);
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .navbar-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .navbar-brand {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--gold);
-        }
-
-        .navbar-logout {
-            background: #E74C3C;
-            padding: 8px 20px;
-            border: none;
+        /* Success Message */
+        .success-message {
+            background: #D4EDDA;
+            color: #155724;
+            padding: 15px;
             border-radius: 6px;
-            color: var(--white);
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .navbar-logout:hover {
-            background: #C0392B;
-        }
-
-        /* Student Portal Content */
-        .portal-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-
-        .welcome-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 12px;
-            border-right: 4px solid var(--gold);
-            margin-bottom: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .welcome-card h2 {
-            color: var(--gold);
-            margin-bottom: 15px;
-        }
-
-        .welcome-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-        }
-
-        .info-item p {
-            color: #999;
-            font-size: 0.9rem;
-        }
-
-        .info-item strong {
-            color: var(--black);
-            display: block;
-            margin-top: 5px;
-        }
-
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            border-bottom: 2px solid #E0E0E0;
-            padding-bottom: 15px;
-        }
-
-        .tab-btn {
-            padding: 10px 20px;
-            background: transparent;
-            border: none;
-            color: #999;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-            margin-bottom: -17px;
-        }
-
-        .tab-btn.active {
-            color: var(--gold);
-            border-bottom-color: var(--gold);
-        }
-
-        .tab-content {
+            margin-bottom: 20px;
+            border-right: 4px solid #28A745;
             display: none;
         }
 
-        .tab-content.active {
+        .success-message.show {
             display: block;
         }
 
-        /* Error/Success Messages */
         .error-message {
             background: #F8D7DA;
             color: #721C24;
             padding: 15px;
-            border-radius: 8px;
+            border-radius: 6px;
             margin-bottom: 20px;
             border-right: 4px solid #F5C6CB;
             display: none;
@@ -593,258 +688,497 @@
             display: block;
         }
 
+        /* Footer */
+        footer {
+            background: var(--black);
+            color: var(--white);
+            padding: 40px 30px;
+            text-align: center;
+            border-top: 3px solid var(--gold);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .footer-logo-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .footer-tagline {
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .footer-socials a {
+            color: var(--gold);
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .footer-socials a:hover {
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 20px;
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+        }
+
+        /* Light Border */
+        .light-border {
+            color: #E0E0E0;
+        }
+
         /* Responsive */
-        @media (max-width: 768px) {
-            .hero h1 {
+        @media (max-width: 1024px) {
+            .hero {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 40px 30px;
+            }
+
+            .hero-title {
+                font-size: 2.2rem;
+            }
+
+            .navbar-nav {
+                display: none;
+            }
+
+            .container {
+                padding: 0 20px;
+            }
+
+            .section-title {
                 font-size: 2rem;
             }
 
-            .hero p {
+            .pricing-card {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 15px;
+                flex-wrap: wrap;
+            }
+
+            .navbar-logo {
                 font-size: 1rem;
+            }
+
+            .navbar-logo-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .navbar-nav {
+                display: none;
+            }
+
+            .navbar-actions {
+                gap: 10px;
+            }
+
+            .btn-code, .btn-register-nav {
+                padding: 8px 15px;
+                font-size: 0.85rem;
+            }
+
+            .main-content {
+                margin-top: 70px;
+            }
+
+            .hero {
+                padding: 30px 15px;
+            }
+
+            .hero-title {
+                font-size: 1.8rem;
             }
 
             .hero-buttons {
                 flex-direction: column;
             }
 
-            .btn-primary,
-            .btn-secondary {
+            .btn-primary, .btn-secondary {
                 width: 100%;
             }
 
-            .stats-container {
-                grid-template-columns: 1fr;
+            .hero-stats {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
             }
 
-            .registration-container {
-                grid-template-columns: 1fr;
-            }
-
-            .registration-form {
-                order: 1;
-            }
-
-            .registration-text {
-                order: 2;
+            .stat-number {
+                font-size: 1.5rem;
             }
 
             .features-grid {
                 grid-template-columns: 1fr;
             }
 
-            .navbar-content {
-                flex-direction: column;
-                gap: 15px;
+            .grades-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .tabs {
-                overflow-x: auto;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.5rem;
-            }
-
-            .hero {
-                padding: 40px 15px;
-            }
-
-            .hero p {
-                font-size: 0.9rem;
-            }
-
-            .stats {
-                padding: 25px 15px;
-            }
-
-            .registration-container {
-                padding: 25px 15px;
-            }
-
-            .modal {
-                padding: 25px 15px;
-            }
-
-            .pricing-card {
-                padding: 25px 15px;
+            .steps-container {
+                grid-template-columns: 1fr;
             }
 
             .section-title {
                 font-size: 1.6rem;
             }
 
-            .price {
+            .modal {
+                padding: 25px;
+            }
+
+            .footer-links {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 10px;
+            }
+
+            .navbar-logo-text {
+                display: none;
+            }
+
+            .navbar-actions {
+                gap: 8px;
+            }
+
+            .btn-code, .btn-register-nav {
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+
+            .hero {
+                padding: 20px 15px;
+            }
+
+            .hero-title {
+                font-size: 1.4rem;
+            }
+
+            .hero-description {
+                font-size: 0.95rem;
+            }
+
+            .hero-stats {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .grades-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pricing-card {
+                padding: 20px;
+            }
+
+            .pricing-price {
                 font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+                margin-bottom: 30px;
+            }
+
+            .modal {
+                padding: 20px;
+            }
+
+            .container {
+                padding: 0 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Hero Section -->
-    <div class="hero" id="heroSection">
-        <div class="hero-content">
-            <h1>🎓 أكاديمية دراستي VIP</h1>
-            <p>منصة تعليمية عمانية متكاملة للصفوف 5 إلى 10</p>
-            <div class="hero-buttons">
-                <button class="btn-primary" onclick="openRegisterModal()">ابدأ رحلتك 🚀</button>
-                <button class="btn-secondary" onclick="openCodeModal()">لدي كود</button>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-logo">
+            <div class="navbar-logo-icon">د</div>
+            <div class="navbar-logo-text">
+                <span>دراستي</span>
+                <span class="gold"> VIP</span>
             </div>
         </div>
-    </div>
 
-    <!-- Stats Section -->
-    <div class="stats">
-        <div class="stats-container">
-            <div class="stat-item">
-                <h3>500+</h3>
-                <p>طالب نشط</p>
-            </div>
-            <div class="stat-item">
-                <h3>13</h3>
-                <p>معلم متخصص</p>
-            </div>
-            <div class="stat-item">
-                <h3>6</h3>
-                <p>مواد دراسية</p>
-            </div>
+        <div class="navbar-nav">
+            <a onclick="scrollToSection('features')">المميزات</a>
+            <a onclick="scrollToSection('grades')">الصفوف</a>
+            <a onclick="scrollToSection('steps')">كيف تعمل</a>
+            <a onclick="scrollToSection('pricing')">الأسعار</a>
         </div>
-    </div>
 
-    <!-- Features Section -->
-    <div class="container">
-        <div class="features">
-            <h2 class="section-title">مميزاتنا الفريدة</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">📚</div>
-                    <h3>محتوى شامل</h3>
-                    <p>كل مواد الصفوف 5-10 بطريقة منظمة وسهلة الفهم</p>
+        <div class="navbar-actions">
+            <button class="btn-code" onclick="openCodeModal()">لدي كود</button>
+            <button class="btn-register-nav" onclick="openRegisterModal()">سجل الآن</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Hero Section -->
+        <section class="hero" id="hero">
+            <div class="hero-left">
+                <h1 class="hero-title">
+                    تعليم <span class="gold">VIP</span> يصنع الفارق
+                </h1>
+
+                <p class="hero-description">
+                    منصة تعليمية عمانية متكاملة توفر لك حصص مباشرة، اختبارات، وملخصات ذكية مع جدول مذاكرة مخصص لك.
+                </p>
+
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="openRegisterModal()">ابدأ رحلتك الآن</button>
+                    <button class="btn-secondary" onclick="scrollToSection('features')">اكتشف المميزات</button>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🤖</div>
-                    <h3>مساعد ذكي</h3>
-                    <p>اسأل أي سؤال واحصل على إجابة فورية من Claude AI</p>
+
+                <div class="code-login">
+                    <div class="code-login-label">طالب مسجّل؟ أدخل كودك للدخول مباشرة</div>
+                    <div class="code-input-group">
+                        <input type="text" id="quickLoginCode" placeholder="DV-XXXXXX">
+                        <button onclick="quickLogin()">دخول</button>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📊</div>
-                    <h3>تتبع التقدم</h3>
-                    <p>شاهد تقدمك بصرياً مع تقارير مفصلة</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🏆</div>
-                    <h3>لوحة منافسة</h3>
-                    <p>تنافس مع زملائك واكسب نقاط</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📄</div>
-                    <h3>ملخصات ذكية</h3>
-                    <p>رفّع كتابك واحصل على ملخصات</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⭐</div>
-                    <h3>إنجازات ونقاط</h3>
-                    <p>اجمع نقاطاً وافتح بادجات جديدة</p>
+
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">9</div>
+                        <div class="stat-label">مواد دراسية</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label">صفوف دراسية</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">85 ر.ع</div>
+                        <div class="stat-label">للفصل الواحد</div>
+                    </div>
                 </div>
             </div>
-        </div>
+
+            <div class="hero-right">
+                <!-- يمكن إضافة صورة هنا -->
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">لماذا <span class="gold">دراستي VIP</span>؟</h2>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3>📹 حصص مباشرة تفاعلية</h3>
+                        <p>حصص مباشرة عبر Google Meet ساعتان أسبوعياً لكل مادة مع المعلم المتخصص</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>✅ اختبارات فورية</h3>
+                        <p>اختبار بعد كل حصة لضمان فهمك الكامل للمادة</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📋 ملخصات "الزبدة"</h3>
+                        <p>ملخصات لا تتجاوز 3 صفحات لكل وحدة دراسية لتسهيل المراجعة</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>🤖 جدول مذاكرة ذكي</h3>
+                        <p>جدول مذاكرة بالذكاء الاصطناعي مخصص لكل طالب حسب مستواه</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📊 تقارير أسبوعية</h3>
+                        <p>تقارير أسبوعية كاملة لولي الأمر عن مستوى ابنه والتقدم المحرز</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <h3>📚 9 مواد باشتراك واحد</h3>
+                        <p>جميع المواد التسع الأساسية في باقة واحدة فقط</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Grades Section -->
+        <section class="grades" id="grades">
+            <div class="container">
+                <h2 class="section-title">من الصف <span class="gold">الخامس</span> حتى <span class="gold">العاشر</span></h2>
+
+                <div class="grades-grid">
+                    <div class="grade-card" onclick="selectGrade(5, this)">
+                        <h3>5</h3>
+                        <p>الصف الخامس</p>
+                    </div>
+
+                    <div class="grade-card" onclick="selectGrade(6, this)">
+                        <h3>6</h3>
+                        <p>الصف السادس</p>
+                    </div>
+
+                    <div class="grade-card" onclick="selectGrade(7, this)">
+                        <h3>7</h3>
+                        <p>الصف السابع</p>
+                    </div>
+
+                    <div class="grade-card" onclick="selectGrade(8, this)">
+                        <h3>8</h3>
+                        <p>الصف الثامن</p>
+                    </div>
+
+                    <div class="grade-card" onclick="selectGrade(9, this)">
+                        <h3>9</h3>
+                        <p>الصف التاسع</p>
+                    </div>
+
+                    <div class="grade-card" onclick="selectGrade(10, this)">
+                        <h3>10</h3>
+                        <p>الصف العاشر</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Steps Section -->
+        <section class="steps" id="steps">
+            <div class="container">
+                <h2 class="section-title"><span class="gold">أربع</span> خطوات للنجاح</h2>
+
+                <div class="steps-container">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3>سجل واشترك</h3>
+                        <p>أكمل النموذج وادفع 85 ر.ع عبر التحويل البنكي</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3>استلم كودك</h3>
+                        <p>بعد تأكيد الدفع يصلك كود سري عبر واتساب فوراً</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3>ادخل بكودك</h3>
+                        <p>أدخل كودك في الصفحة الرئيسية وادخل لبوابتك الخاصة</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3>انضم وتعلّم</h3>
+                        <p>احضر الحصص وأجب الاختبارات وتابع تقدمك</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Pricing Section -->
-        <div class="pricing">
-            <h2 class="section-title">الأسعار</h2>
-            <div class="pricing-card">
-                <div class="price">85 ر.ع</div>
-                <p class="price-subtitle">للفصل الدراسي كاملاً</p>
-                <div class="price-features">
-                    <p>الوصول لكل المواد</p>
-                    <p>حصص يومية</p>
-                    <p>مساعد ذكي</p>
-                    <p>تقارير تقدم</p>
-                    <p>لوحة منافسة</p>
-                </div>
-                <button class="btn-primary" onclick="openRegisterModal()">ابدأ الآن</button>
-            </div>
-        </div>
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <h2 class="section-title">استثمار في <span class="gold">مستقبلك</span></h2>
 
-        <!-- Registration Section -->
-        <div class="registration">
-            <h2 class="section-title">انضم إلينا الآن</h2>
-            <div class="registration-container">
-                <div class="registration-text">
-                    <h2>كيف تبدأ؟</h2>
-                    <p>✓ ملء بيانات بسيطة وسريعة</p>
-                    <p>✓ سنتحقق من التحويل البنكي</p>
-                    <p>✓ تفعيل فوري للحساب</p>
-                    <p>✓ الوصول الكامل للمنصة</p>
-                    <p style="margin-top: 20px; color: var(--gold); font-weight: 600;">انضم لآلاف الطلاب الناجحين</p>
-                </div>
+                <div class="pricing-card">
+                    <div class="pricing-badge">🏆 باقة التميز المطلق</div>
+                    <div class="pricing-price">85 ر.ع</div>
+                    <div class="pricing-duration">للفصل الدراسي الكامل</div>
 
-                <div class="registration-form">
-                    <form id="registerForm">
-                        <div id="registerError" class="error-message"></div>
+                    <div class="pricing-features">
+                        <p>جميع المواد التسع الأساسية</p>
+                        <p>حصص مباشرة أسبوعية لكل مادة</p>
+                        <p>اختبار بعد كل حصة</p>
+                        <p>ملخصات الزبدة لكل وحدة</p>
+                        <p>جدول مذاكرة بالذكاء الاصطناعي</p>
+                        <p>تقارير أسبوعية لولي الأمر</p>
+                    </div>
 
-                        <div class="form-group">
-                            <label>الاسم الكامل</label>
-                            <input type="text" id="studentName" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>الصف الدراسي</label>
-                            <select id="studentGrade" required>
-                                <option value="">اختر الصف</option>
-                                <option value="5">الصف الخامس</option>
-                                <option value="6">الصف السادس</option>
-                                <option value="7">الصف السابع</option>
-                                <option value="8">الصف الثامن</option>
-                                <option value="9">الصف التاسع</option>
-                                <option value="10">الصف العاشر</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label>البريد الإلكتروني</label>
-                            <input type="email" id="studentEmail" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>رقم ولي الأمر (واتساب)</label>
-                            <input type="tel" id="parentPhone" placeholder="966501234567" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label>رقم الطالب (اختياري)</label>
-                            <input type="tel" id="studentPhone">
-                        </div>
-
-                        <div class="form-group">
-                            <label>رقم التحويل البنكي</label>
-                            <input type="text" id="bankTransfer" required>
-                        </div>
-
-                        <button type="submit" class="form-submit">إنشاء حسابي</button>
-                    </form>
+                    <button class="btn-primary" style="width: 100%; padding: 16px;" onclick="openRegisterModal()">
+                        سجل الآن — 85 ر.ع
+                    </button>
                 </div>
             </div>
-        </div>
+        </section>
     </div>
 
     <!-- Register Modal -->
     <div class="modal-overlay" id="registerModal">
         <div class="modal">
             <button class="modal-close" onclick="closeRegisterModal()">✕</button>
-            <h2 class="modal-title">تسجيل جديد</h2>
-            <form id="registerModalForm">
-                <div id="registerModalError" class="error-message"></div>
+            <h2 class="modal-title">نموذج التسجيل</h2>
 
+            <div id="registerError" class="error-message"></div>
+
+            <form id="registerForm">
                 <div class="form-group">
-                    <label>الاسم الكامل</label>
-                    <input type="text" id="modalStudentName" required>
+                    <label>اسم الطالب كاملاً *</label>
+                    <input type="text" id="studentName" required>
                 </div>
 
                 <div class="form-group">
-                    <label>الصف الدراسي</label>
-                    <select id="modalStudentGrade" required>
+                    <label>الصف الدراسي *</label>
+                    <select id="studentGrade" required>
                         <option value="">اختر الصف</option>
                         <option value="5">الصف الخامس</option>
                         <option value="6">الصف السادس</option>
@@ -856,51 +1190,37 @@
                 </div>
 
                 <div class="form-group">
-                    <label>البريد الإلكتروني</label>
-                    <input type="email" id="modalStudentEmail" required>
+                    <label>البريد الإلكتروني *</label>
+                    <input type="email" id="studentEmail" required>
                 </div>
 
                 <div class="form-group">
-                    <label>رقم ولي الأمر</label>
-                    <input type="tel" id="modalParentPhone" required>
+                    <label>رقم واتساب ولي الأمر *</label>
+                    <input type="tel" id="parentPhone" placeholder="966501234567" required>
                 </div>
 
                 <div class="form-group">
                     <label>رقم الطالب (اختياري)</label>
-                    <input type="tel" id="modalStudentPhone">
+                    <input type="tel" id="studentPhone">
                 </div>
 
                 <div class="form-group">
-                    <label>رقم التحويل البنكي</label>
-                    <input type="text" id="modalBankTransfer" required>
+                    <label>رقم التحويل البنكي *</label>
+                    <input type="text" id="bankTransfer" required>
                 </div>
 
-                <button type="submit" class="form-submit">إنشاء حسابي</button>
+                <div class="bank-info">
+                    <h4>💳 بيانات التحويل البنكي:</h4>
+                    <p><strong>البنك:</strong> البنك الأهلي العماني</p>
+                    <p><strong>الحساب:</strong> أكاديمية دراستي VIP</p>
+                    <p><strong>رقم الحساب:</strong> XXXXXXXXXXXXXX</p>
+                    <p><strong>المبلغ:</strong> 85 ر.ع</p>
+                </div>
+
+                <button type="submit" class="form-submit">إرسال طلب التسجيل</button>
             </form>
-        </div>
-    </div>
 
-    <!-- Success Modal -->
-    <div class="modal-overlay" id="successModal">
-        <div class="modal success-modal">
-            <button class="modal-close" onclick="closeSuccessModal()">✕</button>
-            <div class="success-icon">✅</div>
-            <h3>تم التسجيل بنجاح!</h3>
-
-            <div class="code-box">
-                <div class="code-label">كودك الشخصي - احتفظ به:</div>
-                <div class="code-display" id="successCode">DV-XXXXXX</div>
-            </div>
-
-            <div class="warning-section">
-                <h4>⏳ حسابك قيد المراجعة</h4>
-                <p>سيتم التحقق من التحويل البنكي من قبل فريق خدمة العملاء</p>
-                <p>ستتلقى رسالة واتساب عند تفعيل حسابك</p>
-            </div>
-
-            <div class="modal-buttons">
-                <button class="btn-modal btn-modal-primary" onclick="closeSuccessModal(); closeRegisterModal();">حسناً</button>
-            </div>
+            <div id="registerSuccess" class="success-message"></div>
         </div>
     </div>
 
@@ -909,9 +1229,10 @@
         <div class="modal">
             <button class="modal-close" onclick="closeCodeModal()">✕</button>
             <h2 class="modal-title">الدخول بالكود</h2>
-            <form id="codeForm">
-                <div id="codeError" class="error-message"></div>
 
+            <div id="codeError" class="error-message"></div>
+
+            <form id="codeForm">
                 <div class="form-group">
                     <label>أدخل كودك الشخصي</label>
                     <input type="text" id="loginCode" placeholder="DV-XXXXXX" required>
@@ -922,101 +1243,36 @@
         </div>
     </div>
 
-    <!-- Pending Modal -->
-    <div class="modal-overlay" id="pendingModal">
-        <div class="modal success-modal">
-            <button class="modal-close" onclick="closePendingModal()">✕</button>
-            <div class="success-icon">⏳</div>
-            <h3>حسابك قيد المراجعة</h3>
-
-            <div class="warning-section">
-                <p>سيقوم فريق خدمة العملاء بمراجعة بيانات التحويل البنكي</p>
-                <p>ستتلقى رسالة واتساب فور تفعيل حسابك</p>
-                <p style="margin-top: 15px; font-weight: 600;">شكراً لانتظارك! 🙏</p>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="footer-logo-icon">د</div>
+                <span>دراستي VIP</span>
             </div>
 
-            <div class="modal-buttons">
-                <button class="btn-modal btn-modal-primary" onclick="closePendingModal(); closeCodeModal();">حسناً</button>
-            </div>
-        </div>
-    </div>
+            <p class="footer-tagline">جودة قبل الكمية</p>
 
-    <!-- Student Portal -->
-    <div class="student-portal" id="studentPortal">
-        <!-- Navbar -->
-        <div class="navbar">
-            <div class="navbar-content">
-                <span class="navbar-brand">🎓 دراستي VIP</span>
-                <button class="navbar-logout" onclick="logout()">تسجيل الخروج</button>
-            </div>
-        </div>
-
-        <!-- Portal Content -->
-        <div class="portal-container">
-            <!-- Welcome Card -->
-            <div class="welcome-card">
-                <h2>أهلاً وسهلاً 👋</h2>
-                <div class="welcome-info">
-                    <div class="info-item">
-                        <p>الاسم</p>
-                        <strong id="portalName">-</strong>
-                    </div>
-                    <div class="info-item">
-                        <p>الصف</p>
-                        <strong id="portalGrade">-</strong>
-                    </div>
-                    <div class="info-item">
-                        <p>الكود</p>
-                        <strong id="portalCode">-</strong>
-                    </div>
-                    <div class="info-item">
-                        <p>النقاط</p>
-                        <strong id="portalPoints">0</strong>
-                    </div>
-                </div>
+            <div class="footer-links">
+                <a href="https://wa.me/968" target="_blank">واتساب</a>
+                <a href="https://instagram.com" target="_blank">إنستقرام</a>
+                <a onclick="scrollToSection('contact')">تواصل معنا</a>
             </div>
 
-            <!-- Tabs -->
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('today')">🕐 حصص اليوم</button>
-                <button class="tab-btn" onclick="switchTab('subjects')">📚 المواد</button>
-                <button class="tab-btn" onclick="switchTab('grades')">📊 درجاتي</button>
-                <button class="tab-btn" onclick="switchTab('leaderboard')">🏆 المنافسة</button>
+            <div class="footer-socials">
+                <a href="https://wa.me/968" target="_blank" title="واتساب">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" title="إنستقرام">
+                    <i class="fab fa-instagram"></i>
+                </a>
             </div>
 
-            <!-- Today Sessions -->
-            <div id="today" class="tab-content active">
-                <div class="welcome-card">
-                    <h3>🕐 حصص اليوم</h3>
-                    <p id="todayContent" style="color: #999; margin-top: 15px;">جاري تحميل الحصص...</p>
-                </div>
-            </div>
-
-            <!-- Subjects -->
-            <div id="subjects" class="tab-content">
-                <div class="welcome-card">
-                    <h3>📚 المواد الدراسية</h3>
-                    <p id="subjectsContent" style="color: #999; margin-top: 15px;">جاري تحميل المواد...</p>
-                </div>
-            </div>
-
-            <!-- Grades -->
-            <div id="grades" class="tab-content">
-                <div class="welcome-card">
-                    <h3>📊 درجاتي</h3>
-                    <p id="gradesContent" style="color: #999; margin-top: 15px;">لم تحصل على درجات بعد</p>
-                </div>
-            </div>
-
-            <!-- Leaderboard -->
-            <div id="leaderboard" class="tab-content">
-                <div class="welcome-card">
-                    <h3>🏆 لوحة المنافسة</h3>
-                    <p id="leaderboardContent" style="color: #999; margin-top: 15px;">جاري تحميل البيانات...</p>
-                </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 أكاديمية دراستي VIP. جميع الحقوق محفوظة.</p>
             </div>
         </div>
-    </div>
+    </footer>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
@@ -1036,9 +1292,7 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        let currentStudent = null;
-
-        // Generate Student Code
+        // Generate Code
         function generateCode() {
             const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
             let code = "DV-";
@@ -1055,8 +1309,9 @@
 
         function closeRegisterModal() {
             document.getElementById("registerModal").classList.remove("show");
-            document.getElementById("registerModalForm").reset();
-            document.getElementById("registerModalError").classList.remove("show");
+            document.getElementById("registerForm").reset();
+            document.getElementById("registerError").classList.remove("show");
+            document.getElementById("registerSuccess").classList.remove("show");
         }
 
         function openCodeModal() {
@@ -1069,34 +1324,28 @@
             document.getElementById("codeError").classList.remove("show");
         }
 
-        function closeSuccessModal() {
-            document.getElementById("successModal").classList.remove("show");
-        }
-
-        function closePendingModal() {
-            document.getElementById("pendingModal").classList.remove("show");
-        }
-
         // Close modal on outside click
-        window.addEventListener("click", function(event) {
-            if (event.target.classList.contains("modal-overlay")) {
-                event.target.classList.remove("show");
-            }
+        document.querySelectorAll(".modal-overlay").forEach(modal => {
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove("show");
+                }
+            });
         });
 
-        // Register Form
-        document.getElementById("registerModalForm").addEventListener("submit", async (e) => {
+        // Register Form Submit
+        document.getElementById("registerForm").addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            const name = document.getElementById("modalStudentName").value.trim();
-            const grade = document.getElementById("modalStudentGrade").value;
-            const email = document.getElementById("modalStudentEmail").value.trim();
-            const parentPhone = document.getElementById("modalParentPhone").value.trim();
-            const studentPhone = document.getElementById("modalStudentPhone").value.trim();
-            const bankTransfer = document.getElementById("modalBankTransfer").value.trim();
+            const name = document.getElementById("studentName").value.trim();
+            const grade = document.getElementById("studentGrade").value;
+            const email = document.getElementById("studentEmail").value.trim();
+            const parentPhone = document.getElementById("parentPhone").value.trim();
+            const studentPhone = document.getElementById("studentPhone").value.trim();
+            const bankTransfer = document.getElementById("bankTransfer").value.trim();
 
             if (!name || !grade || !email || !parentPhone || !bankTransfer) {
-                showError("registerModalError", "الرجاء ملء جميع الحقول المطلوبة");
+                showError("registerError", "الرجاء ملء جميع الحقول المطلوبة");
                 return;
             }
 
@@ -1114,137 +1363,69 @@
                     status: "pending",
                     createdAt: new Date(),
                     points: 0,
-                    grades: {},
-                    attendance: []
+                    grades: {}
                 });
 
-                closeRegisterModal();
-                document.getElementById("successCode").textContent = code;
-                document.getElementById("successModal").classList.add("show");
+                showSuccess("registerSuccess", `✅ تم استلام طلبك! كودك: <strong>${code}</strong><br>انتظر التفعيل عبر واتساب`);
+                document.getElementById("registerForm").reset();
             } catch (error) {
-                showError("registerModalError", "خطأ: " + error.message);
+                showError("registerError", "خطأ: " + error.message);
             }
         });
 
-        // Login Form
+        // Code Form Submit
         document.getElementById("codeForm").addEventListener("submit", async (e) => {
             e.preventDefault();
-
             const code = document.getElementById("loginCode").value.trim();
+            loginWithCode(code, "codeError");
+        });
 
+        // Quick Login
+        async function quickLogin() {
+            const code = document.getElementById("quickLoginCode").value.trim();
             if (!code) {
-                showError("codeError", "الرجاء إدخال الكود");
+                alert("الرجاء إدخال الكود");
                 return;
             }
+            loginWithCode(code, null);
+        }
 
+        // Login Function
+        async function loginWithCode(code, errorElementId) {
             try {
                 const doc = await db.collection("students").doc(code).get();
 
                 if (!doc.exists) {
-                    showError("codeError", "الكود غير صحيح");
+                    if (errorElementId) showError(errorElementId, "الكود غير صحيح");
+                    else alert("الكود غير صحيح");
                     return;
                 }
 
                 const student = doc.data();
 
                 if (student.status === "pending") {
-                    closeCodeModal();
-                    document.getElementById("pendingModal").classList.add("show");
+                    if (errorElementId) closeCodeModal();
+                    alert("⏳ حسابك قيد المراجعة. انتظر تأكيد الدفع عبر واتساب");
                     return;
                 }
 
                 if (student.status !== "active") {
-                    showError("codeError", "حسابك غير مفعّل");
+                    if (errorElementId) showError(errorElementId, "حسابك غير مفعّل");
+                    else alert("حسابك غير مفعّل");
                     return;
                 }
 
+                // TODO: Redirect to student portal
                 localStorage.setItem("studentCode", code);
-                currentStudent = { code, ...student };
-                closeCodeModal();
-                showPortal();
+                alert("✅ تم تسجيل الدخول بنجاح!");
+                // window.location.href = "student-portal.html";
             } catch (error) {
-                showError("codeError", "خطأ: " + error.message);
+                if (errorElementId) showError(errorElementId, "خطأ: " + error.message);
+                else alert("خطأ: " + error.message);
             }
-        });
-
-        // Show Portal
-        function showPortal() {
-            document.getElementById("heroSection").style.display = "none";
-            document.querySelector(".stats").style.display = "none";
-            document.querySelectorAll(".container").forEach(el => el.style.display = "none");
-            document.getElementById("studentPortal").style.display = "block";
-
-            document.getElementById("portalName").textContent = currentStudent.name;
-            document.getElementById("portalGrade").textContent = `الصف ${currentStudent.grade}`;
-            document.getElementById("portalCode").textContent = currentStudent.code;
-            document.getElementById("portalPoints").textContent = currentStudent.points || 0;
-
-            loadTodayContent();
-            loadSubjects();
         }
 
-        // Load Today Content
-        function loadTodayContent() {
-            const today = new Date();
-            const days = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-            const dayName = days[today.getDay()];
-
-            let content = `<p><strong>📅 اليوم:</strong> ${dayName}</p>`;
-
-            if ([0, 1, 2, 3].includes(today.getDay())) {
-                content += `
-                    <p style="margin-top: 15px;">🕐 <strong>4:00 م - 5:00 م:</strong> مادة أولى</p>
-                    <p>🕐 <strong>5:00 م - 6:00 م:</strong> مادة ثانية</p>
-                    <p>🕐 <strong>8:00 م - 9:00 م:</strong> مادة ثالثة</p>
-                `;
-            } else if ([4, 5].includes(today.getDay())) {
-                content += `<p style="margin-top: 15px; color: var(--gold); font-weight: 600;">🎉 يوم راحة - استمتع بوقتك!</p>`;
-            } else {
-                content += `
-                    <p style="margin-top: 15px;">🕐 <strong>10:00 ص - 11:00 ص:</strong> مادة أولى</p>
-                    <p>🕐 <strong>11:00 ص - 12:00 م:</strong> مادة ثانية</p>
-                    <p>🕐 <strong>4:00 م - 5:00 م:</strong> مادة ثالثة</p>
-                `;
-            }
-
-            document.getElementById("todayContent").innerHTML = content;
-        }
-
-        // Load Subjects
-        function loadSubjects() {
-            const subjects = {
-                "5": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-                "6": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-                "7": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-                "8": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-                "9": ["رياضيات", "فيزياء", "كيمياء", "أحياء", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-                "10": ["رياضيات", "فيزياء", "كيمياء", "أحياء", "عربي", "إنجليزي", "إسلامية", "دراسات"]
-            };
-
-            const grade = currentStudent.grade;
-            const gradeSubjects = subjects[grade] || [];
-
-            let content = gradeSubjects.map(s => `<p style="margin: 10px 0;">📖 ${s}</p>`).join("");
-            document.getElementById("subjectsContent").innerHTML = content;
-        }
-
-        // Switch Tab
-        function switchTab(tabName) {
-            document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
-            document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
-
-            document.getElementById(tabName).classList.add("active");
-            event.target.classList.add("active");
-        }
-
-        // Logout
-        function logout() {
-            localStorage.removeItem("studentCode");
-            currentStudent = null;
-            location.reload();
-        }
-
-        // Show Error
+        // Utility Functions
         function showError(elementId, message) {
             const element = document.getElementById(elementId);
             element.textContent = message;
@@ -1252,20 +1433,25 @@
             setTimeout(() => element.classList.remove("show"), 5000);
         }
 
-        // Check Login on Load
-        window.addEventListener("load", () => {
-            const code = localStorage.getItem("studentCode");
-            if (code) {
-                db.collection("students").doc(code).get().then(doc => {
-                    if (doc.exists && doc.data().status === "active") {
-                        currentStudent = { code, ...doc.data() };
-                        showPortal();
-                    } else {
-                        localStorage.removeItem("studentCode");
-                    }
-                });
+        function showSuccess(elementId, message) {
+            const element = document.getElementById(elementId);
+            element.innerHTML = message;
+            element.classList.add("show");
+        }
+
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: "smooth" });
             }
-        });
+        }
+
+        function selectGrade(gradeNum, element) {
+            document.querySelectorAll(".grade-card").forEach(card => {
+                card.classList.remove("active");
+            });
+            element.classList.add("active");
+        }
     </script>
 </body>
 </html>
