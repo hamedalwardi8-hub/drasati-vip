@@ -1646,14 +1646,38 @@
             const studentPhone = document.getElementById("studentPhone").value.trim();
             const bankTransfer = document.getElementById("bankTransfer").value.trim();
 
-            if (!name || !grade || !email || !parentPhone || !bankTransfer) {
-                showError("registerError", "الرجاء ملء جميع الحقول المطلوبة");
+            // التحقق من الحقول المطلوبة
+            if (!name) {
+                showError("registerError", "الرجاء إدخال اسم الطالب");
+                return;
+            }
+            if (!grade) {
+                showError("registerError", "الرجاء اختيار الصف الدراسي");
+                return;
+            }
+            if (!email) {
+                showError("registerError", "الرجاء إدخال البريد الإلكتروني");
+                return;
+            }
+            if (!parentPhone) {
+                showError("registerError", "الرجاء إدخال رقم واتساب ولي الأمر");
+                return;
+            }
+            if (!bankTransfer) {
+                showError("registerError", "الرجاء إدخال رقم التحويل البنكي");
                 return;
             }
 
             const code = generateCode();
 
             try {
+                // التحقق من Firebase
+                if (!db) {
+                    showError("registerError", "خطأ في الاتصال بقاعدة البيانات. تحقق من الإنترنت");
+                    console.error("Firebase not initialized");
+                    return;
+                }
+
                 await db.collection("students").doc(code).set({
                     name: name,
                     grade: grade,
@@ -1668,13 +1692,16 @@
                     grades: {}
                 });
 
+                console.log("تم التسجيل بنجاح - الكود:", code);
+
                 // عرض الكود في modal جديد
                 closeRegisterModal();
                 document.getElementById("displayCode").textContent = code;
                 document.getElementById("successCodeModal").classList.add("show");
                 document.getElementById("registerForm").reset();
             } catch (error) {
-                showError("registerError", "خطأ: " + error.message);
+                console.error("خطأ التسجيل:", error);
+                showError("registerError", "❌ خطأ: " + error.message);
             }
         });
 
