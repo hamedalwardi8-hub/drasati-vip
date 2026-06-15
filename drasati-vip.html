@@ -1702,10 +1702,13 @@
 
                 console.log("تم التسجيل بنجاح - الكود:", code);
 
-                // عرض الكود في modal جديد
+                // إغلاق modal التسجيل فوراً
                 closeRegisterModal();
-                document.getElementById("displayCode").textContent = code;
-                document.getElementById("successCodeModal").classList.add("show");
+
+                // عرض الكود في alert كبير وواضح
+                alert(`🎉 تم التسجيل بنجاح!\n\nكودك الشخصي:\n\n${code}\n\n⭐ احتفظ بهذا الكود\n⏳ انتظر تفعيل حسابك عبر واتساب`);
+
+                // إعادة تعيين النموذج
                 document.getElementById("registerForm").reset();
             } catch (error) {
                 console.error("خطأ التسجيل:", error);
