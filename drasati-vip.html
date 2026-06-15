@@ -1564,6 +1564,10 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
+        // التحقق من Firebase
+        console.log("✅ Firebase initialized");
+        console.log("Database:", db);
+
         // Generate Code
         function generateCode() {
             const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -1636,7 +1640,11 @@
         });
 
         // Register Form Submit
-        document.getElementById("registerForm").addEventListener("submit", async (e) => {
+        const registerForm = document.getElementById("registerForm");
+        console.log("Register form found:", registerForm);
+
+        if (registerForm) {
+            registerForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
             const name = document.getElementById("studentName").value.trim();
@@ -1703,7 +1711,10 @@
                 console.error("خطأ التسجيل:", error);
                 showError("registerError", "❌ خطأ: " + error.message);
             }
-        });
+            });
+        } else {
+            console.error("❌ Register form not found!");
+        }
 
         // Code Form Submit
         document.getElementById("codeForm").addEventListener("submit", async (e) => {
