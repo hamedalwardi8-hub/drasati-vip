@@ -76,11 +76,19 @@
         .hero-description {
             font-size: 1.1rem;
             color: var(--gray);
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             line-height: 1.8;
         }
 
-        .hero-btn {
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
             padding: 18px 40px;
             background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%);
             color: var(--white);
@@ -92,12 +100,203 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 8px 25px rgba(201, 168, 76, 0.3);
-            display: inline-block;
         }
 
-        .hero-btn:hover {
+        .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 35px rgba(201, 168, 76, 0.4);
+        }
+
+        .btn-secondary-cta {
+            padding: 18px 40px;
+            background: var(--white);
+            color: var(--gold);
+            border: 3px solid var(--gold);
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary-cta:hover {
+            background: var(--gold);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--light-border);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            float: left;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--black);
+        }
+
+        .modal-title {
+            text-align: center;
+            clear: both;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 30px;
+            margin-top: 10px;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            text-align: center;
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .success-modal h3 {
+            color: var(--black);
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+        }
+
+        .code-display {
+            background: linear-gradient(135deg, var(--cream) 0%, #FAFAF8 100%);
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid var(--gold);
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .code-display .label {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .code-display .code {
+            font-size: 1.8rem;
+            color: var(--gold);
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+        }
+
+        .success-modal p {
+            color: var(--gray);
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #FFF3CD;
+            border: 2px solid #FFE69C;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px 0;
+            text-align: right;
+        }
+
+        .warning-box h4 {
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .warning-box p {
+            color: #856404;
+            font-size: 0.85rem;
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%);
+            color: var(--white);
+        }
+
+        .modal-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
+        }
+
+        .modal-btn-secondary {
+            background: var(--light-border);
+            color: var(--black);
+        }
+
+        .modal-btn-secondary:hover {
+            background: var(--gray);
+            color: var(--white);
+        }
+
+        /* Pending Status Message */
+        .pending-message {
+            background: #E3F2FD;
+            border-right: 4px solid #2196F3;
+            padding: 15px;
+            border-radius: 8px;
+            color: #1565C0;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        .pending-message strong {
+            display: block;
+            margin-bottom: 8px;
         }
 
         .hero-stats {
@@ -1204,9 +1403,14 @@
                         احصل على تعليم عالي الجودة من معلمين متخصصين<br>
                         مع تكنولوجيا ذكية تساعدك على التقدم والتفوق
                     </p>
-                    <button class="hero-btn" onclick="document.getElementById('authSection').scrollIntoView({behavior: 'smooth'}); return false;">
-                        ابدأ رحلتك التعليمية الآن ✨
-                    </button>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="openRegisterModal()">
+                            ابدأ رحلتك مع دراستي VIP 🎓
+                        </button>
+                        <button class="btn-secondary-cta" onclick="openCodeModal()">
+                            لدي كود ✓
+                        </button>
+                    </div>
                 </div>
                 <div class="hero-stats">
                     <div class="stat-item">
@@ -1474,19 +1678,12 @@
             </section>
         </div>
 
-        <!-- شاشة التسجيل -->
-        <div id="authSection" style="scroll-margin-top: 100px;">
-            <div class="auth-title">
-                <h2>انضم إلى أكاديمية دراستي VIP</h2>
-                <p>اختر طريقتك للبدء</p>
-            </div>
-
-            <div class="auth-screen" id="authScreen">
-            <!-- نموذج التسجيل الجديد -->
-            <div class="form-card">
-                <h2>🆕 تسجيل جديد</h2>
+        <!-- Modal التسجيل -->
+        <div class="modal-overlay" id="registerModal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeRegisterModal()">&times;</span>
+                <h2 class="modal-title">🆕 تسجيل جديد</h2>
                 <div id="registerError" class="error-message"></div>
-                <div id="registerSuccess" class="success-message"></div>
                 <form id="registerForm">
                     <div class="form-group">
                         <label for="studentName">اسم الطالب</label>
@@ -1526,40 +1723,84 @@
                         <input type="text" id="bankTransfer" required>
                     </div>
 
-                    <button type="submit">إنشاء حسابي</button>
-                </form>
-            </div>
-
-            <!-- نموذج الدخول -->
-            <div class="form-card">
-                <h2>🔐 الدخول</h2>
-                <div id="loginError" class="error-message"></div>
-                <div id="loginSuccess" class="success-message"></div>
-                <form id="loginForm">
-                    <div class="form-group">
-                        <label for="loginCode">لديك كود؟ أدخل الكود</label>
-                        <input type="text" id="loginCode" placeholder="مثال: DV-AB3K7X">
-                    </div>
-                    <button type="submit">دخول بالكود</button>
-                </form>
-
-                <hr style="margin: 25px 0; border: none; border-top: 2px solid var(--light-border);">
-
-                <form id="emailLoginForm">
-                    <div class="form-group">
-                        <label for="loginEmail">أو أدخل بريدك الإلكتروني</label>
-                        <input type="email" id="loginEmail">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="loginPassword">كلمة المرور</label>
-                        <input type="password" id="loginPassword">
-                    </div>
-
-                    <button type="submit">دخول</button>
+                    <button type="submit" style="width: 100%;">إنشاء حسابي</button>
                 </form>
             </div>
         </div>
+
+        <!-- Modal إدخال الكود -->
+        <div class="modal-overlay" id="codeModal">
+            <div class="modal-content">
+                <span class="modal-close" onclick="closeCodeModal()">&times;</span>
+                <h2 class="modal-title">🔐 الدخول بالكود</h2>
+                <div id="loginError" class="error-message"></div>
+                <form id="codeForm">
+                    <div class="form-group">
+                        <label for="loginCode">أدخل كودك الشخصي</label>
+                        <input type="text" id="loginCode" placeholder="مثال: DV-AB3K7X" required>
+                    </div>
+                    <button type="submit" style="width: 100%;">دخول</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal التسجيل بنجاح -->
+        <div class="modal-overlay" id="successModal">
+            <div class="modal-content success-modal">
+                <div class="success-icon">✅</div>
+                <h3>تم التسجيل بنجاح!</h3>
+
+                <div class="code-display">
+                    <div class="label">هذا كودك الشخصي - احتفظ به في مكان آمن:</div>
+                    <div class="code" id="successCode">DV-XXXXXX</div>
+                </div>
+
+                <div class="warning-box">
+                    <h4>📋 معلومة مهمة</h4>
+                    <p><strong>حسابك قيد المراجعة</strong></p>
+                    <p>سيتم التحقق من التحويل البنكي الذي أدخلته من قبل فريق خدمة العملاء</p>
+                    <p><strong>بعد التفعيل، ستتمكن من:</strong></p>
+                    <p>• الدخول إلى بوابة الطالب</p>
+                    <p>• حضور الحصص الدراسية</p>
+                    <p>• الوصول لكل المواد والموارد</p>
+                </div>
+
+                <p style="color: var(--gold); font-weight: 600; text-align: center; margin-top: 20px;">
+                    سيتم إخبارك عبر الواتساب عند تفعيل حسابك 📱
+                </p>
+
+                <div class="modal-buttons">
+                    <button class="modal-btn modal-btn-primary" onclick="closeSuccessModal(); closeRegisterModal();">
+                        حسناً، فهمت
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal حالة الحساب -->
+        <div class="modal-overlay" id="statusModal">
+            <div class="modal-content success-modal">
+                <div class="success-icon" id="statusIcon">⏳</div>
+                <h3 id="statusTitle">حسابك قيد المراجعة</h3>
+
+                <div class="pending-message" id="statusMessage">
+                    <strong>⏳ انتظر تفعيل حسابك</strong>
+                    سيقوم فريق خدمة العملاء بمراجعة بيانات التحويل البنكي<br>
+                    وتفعيل حسابك قريباً جداً
+                </div>
+
+                <p style="color: var(--gray); text-align: center; margin: 20px 0;">
+                    ستتلقى رسالة واتساب فور تفعيل حسابك
+                </p>
+
+                <div class="modal-buttons">
+                    <button class="modal-btn modal-btn-primary" onclick="closeStatusModal(); closeCodeModal();">
+                        حسناً
+                    </button>
+                </div>
+            </div>
+        </div>
+
 
         <!-- بوابة الطالب -->
         <div class="student-portal" id="studentPortal">
@@ -1777,6 +2018,56 @@
         // بيانات الطالب الحالي
         let currentStudent = null;
 
+        // فتح/إغلاق الـ Modals
+        function openRegisterModal() {
+            document.getElementById("registerModal").classList.add("show");
+        }
+
+        function closeRegisterModal() {
+            document.getElementById("registerModal").classList.remove("show");
+            document.getElementById("registerForm").reset();
+            document.getElementById("registerError").classList.remove("show");
+        }
+
+        function openCodeModal() {
+            document.getElementById("codeModal").classList.add("show");
+        }
+
+        function closeCodeModal() {
+            document.getElementById("codeModal").classList.remove("show");
+            document.getElementById("codeForm").reset();
+            document.getElementById("loginError").classList.remove("show");
+        }
+
+        function closeSuccessModal() {
+            document.getElementById("successModal").classList.remove("show");
+        }
+
+        function closeStatusModal() {
+            document.getElementById("statusModal").classList.remove("show");
+        }
+
+        // إغلاق Modal عند الضغط خارجه
+        window.addEventListener("click", function(event) {
+            const registerModal = document.getElementById("registerModal");
+            const codeModal = document.getElementById("codeModal");
+            const successModal = document.getElementById("successModal");
+            const statusModal = document.getElementById("statusModal");
+
+            if (event.target === registerModal) {
+                closeRegisterModal();
+            }
+            if (event.target === codeModal) {
+                closeCodeModal();
+            }
+            if (event.target === successModal) {
+                closeSuccessModal();
+            }
+            if (event.target === statusModal) {
+                closeStatusModal();
+            }
+        });
+
         // المواد الدراسية حسب الصف
         const subjectsByGrade = {
             "5": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
@@ -1816,7 +2107,7 @@
             const code = generateStudentCode();
 
             try {
-                const docRef = await db.collection("students").doc(code).set({
+                await db.collection("students").doc(code).set({
                     name: name,
                     grade: grade,
                     email: email,
@@ -1831,21 +2122,17 @@
                     attendance: []
                 });
 
-                showSuccess("registerSuccess", `🎉 تم التسجيل بنجاح!\n\nكودك الشخصي: <strong>${code}</strong>\n\nاحفظ هذا الكود لتسجيل الدخول لاحقاً`);
-                document.getElementById("registerForm").reset();
-
-                // تسجيل الدخول تلقائياً
-                setTimeout(() => {
-                    document.getElementById("loginCode").value = code;
-                    loginWithCode();
-                }, 2000);
+                // إغلاق modal التسجيل وعرض modal النجاح
+                closeRegisterModal();
+                document.getElementById("successCode").textContent = code;
+                document.getElementById("successModal").classList.add("show");
             } catch (error) {
                 showError("registerError", "حدث خطأ: " + error.message);
             }
         });
 
         // معالجة الدخول بالكود
-        document.getElementById("loginForm").addEventListener("submit", (e) => {
+        document.getElementById("codeForm").addEventListener("submit", (e) => {
             e.preventDefault();
             loginWithCode();
         });
@@ -1862,62 +2149,45 @@
                 const doc = await db.collection("students").doc(code).get();
 
                 if (!doc.exists) {
-                    showError("loginError", "الكود غير صحيح");
+                    showError("loginError", "الكود غير صحيح أو غير موجود");
                     return;
                 }
 
                 const student = doc.data();
-                if (student.status !== "active") {
-                    showError("loginError", "حسابك قيد المراجعة. سيتم تفعيله قريباً");
+
+                if (student.status === "pending") {
+                    // عرض رسالة أن الحساب قيد المراجعة
+                    closeCodeModal();
+                    document.getElementById("statusIcon").textContent = "⏳";
+                    document.getElementById("statusTitle").textContent = "حسابك قيد المراجعة";
+                    document.getElementById("statusMessage").innerHTML = `
+                        <strong>⏳ انتظر تفعيل حسابك</strong><br>
+                        سيقوم فريق خدمة العملاء بمراجعة بيانات التحويل البنكي<br>
+                        وتفعيل حسابك قريباً جداً
+                    `;
+                    document.getElementById("statusModal").classList.add("show");
                     return;
                 }
 
+                if (student.status !== "active") {
+                    showError("loginError", "حسابك معطّل. يرجى التواصل مع خدمة العملاء");
+                    return;
+                }
+
+                // تسجيل الدخول بنجاح
                 localStorage.setItem("studentCode", code);
                 currentStudent = { code, ...student };
+                closeCodeModal();
                 showPortal();
             } catch (error) {
                 showError("loginError", "خطأ: " + error.message);
             }
         }
 
-        // معالجة الدخول بالبريد والكلمة
-        document.getElementById("emailLoginForm").addEventListener("submit", async (e) => {
-            e.preventDefault();
-
-            const email = document.getElementById("loginEmail").value.trim();
-            const password = document.getElementById("loginPassword").value;
-
-            if (!email || !password) {
-                showError("loginError", "الرجاء إدخال البريد وكلمة المرور");
-                return;
-            }
-
-            try {
-                const snapshot = await db.collection("students").where("email", "==", email).limit(1).get();
-
-                if (snapshot.empty) {
-                    showError("loginError", "البريد غير مسجل");
-                    return;
-                }
-
-                const student = snapshot.docs[0].data();
-
-                // في تطبيق حقيقي، يجب التحقق من كلمة المرور بشكل آمن
-                if (student.password && student.password === password) {
-                    localStorage.setItem("studentCode", student.code);
-                    currentStudent = { code: student.code, ...student };
-                    showPortal();
-                } else {
-                    showError("loginError", "كلمة المرور غير صحيحة");
-                }
-            } catch (error) {
-                showError("loginError", "خطأ: " + error.message);
-            }
-        });
 
         // عرض البوابة
         function showPortal() {
-            document.getElementById("authScreen").style.display = "none";
+            document.getElementById("landingPage").style.display = "none";
             document.getElementById("studentPortal").style.display = "block";
 
             // ملء بيانات الطالب
@@ -2273,10 +2543,9 @@
             localStorage.removeItem("studentCode");
             currentStudent = null;
             document.getElementById("studentPortal").style.display = "none";
-            document.getElementById("authScreen").style.display = "flex";
+            document.getElementById("landingPage").style.display = "block";
             document.getElementById("registerForm").reset();
-            document.getElementById("emailLoginForm").reset();
-            document.getElementById("loginForm").reset();
+            document.getElementById("codeForm").reset();
         }
 
         // دوال مساعدة
@@ -2313,6 +2582,9 @@
                 });
             }
         });
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
