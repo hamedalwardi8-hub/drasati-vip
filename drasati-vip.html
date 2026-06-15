@@ -1831,84 +1831,99 @@
         });
 
         // Register Form Submit
-        const registerForm = document.getElementById("registerForm");
-        console.log("Register form found:", registerForm);
+        console.log("🔍 البحث عن نموذج التسجيل...");
 
-        if (registerForm) {
-            registerForm.addEventListener("submit", async (e) => {
-            e.preventDefault();
+        setTimeout(() => {
+            const registerForm = document.getElementById("registerForm");
+            console.log("✅ نموذج التسجيل:", registerForm);
 
-            const name = document.getElementById("studentName").value.trim();
-            const grade = document.getElementById("studentGrade").value;
-            const email = document.getElementById("studentEmail").value.trim();
-            const parentPhone = document.getElementById("parentPhone").value.trim();
-            const studentPhone = document.getElementById("studentPhone").value.trim();
-            const bankTransfer = document.getElementById("bankTransfer").value.trim();
+            if (registerForm) {
+                registerForm.addEventListener("submit", async (e) => {
+                    console.log("📝 جاري إرسال النموذج...");
+                    e.preventDefault();
 
-            // التحقق من الحقول المطلوبة
-            if (!name) {
-                showError("registerError", "الرجاء إدخال اسم الطالب");
-                return;
-            }
-            if (!grade) {
-                showError("registerError", "الرجاء اختيار الصف الدراسي");
-                return;
-            }
-            if (!email) {
-                showError("registerError", "الرجاء إدخال البريد الإلكتروني");
-                return;
-            }
-            if (!parentPhone) {
-                showError("registerError", "الرجاء إدخال رقم واتساب ولي الأمر");
-                return;
-            }
-            if (!bankTransfer) {
-                showError("registerError", "الرجاء إدخال رقم التحويل البنكي");
-                return;
-            }
+                    const name = document.getElementById("studentName").value.trim();
+                    const grade = document.getElementById("studentGrade").value;
+                    const email = document.getElementById("studentEmail").value.trim();
+                    const parentPhone = document.getElementById("parentPhone").value.trim();
+                    const studentPhone = document.getElementById("studentPhone").value.trim();
+                    const bankTransfer = document.getElementById("bankTransfer").value.trim();
 
-            const code = generateCode();
+                    console.log("البيانات المدخلة:", {name, grade, email, parentPhone, bankTransfer});
 
-            try {
-                // التحقق من Firebase
-                if (!db) {
-                    showError("registerError", "خطأ في الاتصال بقاعدة البيانات. تحقق من الإنترنت");
-                    console.error("Firebase not initialized");
-                    return;
-                }
+                    // التحقق من الحقول المطلوبة
+                    if (!name) {
+                        showError("registerError", "الرجاء إدخال اسم الطالب");
+                        return;
+                    }
+                    if (!grade) {
+                        showError("registerError", "الرجاء اختيار الصف الدراسي");
+                        return;
+                    }
+                    if (!email) {
+                        showError("registerError", "الرجاء إدخال البريد الإلكتروني");
+                        return;
+                    }
+                    if (!parentPhone) {
+                        showError("registerError", "الرجاء إدخال رقم واتساب ولي الأمر");
+                        return;
+                    }
+                    if (!bankTransfer) {
+                        showError("registerError", "الرجاء إدخال رقم التحويل البنكي");
+                        return;
+                    }
 
-                await db.collection("students").doc(code).set({
-                    name: name,
-                    grade: grade,
-                    email: email,
-                    parentPhone: parentPhone,
-                    studentPhone: studentPhone || "",
-                    bankTransfer: bankTransfer,
-                    code: code,
-                    status: "pending",
-                    createdAt: new Date(),
-                    points: 0,
-                    grades: {}
+                    const code = generateCode();
+                    console.log("🔐 الكود المولد:", code);
+
+                    try {
+                        // التحقق من Firebase
+                        if (!db) {
+                            showError("registerError", "خطأ في الاتصال بقاعدة البيانات");
+                            console.error("Firebase not initialized");
+                            return;
+                        }
+
+                        console.log("💾 حفظ البيانات في Firebase...");
+
+                        await db.collection("students").doc(code).set({
+                            name: name,
+                            grade: grade,
+                            email: email,
+                            parentPhone: parentPhone,
+                            studentPhone: studentPhone || "",
+                            bankTransfer: bankTransfer,
+                            code: code,
+                            status: "pending",
+                            createdAt: new Date(),
+                            points: 0,
+                            grades: {}
+                        });
+
+                        console.log("✅ تم التسجيل بنجاح - الكود:", code);
+
+                        // إغلاق modal التسجيل فوراً
+                        closeRegisterModal();
+
+                        // عرض رسالة الانتظار
+                        const pendingModal = document.getElementById("pendingMessageModal");
+                        console.log("عرض الرسالة:", pendingModal);
+                        if (pendingModal) {
+                            pendingModal.classList.add("show");
+                            console.log("✅ تم عرض رسالة الانتظار");
+                        }
+
+                        // إعادة تعيين النموذج
+                        document.getElementById("registerForm").reset();
+                    } catch (error) {
+                        console.error("❌ خطأ التسجيل:", error);
+                        showError("registerError", "❌ خطأ: " + error.message);
+                    }
                 });
-
-                console.log("تم التسجيل بنجاح - الكود:", code);
-
-                // إغلاق modal التسجيل فوراً
-                closeRegisterModal();
-
-                // عرض رسالة الانتظار الجميلة
-                document.getElementById("pendingMessageModal").classList.add("show");
-
-                // إعادة تعيين النموذج
-                document.getElementById("registerForm").reset();
-            } catch (error) {
-                console.error("خطأ التسجيل:", error);
-                showError("registerError", "❌ خطأ: " + error.message);
+            } else {
+                console.error("❌ نموذج التسجيل غير موجود!");
             }
-            });
-        } else {
-            console.error("❌ Register form not found!");
-        }
+        }, 500);
 
         // Code Form Submit
         document.getElementById("codeForm").addEventListener("submit", async (e) => {
