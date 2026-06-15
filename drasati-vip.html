@@ -16,11 +16,9 @@
 
         :root {
             --cream: #F5F0E8;
-            --white: #FFFFFF;
             --gold: #C9A84C;
             --black: #1C1C2E;
-            --gray: #A09880;
-            --light-border: #EDE8DF;
+            --white: #FFFFFF;
         }
 
         body {
@@ -31,99 +29,294 @@
             direction: rtl;
         }
 
-        /* تصميم عام */
-        .container {
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--black) 0%, #2A2A3E 100%);
+            color: var(--white);
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        .hero-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
         }
 
-        /* الصفحة التعريفية */
-        .landing-page {
-            display: block;
-        }
-
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, var(--cream) 0%, #FAFAF8 100%);
-            padding: 80px 30px;
-            border-radius: 20px;
-            margin-bottom: 60px;
-            text-align: center;
-            border: 2px solid var(--light-border);
-            box-shadow: 0 10px 40px rgba(201, 168, 76, 0.1);
-        }
-
-        .hero-title {
+        .hero h1 {
             font-size: 3rem;
+            margin-bottom: 10px;
             font-weight: 700;
-            color: var(--black);
-            margin-bottom: 15px;
-            line-height: 1.2;
-            background: linear-gradient(135deg, var(--gold) 0%, var(--black) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
         }
 
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .hero-description {
-            font-size: 1.1rem;
-            color: var(--gray);
-            margin-bottom: 40px;
-            line-height: 1.8;
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
         }
 
         .hero-buttons {
             display: flex;
             gap: 20px;
             justify-content: center;
-            margin-top: 30px;
             flex-wrap: wrap;
         }
 
         .btn-primary {
-            padding: 18px 40px;
-            background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%);
+            padding: 16px 40px;
+            background: var(--gold);
             color: var(--white);
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             font-family: 'Cairo', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.3);
+            box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(201, 168, 76, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4);
         }
 
-        .btn-secondary-cta {
-            padding: 18px 40px;
-            background: var(--white);
-            color: var(--gold);
-            border: 3px solid var(--gold);
-            border-radius: 12px;
+        .btn-secondary {
+            padding: 16px 40px;
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            border-radius: 8px;
             font-family: 'Cairo', sans-serif;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
-        .btn-secondary-cta:hover {
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--white);
+            padding: 40px 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 60px;
+        }
+
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            color: var(--gold);
+            margin-bottom: 10px;
+        }
+
+        .stat-item p {
+            color: var(--black);
+            font-weight: 600;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Features Section */
+        .features {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--black);
+            margin-bottom: 50px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: var(--gold);
+            margin-bottom: 12px;
+            font-size: 1.2rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            margin-bottom: 80px;
+        }
+
+        .pricing-card {
+            background: var(--white);
+            border: 3px solid var(--gold);
+            border-radius: 12px;
+            padding: 50px;
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
+        }
+
+        .price {
+            font-size: 3rem;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .price-subtitle {
+            color: #999;
+            margin-bottom: 30px;
+            font-weight: 500;
+        }
+
+        .price-features {
+            text-align: right;
+            margin-bottom: 30px;
+        }
+
+        .price-features p {
+            color: var(--black);
+            margin: 10px 0;
+            font-size: 0.95rem;
+        }
+
+        .price-features p:before {
+            content: "✓ ";
+            color: var(--gold);
+            font-weight: 700;
+            margin-left: 10px;
+        }
+
+        /* Registration Section */
+        .registration {
+            margin-bottom: 60px;
+        }
+
+        .registration-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: var(--white);
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .registration-form {
+            order: 2;
+        }
+
+        .registration-text {
+            order: 1;
+        }
+
+        .registration-text h2 {
+            color: var(--gold);
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .registration-text p {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--black);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #E0E0E0;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background: #FAFAFA;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: var(--white);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 14px;
             background: var(--gold);
             color: var(--white);
-            transform: translateY(-3px);
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
         }
 
         /* Modal Styles */
@@ -142,27 +335,29 @@
 
         .modal-overlay.show {
             display: flex;
-            animation: fadeIn 0.3s ease;
         }
 
-        .modal-content {
+        .modal {
             background: var(--white);
-            border-radius: 20px;
+            border-radius: 12px;
             padding: 40px;
-            max-width: 500px;
+            max-width: 450px;
             width: 90%;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            border: 2px solid var(--light-border);
-            max-height: 90vh;
-            overflow-y: auto;
+            border: 2px solid var(--gold);
+            position: relative;
         }
 
         .modal-close {
-            float: left;
-            font-size: 1.8rem;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 2rem;
             cursor: pointer;
-            color: var(--gray);
-            transition: all 0.3s ease;
+            color: #999;
+            background: none;
+            border: none;
+            transition: color 0.3s;
         }
 
         .modal-close:hover {
@@ -171,7 +366,6 @@
 
         .modal-title {
             text-align: center;
-            clear: both;
             font-size: 1.8rem;
             color: var(--gold);
             margin-bottom: 30px;
@@ -184,7 +378,7 @@
         }
 
         .success-icon {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 20px;
         }
 
@@ -194,22 +388,21 @@
             margin-bottom: 20px;
         }
 
-        .code-display {
-            background: linear-gradient(135deg, var(--cream) 0%, #FAFAF8 100%);
-            padding: 20px;
-            border-radius: 12px;
+        .code-box {
+            background: var(--cream);
             border: 2px solid var(--gold);
+            padding: 20px;
+            border-radius: 8px;
             margin: 25px 0;
-            text-align: center;
         }
 
-        .code-display .label {
-            color: var(--gray);
-            font-size: 0.9rem;
+        .code-label {
+            color: #999;
+            font-size: 0.85rem;
             margin-bottom: 10px;
         }
 
-        .code-display .code {
+        .code-display {
             font-size: 1.8rem;
             color: var(--gold);
             font-weight: 700;
@@ -217,33 +410,25 @@
             letter-spacing: 2px;
         }
 
-        .success-modal p {
-            color: var(--gray);
-            line-height: 1.8;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-        }
-
-        .warning-box {
+        .warning-section {
             background: #FFF3CD;
-            border: 2px solid #FFE69C;
-            border-radius: 10px;
+            border-right: 4px solid #FFB800;
             padding: 15px;
+            border-radius: 8px;
             margin: 20px 0;
             text-align: right;
         }
 
-        .warning-box h4 {
+        .warning-section h4 {
             color: #856404;
             margin-bottom: 8px;
             font-size: 0.95rem;
         }
 
-        .warning-box p {
+        .warning-section p {
             color: #856404;
             font-size: 0.85rem;
             margin: 5px 0;
-            line-height: 1.6;
         }
 
         .modal-buttons {
@@ -252,7 +437,7 @@
             margin-top: 25px;
         }
 
-        .modal-btn {
+        .btn-modal {
             flex: 1;
             padding: 12px;
             border: none;
@@ -263,513 +448,137 @@
             transition: all 0.3s ease;
         }
 
-        .modal-btn-primary {
-            background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%);
+        .btn-modal-primary {
+            background: var(--gold);
             color: var(--white);
         }
 
-        .modal-btn-primary:hover {
+        .btn-modal-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(201, 168, 76, 0.3);
         }
 
-        .modal-btn-secondary {
-            background: var(--light-border);
-            color: var(--black);
-        }
-
-        .modal-btn-secondary:hover {
-            background: var(--gray);
-            color: var(--white);
-        }
-
-        /* Pending Status Message */
-        .pending-message {
-            background: #E3F2FD;
-            border-right: 4px solid #2196F3;
-            padding: 15px;
-            border-radius: 8px;
-            color: #1565C0;
-            margin-bottom: 20px;
-            text-align: right;
-        }
-
-        .pending-message strong {
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            margin-top: 50px;
-            padding-top: 40px;
-            border-top: 2px solid var(--light-border);
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--gold);
-            margin-bottom: 8px;
-        }
-
-        .stat-item p {
-            color: var(--gray);
-            font-weight: 500;
-        }
-
-        /* قسم "لماذا دراستي VIP" */
-        .why-section {
-            margin-bottom: 80px;
-        }
-
-        .why-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--black);
-            margin-bottom: 15px;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--gold);
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            font-weight: 600;
-        }
-
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-
-        .comparison-item {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px solid var(--light-border);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .comparison-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
-            border-color: var(--gold);
-        }
-
-        .comparison-feature {
-            font-weight: 700;
-            color: var(--black);
-            font-size: 1.05rem;
-            margin-bottom: 15px;
-        }
-
-        .comparison-us {
-            background: linear-gradient(135deg, #D4EDDA 0%, #C8E6C9 100%);
-            padding: 12px;
-            border-radius: 8px;
-            color: #155724;
-            font-weight: 600;
-            margin-bottom: 10px;
-            border-right: 4px solid #28A745;
-        }
-
-        .comparison-others {
-            background: #F8D7DA;
-            padding: 12px;
-            border-radius: 8px;
-            color: #721C24;
-            font-weight: 600;
-            border-right: 4px solid #E74C3C;
-        }
-
-        /* قسم الشهادات */
-        .testimonials-section {
-            margin-bottom: 80px;
-            background: linear-gradient(135deg, var(--cream) 0%, #FAFAF8 100%);
-            padding: 60px 30px;
-            border-radius: 20px;
-            border: 2px solid var(--light-border);
-        }
-
-        .testimonials-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--black);
-            margin-bottom: 15px;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .testimonial-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid var(--light-border);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
-            border-color: var(--gold);
-        }
-
-        .stars {
-            color: var(--gold);
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-        }
-
-        .testimonial-text {
-            color: var(--black);
-            font-size: 0.95rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            color: var(--gray);
-            font-weight: 600;
-            border-top: 2px solid var(--light-border);
-            padding-top: 15px;
-        }
-
-        /* قسم المميزات */
-        .features-section {
-            margin-bottom: 80px;
-        }
-
-        .features-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--black);
-            margin-bottom: 15px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            background: var(--white);
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid var(--light-border);
-            text-align: center;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold);
-            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-
-        .feature-card h3 {
-            color: var(--gold);
-            margin-bottom: 12px;
-            font-size: 1.2rem;
-        }
-
-        .feature-card p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* قسم الأسعار */
-        .pricing-section {
-            margin-bottom: 80px;
-            text-align: center;
-        }
-
-        .pricing-section h2 {
-            font-size: 2.5rem;
-            color: var(--black);
-            margin-bottom: 15px;
-        }
-
-        .pricing-card {
-            background: linear-gradient(135deg, var(--white) 0%, #FAFAF8 100%);
-            padding: 50px 40px;
-            border-radius: 20px;
-            border: 3px solid var(--gold);
-            box-shadow: 0 10px 40px rgba(201, 168, 76, 0.15);
-            max-width: 600px;
-            margin: 40px auto;
-        }
-
-        .pricing-card h3 {
-            font-size: 1.8rem;
-            color: var(--black);
-            margin-bottom: 20px;
-        }
-
-        .price {
-            font-size: 3.5rem;
-            color: var(--gold);
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .price-subtitle {
-            color: var(--gray);
-            font-size: 1.05rem;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
-
-        .price-features {
-            text-align: right;
-            margin: 30px 0;
-        }
-
-        .price-features p {
-            color: var(--black);
-            margin: 12px 0;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-
-        .price-comparison {
-            background: var(--cream);
-            padding: 20px;
-            border-radius: 12px;
-            border: 2px solid var(--light-border);
-        }
-
-        /* قسم المعلمين */
-        .teachers-section {
-            margin-bottom: 80px;
-            background: linear-gradient(135deg, var(--cream) 0%, #FAFAF8 100%);
-            padding: 60px 30px;
-            border-radius: 20px;
-            border: 2px solid var(--light-border);
-        }
-
-        .teachers-section h2 {
-            text-align: center;
-            font-size: 2.5rem;
-            color: var(--black);
-            margin-bottom: 15px;
-        }
-
-        .teachers-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-
-        .teacher-info-item {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 12px;
-            border: 2px solid var(--light-border);
-            text-align: center;
-        }
-
-        .teacher-info-item h3 {
-            color: var(--gold);
-            margin-bottom: 12px;
-            font-size: 1.15rem;
-        }
-
-        .teacher-info-item p {
-            color: var(--gray);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%);
-            color: var(--white);
-            padding: 60px 30px;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 60px;
-            box-shadow: 0 10px 40px rgba(201, 168, 76, 0.2);
-        }
-
-        .cta-section h2 {
-            font-size: 2.2rem;
-            margin-bottom: 15px;
-        }
-
-        .cta-section p {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            opacity: 0.95;
-        }
-
-        .cta-btn {
-            padding: 16px 40px;
-            background: var(--white);
-            color: var(--gold);
-            border: none;
-            border-radius: 10px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1.05rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        /* عنوان قسم التسجيل */
-        .auth-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .auth-title h2 {
-            font-size: 2.2rem;
-            color: var(--black);
-            margin-bottom: 10px;
-        }
-
-        .auth-title p {
-            color: var(--gray);
-            font-size: 1.05rem;
-        }
-
-        /* شاشة التسجيل */
-        .auth-screen {
-            display: flex;
-            gap: 40px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-        }
-
-        .form-card {
-            flex: 1;
-            min-width: 300px;
-            background: var(--white);
-            padding: 40px;
-            border-radius: 15px;
-            border: 2px solid var(--light-border);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-        }
-
-        .form-card h2 {
-            color: var(--gold);
-            margin-bottom: 25px;
-            font-size: 1.8rem;
-            text-align: center;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--black);
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 12px 15px;
-            border: 2px solid var(--light-border);
-            border-radius: 8px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background: #FAFAF8;
-            color: var(--black);
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
-            background: var(--white);
-        }
-
-        button {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            font-family: 'Cairo', sans-serif;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(201, 168, 76, 0.3);
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(201, 168, 76, 0.4);
-        }
-
-        button:active {
-            transform: translateY(0);
-        }
-
-        .btn-secondary {
-            background: var(--gray);
-            box-shadow: 0 4px 15px rgba(160, 152, 128, 0.2);
-        }
-
-        .btn-secondary:hover {
-            background: #9A9070;
-        }
-
-        /* رسالة النجاح */
-        .success-message {
-            background: #D4EDDA;
-            color: #155724;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-right: 4px solid #28A745;
+        /* Student Portal */
+        .student-portal {
             display: none;
         }
 
-        .success-message.show {
-            display: block;
-            animation: slideIn 0.3s ease;
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, var(--black) 0%, #2A2A3E 100%);
+            color: var(--white);
+            padding: 15px 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        /* رسالة الخطأ */
+        .navbar-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--gold);
+        }
+
+        .navbar-logout {
+            background: #E74C3C;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 6px;
+            color: var(--white);
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .navbar-logout:hover {
+            background: #C0392B;
+        }
+
+        /* Student Portal Content */
+        .portal-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        .welcome-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            border-right: 4px solid var(--gold);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .welcome-card h2 {
+            color: var(--gold);
+            margin-bottom: 15px;
+        }
+
+        .welcome-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .info-item strong {
+            color: var(--black);
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #E0E0E0;
+            padding-bottom: 15px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: none;
+            color: #999;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -17px;
+        }
+
+        .tab-btn.active {
+            color: var(--gold);
+            border-bottom-color: var(--gold);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Error/Success Messages */
         .error-message {
             background: #F8D7DA;
             color: #721C24;
@@ -782,1215 +591,428 @@
 
         .error-message.show {
             display: block;
-            animation: slideIn 0.3s ease;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* البوابة الرئيسية للطالب */
-        .student-portal {
-            display: none;
-        }
-
-        .portal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .student-info {
-            background: var(--white);
-            padding: 20px 30px;
-            border-radius: 12px;
-            border: 2px solid var(--light-border);
-            flex: 1;
-            min-width: 250px;
-        }
-
-        .student-info p {
-            margin: 8px 0;
-            color: var(--gray);
-        }
-
-        .student-info strong {
-            color: var(--black);
-        }
-
-        .logout-btn {
-            padding: 12px 30px;
-            background: #E74C3C;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .logout-btn:hover {
-            background: #C0392B;
-            transform: translateY(-2px);
-        }
-
-        /* علامات التبويب */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            border-bottom: 2px solid var(--light-border);
-            padding-bottom: 15px;
-        }
-
-        .tab-btn {
-            padding: 12px 20px;
-            background: transparent;
-            border: 2px solid var(--light-border);
-            border-bottom: none;
-            color: var(--gray);
-            cursor: pointer;
-            border-radius: 12px 12px 0 0;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            background: var(--gold);
-            color: var(--white);
-            border-color: var(--gold);
-        }
-
-        .tab-btn:hover:not(.active) {
-            border-color: var(--gold);
-            color: var(--gold);
-        }
-
-        /* محتوى التبويبات */
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* بطاقات المواد */
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .subject-card {
-            background: var(--white);
-            border: 2px solid var(--light-border);
-            border-radius: 15px;
-            padding: 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            position: relative;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.15);
-            border-color: var(--gold);
-        }
-
-        .subject-card h3 {
-            color: var(--gold);
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .subject-card .tabs-small {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-
-        .tab-small {
-            padding: 6px 12px;
-            background: var(--cream);
-            border: 1px solid var(--light-border);
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
-        }
-
-        .tab-small:hover, .tab-small.active {
-            background: var(--gold);
-            color: var(--white);
-            border-color: var(--gold);
-        }
-
-        /* الحصص اليومية */
-        .today-sessions {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px solid var(--light-border);
-            margin-bottom: 30px;
-        }
-
-        .today-sessions h3 {
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .sessions-list {
-            display: grid;
-            gap: 15px;
-        }
-
-        .session-item {
-            background: linear-gradient(135deg, #F9F7F3 0%, #FDFBF8 100%);
-            padding: 20px;
-            border-radius: 12px;
-            border-right: 4px solid var(--gold);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .session-info h4 {
-            color: var(--gold);
-            margin-bottom: 5px;
-        }
-
-        .session-info p {
-            color: var(--gray);
-            font-size: 0.9rem;
-        }
-
-        .session-time {
-            background: var(--gold);
-            color: var(--white);
-            padding: 15px 25px;
-            border-radius: 8px;
-            font-weight: 600;
-            text-align: center;
-            min-width: 120px;
-        }
-
-        .meet-btn {
-            padding: 10px 20px;
-            background: #34A853;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: 'Cairo', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .meet-btn:hover {
-            background: #2D8E47;
-            transform: translateY(-2px);
-        }
-
-        /* شريط التقدم */
-        .progress-bar {
-            background: var(--light-border);
-            height: 12px;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 15px 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--gold) 0%, #B8955E 100%);
-            border-radius: 10px;
-            transition: width 0.3s ease;
-        }
-
-        .score-display {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-            font-size: 0.9rem;
-        }
-
-        .score-display .score {
-            color: var(--gold);
-            font-weight: 600;
-        }
-
-        .score-display .total {
-            color: var(--gray);
-        }
-
-        /* لوحة المنافسة */
-        .leaderboard {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px solid var(--light-border);
-        }
-
-        .leaderboard h3 {
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-size: 1.3rem;
-        }
-
-        .leaderboard-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .leaderboard-item {
-            display: flex;
-            align-items: center;
-            padding: 15px;
-            background: linear-gradient(135deg, #F9F7F3 0%, #FDFBF8 100%);
-            border-radius: 10px;
-            border-right: 4px solid var(--light-border);
-        }
-
-        .leaderboard-item.top-1 {
-            border-right-color: #FFD700;
-            background: linear-gradient(135deg, #FFF8DC 0%, #FFFAF0 100%);
-        }
-
-        .leaderboard-item.top-2 {
-            border-right-color: #C0C0C0;
-        }
-
-        .leaderboard-item.top-3 {
-            border-right-color: #CD7F32;
-        }
-
-        .rank {
-            font-weight: 700;
-            font-size: 1.3rem;
-            color: var(--gold);
-            min-width: 40px;
-            text-align: center;
-        }
-
-        .leaderboard-item.top-1 .rank {
-            color: #FFD700;
-        }
-
-        .leaderboard-info {
-            flex: 1;
-            margin: 0 15px;
-        }
-
-        .leaderboard-name {
-            color: var(--black);
-            font-weight: 600;
-        }
-
-        .leaderboard-points {
-            color: var(--gold);
-            font-weight: 700;
-            text-align: left;
-        }
-
-        /* الإعدادات */
-        .settings-grid {
-            display: grid;
-            gap: 25px;
-        }
-
-        .settings-section {
-            background: var(--white);
-            padding: 25px;
-            border-radius: 15px;
-            border: 2px solid var(--light-border);
-        }
-
-        .settings-section h3 {
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-size: 1.2rem;
-        }
-
-        /* تنبيهات */
-        .notification-badge {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            background: #E74C3C;
-            color: white;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.85rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero-title {
+            .hero h1 {
                 font-size: 2rem;
             }
 
-            .hero-subtitle {
-                font-size: 1.2rem;
+            .hero p {
+                font-size: 1rem;
             }
 
-            .hero-description {
-                font-size: 0.95rem;
-            }
-
-            .hero-section {
-                padding: 50px 20px;
-            }
-
-            .why-section h2,
-            .testimonials-section h2,
-            .features-section h2,
-            .pricing-section h2,
-            .teachers-section h2 {
-                font-size: 1.8rem;
-            }
-
-            .comparison-grid,
-            .testimonials-grid,
-            .features-grid,
-            .teachers-info {
-                grid-template-columns: 1fr;
-            }
-
-            .pricing-card {
-                padding: 30px 20px;
-            }
-
-            .price {
-                font-size: 2.5rem;
-            }
-
-            .auth-screen {
-                gap: 20px;
+            .hero-buttons {
                 flex-direction: column;
             }
 
-            .form-card {
-                padding: 25px;
-                min-width: 100%;
-            }
-
-            .subjects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .portal-header {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .student-info {
-                text-align: center;
-            }
-
-            .logout-btn {
+            .btn-primary,
+            .btn-secondary {
                 width: 100%;
+            }
+
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+
+            .registration-container {
+                grid-template-columns: 1fr;
+            }
+
+            .registration-form {
+                order: 1;
+            }
+
+            .registration-text {
+                order: 2;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar-content {
+                flex-direction: column;
+                gap: 15px;
             }
 
             .tabs {
                 overflow-x: auto;
-                flex-wrap: nowrap;
-            }
-
-            .session-item {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .cta-section {
-                padding: 40px 20px;
-            }
-
-            .cta-section h2 {
-                font-size: 1.8rem;
             }
         }
 
-        @media (max-width: 375px) {
-            .container {
-                padding: 10px;
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
             }
 
-            .hero-title {
-                font-size: 1.4rem;
+            .hero {
+                padding: 40px 15px;
             }
 
-            .hero-subtitle {
-                font-size: 1rem;
-            }
-
-            .hero-description {
-                font-size: 0.85rem;
-            }
-
-            .hero-section {
-                padding: 30px 15px;
-                margin-bottom: 40px;
-            }
-
-            .hero-stats {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-
-            .stat-item h3 {
-                font-size: 2rem;
-            }
-
-            .why-section h2,
-            .testimonials-section h2,
-            .features-section h2,
-            .pricing-section h2,
-            .teachers-section h2,
-            .auth-title h2 {
-                font-size: 1.4rem;
-            }
-
-            .section-subtitle,
-            .auth-title p {
+            .hero p {
                 font-size: 0.9rem;
             }
 
-            .comparison-item,
-            .testimonial-card,
-            .feature-card,
-            .teacher-info-item {
-                padding: 15px;
+            .stats {
+                padding: 25px 15px;
             }
 
-            .feature-icon {
-                font-size: 2rem;
+            .registration-container {
+                padding: 25px 15px;
             }
 
-            .feature-card h3 {
-                font-size: 1rem;
-            }
-
-            .feature-card p {
-                font-size: 0.85rem;
+            .modal {
+                padding: 25px 15px;
             }
 
             .pricing-card {
-                padding: 20px 15px;
-                border-radius: 15px;
+                padding: 25px 15px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
             }
 
             .price {
                 font-size: 2rem;
-            }
-
-            .price-features p {
-                font-size: 0.85rem;
-            }
-
-            .form-card {
-                padding: 15px;
-                min-width: 100%;
-            }
-
-            .form-card h2 {
-                font-size: 1.3rem;
-            }
-
-            .tab-btn {
-                padding: 10px 15px;
-                font-size: 0.85rem;
-            }
-
-            .subject-card {
-                padding: 15px;
-            }
-
-            .subject-card h3 {
-                font-size: 1.1rem;
-            }
-
-            button {
-                padding: 12px;
-                font-size: 0.9rem;
-            }
-
-            .hero-btn {
-                padding: 14px 25px;
-                font-size: 0.95rem;
-            }
-
-            .cta-btn {
-                padding: 12px 25px;
-                font-size: 0.95rem;
-            }
-
-            .testimonials-section,
-            .teachers-section {
-                padding: 40px 15px;
-            }
-
-            .cta-section {
-                padding: 30px 15px;
-                margin-bottom: 40px;
-            }
-
-            .cta-section h2 {
-                font-size: 1.4rem;
-            }
-
-            .cta-section p {
-                font-size: 0.95rem;
             }
         }
     </style>
 </head>
 <body>
-    <!-- شريط التنقل -->
-    <nav style="background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%); padding: 15px 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 100;">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
-            <h2 style="color: white; font-size: 1.5rem; margin: 0;">🎓 دراستي VIP</h2>
-            <a href="#auth" style="color: white; text-decoration: none; font-weight: 600; padding: 10px 20px; background: rgba(255,255,255,0.2); border-radius: 6px; transition: all 0.3s ease;" onclick="document.getElementById('authSection').scrollIntoView({behavior: 'smooth'}); return false;">
-                ابدأ الآن
-            </a>
+    <!-- Hero Section -->
+    <div class="hero" id="heroSection">
+        <div class="hero-content">
+            <h1>🎓 أكاديمية دراستي VIP</h1>
+            <p>منصة تعليمية عمانية متكاملة للصفوف 5 إلى 10</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="openRegisterModal()">ابدأ رحلتك 🚀</button>
+                <button class="btn-secondary" onclick="openCodeModal()">لدي كود</button>
+            </div>
         </div>
-    </nav>
+    </div>
 
+    <!-- Stats Section -->
+    <div class="stats">
+        <div class="stats-container">
+            <div class="stat-item">
+                <h3>500+</h3>
+                <p>طالب نشط</p>
+            </div>
+            <div class="stat-item">
+                <h3>13</h3>
+                <p>معلم متخصص</p>
+            </div>
+            <div class="stat-item">
+                <h3>6</h3>
+                <p>مواد دراسية</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
     <div class="container">
-        <!-- الصفحة التعريفية -->
-        <div class="landing-page" id="landingPage">
-            <!-- Hero Section -->
-            <section class="hero-section">
-                <div class="hero-content">
-                    <h1 class="hero-title">انضم لأفضل منصة تعليمية في عُمان</h1>
-                    <p class="hero-subtitle">نحن لا نبيع دروساً، نصنع مستقبلاً</p>
-                    <p class="hero-description">
-                        احصل على تعليم عالي الجودة من معلمين متخصصين<br>
-                        مع تكنولوجيا ذكية تساعدك على التقدم والتفوق
-                    </p>
-                    <div class="hero-buttons">
-                        <button class="btn-primary" onclick="openRegisterModal()">
-                            ابدأ رحلتك مع دراستي VIP 🎓
-                        </button>
-                        <button class="btn-secondary-cta" onclick="openCodeModal()">
-                            لدي كود ✓
-                        </button>
-                    </div>
+        <div class="features">
+            <h2 class="section-title">مميزاتنا الفريدة</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>محتوى شامل</h3>
+                    <p>كل مواد الصفوف 5-10 بطريقة منظمة وسهلة الفهم</p>
                 </div>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <h3>500+</h3>
-                        <p>طالب نشط</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>13</h3>
-                        <p>معلم متخصص</p>
-                    </div>
-                    <div class="stat-item">
-                        <h3>95%</h3>
-                        <p>نسبة النجاح</p>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>مساعد ذكي</h3>
+                    <p>اسأل أي سؤال واحصل على إجابة فورية من Claude AI</p>
                 </div>
-            </section>
-
-            <!-- قسم "لماذا دراستي VIP" -->
-            <section class="why-section">
-                <h2>لماذا دراستي VIP؟</h2>
-                <p class="section-subtitle">مقارنة سريعة بيننا وبين غيرنا</p>
-
-                <div class="comparison-grid">
-                    <div class="comparison-item">
-                        <div class="comparison-feature">✅ معلمون متخصصون</div>
-                        <div class="comparison-us">نخبة المعلمين في عُمان</div>
-                        <div class="comparison-others">معلمون عاديون</div>
-                    </div>
-
-                    <div class="comparison-item">
-                        <div class="comparison-feature">✅ تقنية ذكية</div>
-                        <div class="comparison-us">AI + جدول مذاكرة ذكي</div>
-                        <div class="comparison-others">تقليدية عادية</div>
-                    </div>
-
-                    <div class="comparison-item">
-                        <div class="comparison-feature">✅ السعر</div>
-                        <div class="comparison-us">85 ر.ع فقط للفصل</div>
-                        <div class="comparison-others">مدرس واحد = 300+ ر.ع</div>
-                    </div>
-
-                    <div class="comparison-item">
-                        <div class="comparison-feature">✅ التوفر</div>
-                        <div class="comparison-us">24/7 متاح دائماً</div>
-                        <div class="comparison-others">ساعات محدودة</div>
-                    </div>
-
-                    <div class="comparison-item">
-                        <div class="comparison-feature">✅ المرونة</div>
-                        <div class="comparison-us">تعلم حسب سرعتك</div>
-                        <div class="comparison-others">جدول ثابت</div>
-                    </div>
-
-                    <div class="comparison-item">
-                        <div class="comparison-feature">✅ المتابعة</div>
-                        <div class="comparison-us">تقارير تفصيلية مستمرة</div>
-                        <div class="comparison-others">متابعة سطحية</div>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>تتبع التقدم</h3>
+                    <p>شاهد تقدمك بصرياً مع تقارير مفصلة</p>
                 </div>
-            </section>
-
-            <!-- قسم الشهادات -->
-            <section class="testimonials-section">
-                <h2>آراء طلابنا وأولياء أمورهم</h2>
-                <p class="section-subtitle">تجارب حقيقية غيّرت حياتهم الدراسية</p>
-
-                <div class="testimonials-grid">
-                    <div class="testimonial-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p class="testimonial-text">
-                            "أفضل قرار اتخذته لابني! درجاته ارتفعت من 60 إلى 95 في غضون 4 أشهر فقط. المعلمون ممتازون والتطبيق سهل جداً"
-                        </p>
-                        <p class="testimonial-author">
-                            <strong>أم فاطمة</strong><br>
-                            <span style="font-size: 0.85rem; color: var(--gray);">أم طالبة الصف 9</span>
-                        </p>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p class="testimonial-text">
-                            "كنت خائفة من الرياضيات، لكن الحصص هنا جعلت الموضوع سهل ومفهوم. الآن أنا أحب الرياضيات!"
-                        </p>
-                        <p class="testimonial-author">
-                            <strong>ليلى محمد</strong><br>
-                            <span style="font-size: 0.85rem; color: var(--gray);">طالبة الصف 8</span>
-                        </p>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p class="testimonial-text">
-                            "المساعد الذكي ساعدني في فهم المواضيع الصعبة جداً. وكل يوم أتعلم حاجات جديدة بطريقة ممتعة"
-                        </p>
-                        <p class="testimonial-author">
-                            <strong>علي سالم</strong><br>
-                            <span style="font-size: 0.85rem; color: var(--gray);">طالب الصف 10</span>
-                        </p>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p class="testimonial-text">
-                            "أسعار معقولة وجودة عالية جداً. بصراحة ما في منصة تعليمية ثانية قريبة من دراستي VIP"
-                        </p>
-                        <p class="testimonial-author">
-                            <strong>أب خالد</strong><br>
-                            <span style="font-size: 0.85rem; color: var(--gray);">أب طالب الصف 7</span>
-                        </p>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p class="testimonial-text">
-                            "معلمة الإنجليزي أحسن معلمة شفتها في حياتي! تشرح بكل وضوح وطريقتها مميزة جداً"
-                        </p>
-                        <p class="testimonial-author">
-                            <strong>مريم خميس</strong><br>
-                            <span style="font-size: 0.85rem; color: var(--gray);">طالبة الصف 6</span>
-                        </p>
-                    </div>
-
-                    <div class="testimonial-card">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p class="testimonial-text">
-                            "السرعة في الرد على الأسئلة وجودة الشرح لا تقارن! الآن أنا متفوق في كل مواد الصف"
-                        </p>
-                        <p class="testimonial-author">
-                            <strong>محمد ناصر</strong><br>
-                            <span style="font-size: 0.85rem; color: var(--gray);">طالب الصف 9</span>
-                        </p>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3>لوحة منافسة</h3>
+                    <p>تنافس مع زملائك واكسب نقاط</p>
                 </div>
-            </section>
-
-            <!-- قسم المميزات -->
-            <section class="features-section">
-                <h2>مميزاتنا الفريدة</h2>
-                <p class="section-subtitle">8 أسباب تجعلنا الأفضل</p>
-
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">📚</div>
-                        <h3>محتوى شامل</h3>
-                        <p>كل مواد الصفوف 5-10 بطريقة منظمة وسهلة الفهم</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">🤖</div>
-                        <h3>مساعد ذكي</h3>
-                        <p>اسأل أي سؤال واحصل على إجابة فورية من Claude AI</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h3>تتبع التقدم</h3>
-                        <p>شاهد تقدمك بصرياً مع تقارير مفصلة عن كل مادة</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">🏆</div>
-                        <h3>لوحة المنافسة</h3>
-                        <p>تنافس مع زملائك واكسب نقاط وإنجازات</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">📄</div>
-                        <h3>ملخصات ذكية</h3>
-                        <p>رفّع كتابك واحصل على ملخصات واختبارات تلقائية</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">📅</div>
-                        <h3>جدول مذاكرة ذكي</h3>
-                        <p>نظام ذكي ينظم مذاكرتك حسب قوتك وضعفك</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">🕐</div>
-                        <h3>حصص منتظمة</h3>
-                        <p>حصص يومية محددة مع معلمين متخصصين</p>
-                    </div>
-
-                    <div class="feature-card">
-                        <div class="feature-icon">⭐</div>
-                        <h3>نقاط وإنجازات</h3>
-                        <p>اجمع نقاطاً على كل حصة واختبار وافتح بادجات</p>
-                    </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>ملخصات ذكية</h3>
+                    <p>رفّع كتابك واحصل على ملخصات</p>
                 </div>
-            </section>
-
-            <!-- قسم الأسعار -->
-            <section class="pricing-section">
-                <h2>الأسعار</h2>
-                <p class="section-subtitle">استثمار في مستقبل ابنك</p>
-
-                <div class="pricing-card">
-                    <h3>👑 الفصل الدراسي الكامل</h3>
-                    <div class="price">85 ر.ع</div>
-                    <p class="price-subtitle">فقط 85 ريال عماني للفصل الدراسي الكامل</p>
-
-                    <div class="price-features">
-                        <p>✅ الوصول لكل المواد المتعلقة بصفك</p>
-                        <p>✅ حصص يومية مع معلمين متخصصين</p>
-                        <p>✅ مساعد ذكي متاح 24/7</p>
-                        <p>✅ تقارير تقدم مفصلة</p>
-                        <p>✅ لوحة منافسة وإنجازات</p>
-                        <p>✅ ملخصات ذكية للمنهج</p>
-                    </div>
-
-                    <div class="price-comparison">
-                        <h4 style="color: var(--gold); margin: 20px 0 15px 0;">📊 المقارنة:</h4>
-                        <p style="margin: 8px 0; color: var(--gray);">
-                            <span style="color: var(--black); font-weight: 600;">مدرس خصوصي واحد:</span> 300+ ر.ع شهرياً
-                        </p>
-                        <p style="margin: 8px 0; color: var(--gray);">
-                            <span style="color: var(--black); font-weight: 600;">دراستي VIP:</span> 85 ر.ع فقط للفصل كله!
-                        </p>
-                        <p style="margin: 8px 0; color: #28A745; font-weight: 600;">
-                            💰 توفير: أكثر من 1000 ر.ع سنوياً!
-                        </p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- قسم المعلمين -->
-            <section class="teachers-section">
-                <h2>نخبة من أفضل المعلمين في عُمان</h2>
-                <p class="section-subtitle">معلمون متخصصون بخبرة سنوات في التدريس</p>
-
-                <div class="teachers-info">
-                    <div class="teacher-info-item">
-                        <h3>🎓 شهادات عليا</h3>
-                        <p>كل معلم لديه شهادات أكاديمية عالية ومتخصص في مادته</p>
-                    </div>
-
-                    <div class="teacher-info-item">
-                        <h3>📚 سنوات خبرة</h3>
-                        <p>متوسط خبرة معلمينا أكثر من 10 سنوات في التدريس</p>
-                    </div>
-
-                    <div class="teacher-info-item">
-                        <h3>🏅 طرق تدريس حديثة</h3>
-                        <p>نستخدم أفضل طرق التدريس الحديثة والمثبتة عالمياً</p>
-                    </div>
-
-                    <div class="teacher-info-item">
-                        <h3>💖 تفاني في العمل</h3>
-                        <p>معلمونا مهتمون برؤية طلابهم يتفوقون فعلاً</p>
-                    </div>
-                </div>
-
-                <p style="text-align: center; color: var(--gold); font-size: 1.1rem; margin-top: 30px; font-weight: 600;">
-                    معلمونا يعملون بحب وتفاني لرؤية نجاح طلابهم 🌟
-                </p>
-            </section>
-
-            <!-- CTA Section -->
-            <section class="cta-section">
-                <h2>جاهز تنضم إلينا؟</h2>
-                <p>اختر طريقتك للدخول واستعد لرحلة تعليمية رائعة</p>
-                <button class="cta-btn" onclick="document.getElementById('authSection').scrollIntoView({behavior: 'smooth'}); return false;">
-                    ابدأ الآن مجاناً 🚀
-                </button>
-            </section>
-        </div>
-
-        <!-- Modal التسجيل -->
-        <div class="modal-overlay" id="registerModal">
-            <div class="modal-content">
-                <span class="modal-close" onclick="closeRegisterModal()">&times;</span>
-                <h2 class="modal-title">🆕 تسجيل جديد</h2>
-                <div id="registerError" class="error-message"></div>
-                <form id="registerForm">
-                    <div class="form-group">
-                        <label for="studentName">اسم الطالب</label>
-                        <input type="text" id="studentName" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="studentGrade">الصف الدراسي</label>
-                        <select id="studentGrade" required>
-                            <option value="">اختر الصف</option>
-                            <option value="5">الصف الخامس</option>
-                            <option value="6">الصف السادس</option>
-                            <option value="7">الصف السابع</option>
-                            <option value="8">الصف الثامن</option>
-                            <option value="9">الصف التاسع</option>
-                            <option value="10">الصف العاشر</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="studentEmail">البريد الإلكتروني</label>
-                        <input type="email" id="studentEmail" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="parentPhone">رقم ولي الأمر (واتساب)</label>
-                        <input type="tel" id="parentPhone" placeholder="966..." required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="studentPhone">رقم الطالب (اختياري)</label>
-                        <input type="tel" id="studentPhone">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bankTransfer">رقم التحويل البنكي</label>
-                        <input type="text" id="bankTransfer" required>
-                    </div>
-
-                    <button type="submit" style="width: 100%;">إنشاء حسابي</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Modal إدخال الكود -->
-        <div class="modal-overlay" id="codeModal">
-            <div class="modal-content">
-                <span class="modal-close" onclick="closeCodeModal()">&times;</span>
-                <h2 class="modal-title">🔐 الدخول بالكود</h2>
-                <div id="loginError" class="error-message"></div>
-                <form id="codeForm">
-                    <div class="form-group">
-                        <label for="loginCode">أدخل كودك الشخصي</label>
-                        <input type="text" id="loginCode" placeholder="مثال: DV-AB3K7X" required>
-                    </div>
-                    <button type="submit" style="width: 100%;">دخول</button>
-                </form>
-            </div>
-        </div>
-
-        <!-- Modal التسجيل بنجاح -->
-        <div class="modal-overlay" id="successModal">
-            <div class="modal-content success-modal">
-                <div class="success-icon">✅</div>
-                <h3>تم التسجيل بنجاح!</h3>
-
-                <div class="code-display">
-                    <div class="label">هذا كودك الشخصي - احتفظ به في مكان آمن:</div>
-                    <div class="code" id="successCode">DV-XXXXXX</div>
-                </div>
-
-                <div class="warning-box">
-                    <h4>📋 معلومة مهمة</h4>
-                    <p><strong>حسابك قيد المراجعة</strong></p>
-                    <p>سيتم التحقق من التحويل البنكي الذي أدخلته من قبل فريق خدمة العملاء</p>
-                    <p><strong>بعد التفعيل، ستتمكن من:</strong></p>
-                    <p>• الدخول إلى بوابة الطالب</p>
-                    <p>• حضور الحصص الدراسية</p>
-                    <p>• الوصول لكل المواد والموارد</p>
-                </div>
-
-                <p style="color: var(--gold); font-weight: 600; text-align: center; margin-top: 20px;">
-                    سيتم إخبارك عبر الواتساب عند تفعيل حسابك 📱
-                </p>
-
-                <div class="modal-buttons">
-                    <button class="modal-btn modal-btn-primary" onclick="closeSuccessModal(); closeRegisterModal();">
-                        حسناً، فهمت
-                    </button>
+                <div class="feature-card">
+                    <div class="feature-icon">⭐</div>
+                    <h3>إنجازات ونقاط</h3>
+                    <p>اجمع نقاطاً وافتح بادجات جديدة</p>
                 </div>
             </div>
         </div>
 
-        <!-- Modal حالة الحساب -->
-        <div class="modal-overlay" id="statusModal">
-            <div class="modal-content success-modal">
-                <div class="success-icon" id="statusIcon">⏳</div>
-                <h3 id="statusTitle">حسابك قيد المراجعة</h3>
-
-                <div class="pending-message" id="statusMessage">
-                    <strong>⏳ انتظر تفعيل حسابك</strong>
-                    سيقوم فريق خدمة العملاء بمراجعة بيانات التحويل البنكي<br>
-                    وتفعيل حسابك قريباً جداً
+        <!-- Pricing Section -->
+        <div class="pricing">
+            <h2 class="section-title">الأسعار</h2>
+            <div class="pricing-card">
+                <div class="price">85 ر.ع</div>
+                <p class="price-subtitle">للفصل الدراسي كاملاً</p>
+                <div class="price-features">
+                    <p>الوصول لكل المواد</p>
+                    <p>حصص يومية</p>
+                    <p>مساعد ذكي</p>
+                    <p>تقارير تقدم</p>
+                    <p>لوحة منافسة</p>
                 </div>
-
-                <p style="color: var(--gray); text-align: center; margin: 20px 0;">
-                    ستتلقى رسالة واتساب فور تفعيل حسابك
-                </p>
-
-                <div class="modal-buttons">
-                    <button class="modal-btn modal-btn-primary" onclick="closeStatusModal(); closeCodeModal();">
-                        حسناً
-                    </button>
-                </div>
+                <button class="btn-primary" onclick="openRegisterModal()">ابدأ الآن</button>
             </div>
         </div>
 
-
-        <!-- بوابة الطالب -->
-        <div class="student-portal" id="studentPortal">
-            <!-- رأس البوابة -->
-            <div class="portal-header">
-                <div class="student-info">
-                    <p><strong>👤 الاسم:</strong> <span id="portalStudentName"></span></p>
-                    <p><strong>📚 الصف:</strong> <span id="portalStudentGrade"></span></p>
-                    <p><strong>⭐ النقاط:</strong> <span id="portalStudentPoints">0</span></p>
+        <!-- Registration Section -->
+        <div class="registration">
+            <h2 class="section-title">انضم إلينا الآن</h2>
+            <div class="registration-container">
+                <div class="registration-text">
+                    <h2>كيف تبدأ؟</h2>
+                    <p>✓ ملء بيانات بسيطة وسريعة</p>
+                    <p>✓ سنتحقق من التحويل البنكي</p>
+                    <p>✓ تفعيل فوري للحساب</p>
+                    <p>✓ الوصول الكامل للمنصة</p>
+                    <p style="margin-top: 20px; color: var(--gold); font-weight: 600;">انضم لآلاف الطلاب الناجحين</p>
                 </div>
-                <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
-            </div>
 
-            <!-- علامات التبويب -->
-            <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab(event, 'subjects')">📚 المواد الدراسية</button>
-                <button class="tab-btn" onclick="switchTab(event, 'sessions')">🕐 جدول الحصص</button>
-                <button class="tab-btn" onclick="switchTab(event, 'grades')">📊 درجاتي</button>
-                <button class="tab-btn" onclick="switchTab(event, 'leaderboard')">🏆 لوحة المنافسة</button>
-                <button class="tab-btn" onclick="switchTab(event, 'schedule')">📅 جدول المذاكرة</button>
-                <button class="tab-btn" onclick="switchTab(event, 'ai-tutor')">🤖 المساعد الذكي</button>
-                <button class="tab-btn" onclick="switchTab(event, 'pdf-summary')">📄 ملخص PDF</button>
-                <button class="tab-btn" onclick="switchTab(event, 'settings')">⚙️ الإعدادات</button>
-            </div>
+                <div class="registration-form">
+                    <form id="registerForm">
+                        <div id="registerError" class="error-message"></div>
 
-            <!-- تبويب المواد الدراسية -->
-            <div id="subjects" class="tab-content active">
-                <div class="subjects-grid" id="subjectsGrid">
-                    <!-- سيتم ملؤها ديناميكياً -->
-                </div>
-            </div>
-
-            <!-- تبويب جدول الحصص -->
-            <div id="sessions" class="tab-content">
-                <div class="today-sessions">
-                    <h3>🕐 جدول حصص اليوم</h3>
-                    <p style="color: var(--gray); margin-bottom: 20px;">
-                        <strong>⏰ مواعيد الحصص:</strong><br>
-                        الأحد - الأربعاء: 4:00 م - 6:00 م و 8:00 م - 10:00 م<br>
-                        الخميس - الجمعة: <span style="color: #E74C3C;">راحة أسبوعية</span><br>
-                        السبت: 10:00 ص - 12:00 م و 4:00 م - 6:00 م
-                    </p>
-                    <div class="sessions-list" id="sessionsList">
-                        <!-- سيتم ملؤها ديناميكياً -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- تبويب درجاتي -->
-            <div id="grades" class="tab-content">
-                <div class="subjects-grid" id="gradesGrid">
-                    <!-- سيتم ملؤها ديناميكياً -->
-                </div>
-            </div>
-
-            <!-- تبويب لوحة المنافسة -->
-            <div id="leaderboard" class="tab-content">
-                <div class="leaderboard">
-                    <h3>🏆 لوحة المنافسة - صفك</h3>
-                    <div class="leaderboard-list" id="leaderboardList">
-                        <!-- سيتم ملؤها ديناميكياً -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- تبويب جدول المذاكرة -->
-            <div id="schedule" class="tab-content">
-                <div class="settings-section">
-                    <h3>📅 جدول مذاكرتك الذكي</h3>
-                    <p style="color: var(--gray); margin-bottom: 20px;">سيتم إنشاء جدول مذاكرة شخصي لك بناءً على درجاتك وأدائك في كل مادة.</p>
-                    <div id="scheduleContent">
-                        <!-- سيتم ملؤها ديناميكياً -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- تبويب المساعد الذكي -->
-            <div id="ai-tutor" class="tab-content">
-                <div class="settings-section">
-                    <h3>🤖 مساعدك التعليمي الذكي</h3>
-                    <p style="color: var(--gray); margin-bottom: 20px;">اسأل أي سؤال تعليمي واحصل على إجابة فورية من مساعدك الذكي.</p>
-
-                    <div class="form-group">
-                        <label>📚 اختر المادة</label>
-                        <select id="tutorSubject" style="margin-bottom: 15px;">
-                            <option value="">اختر مادة</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>❓ اسأل سؤالك</label>
-                        <textarea id="tutorQuestion" placeholder="اكتب سؤالك هنا..." style="min-height: 120px; resize: vertical;"></textarea>
-                    </div>
-
-                    <button onclick="askTutor()" style="margin-bottom: 20px;">إرسال السؤال</button>
-
-                    <div id="tutorResponse" style="display: none; background: var(--cream); padding: 20px; border-radius: 12px; border-right: 4px solid var(--gold);">
-                        <h4 style="color: var(--gold); margin-bottom: 15px;">الإجابة:</h4>
-                        <p id="tutorResponseText"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- تبويب ملخص PDF -->
-            <div id="pdf-summary" class="tab-content">
-                <div class="settings-section">
-                    <h3>📄 خدمة ملخص PDF الذكية</h3>
-                    <p style="color: var(--gray); margin-bottom: 20px;">رفّع كتاب المنهج واحصل على ملخص منظم وأسئلة اختبار.</p>
-
-                    <div class="form-group">
-                        <label>📚 اختر المادة</label>
-                        <select id="pdfSubject" style="margin-bottom: 15px;">
-                            <option value="">اختر مادة</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>📑 رفّع ملف PDF</label>
-                        <input type="file" id="pdfFile" accept=".pdf" style="margin-bottom: 15px;">
-                    </div>
-
-                    <div class="form-group">
-                        <label>من الصفحة</label>
-                        <input type="number" id="pdfFromPage" min="1" placeholder="1">
-                    </div>
-
-                    <div class="form-group">
-                        <label>إلى الصفحة</label>
-                        <input type="number" id="pdfToPage" min="1" placeholder="10">
-                    </div>
-
-                    <button onclick="generatePdfSummary()" style="margin-bottom: 20px;">إنشاء الملخص</button>
-
-                    <div id="pdfSummaryResponse" style="display: none; background: var(--cream); padding: 20px; border-radius: 12px; border-right: 4px solid var(--gold);">
-                        <h4 style="color: var(--gold); margin-bottom: 15px;">الملخص:</h4>
-                        <p id="pdfSummaryText"></p>
-                        <hr style="margin: 20px 0; border: none; border-top: 2px solid var(--light-border);">
-                        <h4 style="color: var(--gold); margin: 15px 0;">أسئلة الاختبار:</h4>
-                        <p id="pdfQuestionsText"></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- تبويب الإعدادات -->
-            <div id="settings" class="tab-content">
-                <div class="settings-grid">
-                    <div class="settings-section">
-                        <h3>🔐 كلمة المرور</h3>
                         <div class="form-group">
-                            <label for="newPassword">كلمة مرور جديدة</label>
-                            <input type="password" id="newPassword">
+                            <label>الاسم الكامل</label>
+                            <input type="text" id="studentName" required>
                         </div>
-                        <button onclick="changePassword()">تحديث كلمة المرور</button>
-                    </div>
 
-                    <div class="settings-section">
-                        <h3>📧 البريد الإلكتروني</h3>
-                        <p style="color: var(--gold); margin-bottom: 15px;">تحذير: تغيير البريد قد يؤثر على عملية الدخول</p>
                         <div class="form-group">
-                            <label for="newEmail">بريد إلكتروني جديد</label>
-                            <input type="email" id="newEmail">
-                        </div>
-                        <button onclick="changeEmail()">تحديث البريد</button>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3>📱 البيانات الشخصية</h3>
-                        <p style="color: var(--gray); margin-bottom: 15px;">تحديث الأرقام يتطلب موافقة من ولي الأمر</p>
-                        <div class="form-group">
-                            <label for="newParentPhone">رقم ولي الأمر الجديد</label>
-                            <input type="tel" id="newParentPhone">
-                        </div>
-                        <div class="form-group">
-                            <label for="newStudentPhone">رقم الطالب الجديد</label>
-                            <input type="tel" id="newStudentPhone">
-                        </div>
-                        <button onclick="requestPhoneChange()">طلب تغيير الأرقام</button>
-                    </div>
-
-                    <div class="settings-section">
-                        <h3>🌐 اللغة</h3>
-                        <div class="form-group">
-                            <label for="language">اختر اللغة</label>
-                            <select id="language">
-                                <option value="ar" selected>العربية</option>
-                                <option value="en">English</option>
+                            <label>الصف الدراسي</label>
+                            <select id="studentGrade" required>
+                                <option value="">اختر الصف</option>
+                                <option value="5">الصف الخامس</option>
+                                <option value="6">الصف السادس</option>
+                                <option value="7">الصف السابع</option>
+                                <option value="8">الصف الثامن</option>
+                                <option value="9">الصف التاسع</option>
+                                <option value="10">الصف العاشر</option>
                             </select>
                         </div>
-                        <p style="color: var(--gray); margin-top: 15px; font-size: 0.9rem;">سيتم تحديث البرنامج فوراً</p>
+
+                        <div class="form-group">
+                            <label>البريد الإلكتروني</label>
+                            <input type="email" id="studentEmail" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>رقم ولي الأمر (واتساب)</label>
+                            <input type="tel" id="parentPhone" placeholder="966501234567" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>رقم الطالب (اختياري)</label>
+                            <input type="tel" id="studentPhone">
+                        </div>
+
+                        <div class="form-group">
+                            <label>رقم التحويل البنكي</label>
+                            <input type="text" id="bankTransfer" required>
+                        </div>
+
+                        <button type="submit" class="form-submit">إنشاء حسابي</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal-overlay" id="registerModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeRegisterModal()">✕</button>
+            <h2 class="modal-title">تسجيل جديد</h2>
+            <form id="registerModalForm">
+                <div id="registerModalError" class="error-message"></div>
+
+                <div class="form-group">
+                    <label>الاسم الكامل</label>
+                    <input type="text" id="modalStudentName" required>
+                </div>
+
+                <div class="form-group">
+                    <label>الصف الدراسي</label>
+                    <select id="modalStudentGrade" required>
+                        <option value="">اختر الصف</option>
+                        <option value="5">الصف الخامس</option>
+                        <option value="6">الصف السادس</option>
+                        <option value="7">الصف السابع</option>
+                        <option value="8">الصف الثامن</option>
+                        <option value="9">الصف التاسع</option>
+                        <option value="10">الصف العاشر</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="modalStudentEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label>رقم ولي الأمر</label>
+                    <input type="tel" id="modalParentPhone" required>
+                </div>
+
+                <div class="form-group">
+                    <label>رقم الطالب (اختياري)</label>
+                    <input type="tel" id="modalStudentPhone">
+                </div>
+
+                <div class="form-group">
+                    <label>رقم التحويل البنكي</label>
+                    <input type="text" id="modalBankTransfer" required>
+                </div>
+
+                <button type="submit" class="form-submit">إنشاء حسابي</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal success-modal">
+            <button class="modal-close" onclick="closeSuccessModal()">✕</button>
+            <div class="success-icon">✅</div>
+            <h3>تم التسجيل بنجاح!</h3>
+
+            <div class="code-box">
+                <div class="code-label">كودك الشخصي - احتفظ به:</div>
+                <div class="code-display" id="successCode">DV-XXXXXX</div>
+            </div>
+
+            <div class="warning-section">
+                <h4>⏳ حسابك قيد المراجعة</h4>
+                <p>سيتم التحقق من التحويل البنكي من قبل فريق خدمة العملاء</p>
+                <p>ستتلقى رسالة واتساب عند تفعيل حسابك</p>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn-modal btn-modal-primary" onclick="closeSuccessModal(); closeRegisterModal();">حسناً</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code Modal -->
+    <div class="modal-overlay" id="codeModal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeCodeModal()">✕</button>
+            <h2 class="modal-title">الدخول بالكود</h2>
+            <form id="codeForm">
+                <div id="codeError" class="error-message"></div>
+
+                <div class="form-group">
+                    <label>أدخل كودك الشخصي</label>
+                    <input type="text" id="loginCode" placeholder="DV-XXXXXX" required>
+                </div>
+
+                <button type="submit" class="form-submit">دخول</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Pending Modal -->
+    <div class="modal-overlay" id="pendingModal">
+        <div class="modal success-modal">
+            <button class="modal-close" onclick="closePendingModal()">✕</button>
+            <div class="success-icon">⏳</div>
+            <h3>حسابك قيد المراجعة</h3>
+
+            <div class="warning-section">
+                <p>سيقوم فريق خدمة العملاء بمراجعة بيانات التحويل البنكي</p>
+                <p>ستتلقى رسالة واتساب فور تفعيل حسابك</p>
+                <p style="margin-top: 15px; font-weight: 600;">شكراً لانتظارك! 🙏</p>
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn-modal btn-modal-primary" onclick="closePendingModal(); closeCodeModal();">حسناً</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Student Portal -->
+    <div class="student-portal" id="studentPortal">
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="navbar-content">
+                <span class="navbar-brand">🎓 دراستي VIP</span>
+                <button class="navbar-logout" onclick="logout()">تسجيل الخروج</button>
+            </div>
+        </div>
+
+        <!-- Portal Content -->
+        <div class="portal-container">
+            <!-- Welcome Card -->
+            <div class="welcome-card">
+                <h2>أهلاً وسهلاً 👋</h2>
+                <div class="welcome-info">
+                    <div class="info-item">
+                        <p>الاسم</p>
+                        <strong id="portalName">-</strong>
                     </div>
+                    <div class="info-item">
+                        <p>الصف</p>
+                        <strong id="portalGrade">-</strong>
+                    </div>
+                    <div class="info-item">
+                        <p>الكود</p>
+                        <strong id="portalCode">-</strong>
+                    </div>
+                    <div class="info-item">
+                        <p>النقاط</p>
+                        <strong id="portalPoints">0</strong>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('today')">🕐 حصص اليوم</button>
+                <button class="tab-btn" onclick="switchTab('subjects')">📚 المواد</button>
+                <button class="tab-btn" onclick="switchTab('grades')">📊 درجاتي</button>
+                <button class="tab-btn" onclick="switchTab('leaderboard')">🏆 المنافسة</button>
+            </div>
+
+            <!-- Today Sessions -->
+            <div id="today" class="tab-content active">
+                <div class="welcome-card">
+                    <h3>🕐 حصص اليوم</h3>
+                    <p id="todayContent" style="color: #999; margin-top: 15px;">جاري تحميل الحصص...</p>
+                </div>
+            </div>
+
+            <!-- Subjects -->
+            <div id="subjects" class="tab-content">
+                <div class="welcome-card">
+                    <h3>📚 المواد الدراسية</h3>
+                    <p id="subjectsContent" style="color: #999; margin-top: 15px;">جاري تحميل المواد...</p>
+                </div>
+            </div>
+
+            <!-- Grades -->
+            <div id="grades" class="tab-content">
+                <div class="welcome-card">
+                    <h3>📊 درجاتي</h3>
+                    <p id="gradesContent" style="color: #999; margin-top: 15px;">لم تحصل على درجات بعد</p>
+                </div>
+            </div>
+
+            <!-- Leaderboard -->
+            <div id="leaderboard" class="tab-content">
+                <div class="welcome-card">
+                    <h3>🏆 لوحة المنافسة</h3>
+                    <p id="leaderboardContent" style="color: #999; margin-top: 15px;">جاري تحميل البيانات...</p>
                 </div>
             </div>
         </div>
@@ -1999,10 +1021,9 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js"></script>
 
     <script>
-        // تهيئة Firebase
+        // Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyBcj-6Fvtk2oyxvTnFJayYJLlgZesKckxs",
             authDomain: "drasati-vip.firebaseapp.com",
@@ -2015,18 +1036,27 @@
         firebase.initializeApp(firebaseConfig);
         const db = firebase.firestore();
 
-        // بيانات الطالب الحالي
         let currentStudent = null;
 
-        // فتح/إغلاق الـ Modals
+        // Generate Student Code
+        function generateCode() {
+            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            let code = "DV-";
+            for (let i = 0; i < 6; i++) {
+                code += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return code;
+        }
+
+        // Modal Functions
         function openRegisterModal() {
             document.getElementById("registerModal").classList.add("show");
         }
 
         function closeRegisterModal() {
             document.getElementById("registerModal").classList.remove("show");
-            document.getElementById("registerForm").reset();
-            document.getElementById("registerError").classList.remove("show");
+            document.getElementById("registerModalForm").reset();
+            document.getElementById("registerModalError").classList.remove("show");
         }
 
         function openCodeModal() {
@@ -2036,75 +1066,41 @@
         function closeCodeModal() {
             document.getElementById("codeModal").classList.remove("show");
             document.getElementById("codeForm").reset();
-            document.getElementById("loginError").classList.remove("show");
+            document.getElementById("codeError").classList.remove("show");
         }
 
         function closeSuccessModal() {
             document.getElementById("successModal").classList.remove("show");
         }
 
-        function closeStatusModal() {
-            document.getElementById("statusModal").classList.remove("show");
+        function closePendingModal() {
+            document.getElementById("pendingModal").classList.remove("show");
         }
 
-        // إغلاق Modal عند الضغط خارجه
+        // Close modal on outside click
         window.addEventListener("click", function(event) {
-            const registerModal = document.getElementById("registerModal");
-            const codeModal = document.getElementById("codeModal");
-            const successModal = document.getElementById("successModal");
-            const statusModal = document.getElementById("statusModal");
-
-            if (event.target === registerModal) {
-                closeRegisterModal();
-            }
-            if (event.target === codeModal) {
-                closeCodeModal();
-            }
-            if (event.target === successModal) {
-                closeSuccessModal();
-            }
-            if (event.target === statusModal) {
-                closeStatusModal();
+            if (event.target.classList.contains("modal-overlay")) {
+                event.target.classList.remove("show");
             }
         });
 
-        // المواد الدراسية حسب الصف
-        const subjectsByGrade = {
-            "5": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-            "6": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-            "7": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-            "8": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-            "9": ["رياضيات", "فيزياء", "كيمياء", "أحياء", "عربي", "إنجليزي", "إسلامية", "دراسات"],
-            "10": ["رياضيات", "فيزياء", "كيمياء", "أحياء", "عربي", "إنجليزي", "إسلامية", "دراسات"]
-        };
-
-        // توليد كود عشوائي
-        function generateStudentCode() {
-            const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            let code = "DV-";
-            for (let i = 0; i < 6; i++) {
-                code += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return code;
-        }
-
-        // معالجة التسجيل
-        document.getElementById("registerForm").addEventListener("submit", async (e) => {
+        // Register Form
+        document.getElementById("registerModalForm").addEventListener("submit", async (e) => {
             e.preventDefault();
 
-            const name = document.getElementById("studentName").value.trim();
-            const grade = document.getElementById("studentGrade").value;
-            const email = document.getElementById("studentEmail").value.trim();
-            const parentPhone = document.getElementById("parentPhone").value.trim();
-            const studentPhone = document.getElementById("studentPhone").value.trim();
-            const bankTransfer = document.getElementById("bankTransfer").value.trim();
+            const name = document.getElementById("modalStudentName").value.trim();
+            const grade = document.getElementById("modalStudentGrade").value;
+            const email = document.getElementById("modalStudentEmail").value.trim();
+            const parentPhone = document.getElementById("modalParentPhone").value.trim();
+            const studentPhone = document.getElementById("modalStudentPhone").value.trim();
+            const bankTransfer = document.getElementById("modalBankTransfer").value.trim();
 
             if (!name || !grade || !email || !parentPhone || !bankTransfer) {
-                showError("registerError", "الرجاء ملء جميع الحقول المطلوبة");
+                showError("registerModalError", "الرجاء ملء جميع الحقول المطلوبة");
                 return;
             }
 
-            const code = generateStudentCode();
+            const code = generateCode();
 
             try {
                 await db.collection("students").doc(code).set({
@@ -2113,35 +1109,31 @@
                     email: email,
                     parentPhone: parentPhone,
                     studentPhone: studentPhone || "",
-                    transferRef: bankTransfer,
-                    status: "pending", // في انتظار الموافقة
+                    bankTransfer: bankTransfer,
                     code: code,
+                    status: "pending",
                     createdAt: new Date(),
                     points: 0,
                     grades: {},
                     attendance: []
                 });
 
-                // إغلاق modal التسجيل وعرض modal النجاح
                 closeRegisterModal();
                 document.getElementById("successCode").textContent = code;
                 document.getElementById("successModal").classList.add("show");
             } catch (error) {
-                showError("registerError", "حدث خطأ: " + error.message);
+                showError("registerModalError", "خطأ: " + error.message);
             }
         });
 
-        // معالجة الدخول بالكود
-        document.getElementById("codeForm").addEventListener("submit", (e) => {
+        // Login Form
+        document.getElementById("codeForm").addEventListener("submit", async (e) => {
             e.preventDefault();
-            loginWithCode();
-        });
 
-        async function loginWithCode() {
             const code = document.getElementById("loginCode").value.trim();
 
             if (!code) {
-                showError("loginError", "الرجاء إدخال الكود");
+                showError("codeError", "الرجاء إدخال الكود");
                 return;
             }
 
@@ -2149,406 +1141,110 @@
                 const doc = await db.collection("students").doc(code).get();
 
                 if (!doc.exists) {
-                    showError("loginError", "الكود غير صحيح أو غير موجود");
+                    showError("codeError", "الكود غير صحيح");
                     return;
                 }
 
                 const student = doc.data();
 
                 if (student.status === "pending") {
-                    // عرض رسالة أن الحساب قيد المراجعة
                     closeCodeModal();
-                    document.getElementById("statusIcon").textContent = "⏳";
-                    document.getElementById("statusTitle").textContent = "حسابك قيد المراجعة";
-                    document.getElementById("statusMessage").innerHTML = `
-                        <strong>⏳ انتظر تفعيل حسابك</strong><br>
-                        سيقوم فريق خدمة العملاء بمراجعة بيانات التحويل البنكي<br>
-                        وتفعيل حسابك قريباً جداً
-                    `;
-                    document.getElementById("statusModal").classList.add("show");
+                    document.getElementById("pendingModal").classList.add("show");
                     return;
                 }
 
                 if (student.status !== "active") {
-                    showError("loginError", "حسابك معطّل. يرجى التواصل مع خدمة العملاء");
+                    showError("codeError", "حسابك غير مفعّل");
                     return;
                 }
 
-                // تسجيل الدخول بنجاح
                 localStorage.setItem("studentCode", code);
                 currentStudent = { code, ...student };
                 closeCodeModal();
                 showPortal();
             } catch (error) {
-                showError("loginError", "خطأ: " + error.message);
+                showError("codeError", "خطأ: " + error.message);
             }
-        }
+        });
 
-
-        // عرض البوابة
+        // Show Portal
         function showPortal() {
-            document.getElementById("landingPage").style.display = "none";
+            document.getElementById("heroSection").style.display = "none";
+            document.querySelector(".stats").style.display = "none";
+            document.querySelectorAll(".container").forEach(el => el.style.display = "none");
             document.getElementById("studentPortal").style.display = "block";
 
-            // ملء بيانات الطالب
-            document.getElementById("portalStudentName").textContent = currentStudent.name;
-            document.getElementById("portalStudentGrade").textContent = `الصف ${currentStudent.grade}`;
-            document.getElementById("portalStudentPoints").textContent = currentStudent.points || 0;
+            document.getElementById("portalName").textContent = currentStudent.name;
+            document.getElementById("portalGrade").textContent = `الصف ${currentStudent.grade}`;
+            document.getElementById("portalCode").textContent = currentStudent.code;
+            document.getElementById("portalPoints").textContent = currentStudent.points || 0;
 
-            // ملء المواد الدراسية
-            populateSubjects();
-            populateGrades();
-            populateLeaderboard();
-            populateTutorSubjects();
-            populatePdfSubjects();
-            generateSmartSchedule();
-            displayTodaySessions();
+            loadTodayContent();
+            loadSubjects();
         }
 
-        // ملء المواد الدراسية
-        function populateSubjects() {
-            const grid = document.getElementById("subjectsGrid");
-            grid.innerHTML = "";
-            const subjects = subjectsByGrade[currentStudent.grade] || [];
-
-            subjects.forEach(subject => {
-                const card = document.createElement("div");
-                card.className = "subject-card";
-                card.innerHTML = `
-                    <h3>${subject}</h3>
-                    <div class="tabs-small">
-                        <div class="tab-small active">📹 حصص</div>
-                        <div class="tab-small">📝 اختبارات</div>
-                        <div class="tab-small">📋 ملخصات</div>
-                        <div class="tab-small">❓ أسئلة</div>
-                    </div>
-                    <p style="color: var(--gray); font-size: 0.9rem; margin-top: 10px;">محتوى المادة سيتم تحديثه من قبل المعلم</p>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // عرض حصص اليوم
-        function displayTodaySessions() {
+        // Load Today Content
+        function loadTodayContent() {
             const today = new Date();
-            const dayOfWeek = today.getDay();
-            const dayNames = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
-            const currentDay = dayNames[dayOfWeek];
+            const days = ["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"];
+            const dayName = days[today.getDay()];
 
-            const sessionsList = document.getElementById("sessionsList");
-            sessionsList.innerHTML = `<p style="color: var(--gray); font-size: 0.9rem; margin-bottom: 15px;"><strong>📅 اليوم:</strong> ${currentDay}</p>`;
+            let content = `<p><strong>📅 اليوم:</strong> ${dayName}</p>`;
 
-            let hasSession = false;
-
-            // الأحد - الأربعاء
-            if ([0, 1, 2, 3].includes(dayOfWeek)) {
-                hasSession = true;
-                const sessions = [
-                    { time: "4:00 م - 5:00 م", subject: "المادة الأولى", meet: "https://meet.google.com" },
-                    { time: "5:00 م - 6:00 م", subject: "المادة الثانية", meet: "https://meet.google.com" },
-                    { time: "8:00 م - 9:00 م", subject: "المادة الثالثة", meet: "https://meet.google.com" },
-                    { time: "9:00 م - 10:00 م", subject: "المادة الرابعة", meet: "https://meet.google.com" }
-                ];
-
-                sessions.forEach(s => {
-                    const item = document.createElement("div");
-                    item.className = "session-item";
-                    item.innerHTML = `
-                        <div class="session-info">
-                            <h4>${s.subject}</h4>
-                            <p>مع أ. المعلم</p>
-                        </div>
-                        <div class="session-time">${s.time}</div>
-                        <a href="${s.meet}" target="_blank" class="meet-btn">رابط الحصة</a>
-                    `;
-                    sessionsList.appendChild(item);
-                });
-            }
-
-            // الخميس والجمعة
-            if ([4, 5].includes(dayOfWeek)) {
-                const item = document.createElement("div");
-                item.className = "session-item";
-                item.innerHTML = `
-                    <div class="session-info">
-                        <h4>🎉 يوم راحة</h4>
-                        <p>استمتع بوقتك وراجع دروسك</p>
-                    </div>
+            if ([0, 1, 2, 3].includes(today.getDay())) {
+                content += `
+                    <p style="margin-top: 15px;">🕐 <strong>4:00 م - 5:00 م:</strong> مادة أولى</p>
+                    <p>🕐 <strong>5:00 م - 6:00 م:</strong> مادة ثانية</p>
+                    <p>🕐 <strong>8:00 م - 9:00 م:</strong> مادة ثالثة</p>
                 `;
-                sessionsList.appendChild(item);
-            }
-
-            // السبت
-            if (dayOfWeek === 6) {
-                hasSession = true;
-                const sessions = [
-                    { time: "10:00 ص - 11:00 ص", subject: "المادة الأولى", meet: "https://meet.google.com" },
-                    { time: "11:00 ص - 12:00 م", subject: "المادة الثانية", meet: "https://meet.google.com" },
-                    { time: "4:00 م - 5:00 م", subject: "المادة الثالثة", meet: "https://meet.google.com" },
-                    { time: "5:00 م - 6:00 م", subject: "المادة الرابعة", meet: "https://meet.google.com" }
-                ];
-
-                sessions.forEach(s => {
-                    const item = document.createElement("div");
-                    item.className = "session-item";
-                    item.innerHTML = `
-                        <div class="session-info">
-                            <h4>${s.subject}</h4>
-                            <p>مع أ. المعلم</p>
-                        </div>
-                        <div class="session-time">${s.time}</div>
-                        <a href="${s.meet}" target="_blank" class="meet-btn">رابط الحصة</a>
-                    `;
-                    sessionsList.appendChild(item);
-                });
-            }
-
-            if (!hasSession && ![4, 5].includes(dayOfWeek)) {
-                const item = document.createElement("div");
-                item.className = "session-item";
-                item.innerHTML = `<p style="color: var(--gray);">لا توجد حصص اليوم</p>`;
-                sessionsList.appendChild(item);
-            }
-        }
-
-        // ملء الدرجات
-        function populateGrades() {
-            const grid = document.getElementById("gradesGrid");
-            grid.innerHTML = "";
-            const subjects = subjectsByGrade[currentStudent.grade] || [];
-
-            subjects.forEach(subject => {
-                const grade = currentStudent.grades?.[subject] || 0;
-                const percentage = (grade / 100) * 100;
-
-                const card = document.createElement("div");
-                card.className = "subject-card";
-                card.innerHTML = `
-                    <h3>${subject}</h3>
-                    <div class="score-display">
-                        <span class="score">${grade}/100</span>
-                        <span class="total">${Math.round(percentage)}%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${percentage}%"></div>
-                    </div>
-                    <p style="color: var(--gray); font-size: 0.85rem; margin-top: 10px;">
-                        ${percentage >= 80 ? '✨ أداء ممتاز' : percentage >= 60 ? '👍 أداء جيد' : '📈 يحتاج تحسين'}
-                    </p>
+            } else if ([4, 5].includes(today.getDay())) {
+                content += `<p style="margin-top: 15px; color: var(--gold); font-weight: 600;">🎉 يوم راحة - استمتع بوقتك!</p>`;
+            } else {
+                content += `
+                    <p style="margin-top: 15px;">🕐 <strong>10:00 ص - 11:00 ص:</strong> مادة أولى</p>
+                    <p>🕐 <strong>11:00 ص - 12:00 م:</strong> مادة ثانية</p>
+                    <p>🕐 <strong>4:00 م - 5:00 م:</strong> مادة ثالثة</p>
                 `;
-                grid.appendChild(card);
-            });
-        }
-
-        // ملء لوحة المنافسة
-        async function populateLeaderboard() {
-            const list = document.getElementById("leaderboardList");
-            list.innerHTML = "";
-
-            try {
-                const snapshot = await db.collection("students")
-                    .where("grade", "==", currentStudent.grade)
-                    .where("status", "==", "active")
-                    .orderBy("points", "desc")
-                    .limit(10)
-                    .get();
-
-                let rank = 1;
-                snapshot.forEach(doc => {
-                    const student = doc.data();
-                    const item = document.createElement("div");
-                    item.className = `leaderboard-item ${rank === 1 ? 'top-1' : rank === 2 ? 'top-2' : rank === 3 ? 'top-3' : ''}`;
-
-                    let medal = '';
-                    if (rank === 1) medal = '🥇';
-                    else if (rank === 2) medal = '🥈';
-                    else if (rank === 3) medal = '🥉';
-
-                    item.innerHTML = `
-                        <div class="rank">${medal || rank}</div>
-                        <div class="leaderboard-info">
-                            <div class="leaderboard-name">الطالب ${rank}</div>
-                        </div>
-                        <div class="leaderboard-points">${student.points} ⭐</div>
-                    `;
-                    list.appendChild(item);
-                    rank++;
-                });
-
-                if (snapshot.empty) {
-                    list.innerHTML = '<p style="color: var(--gray); text-align: center; padding: 20px;">لم يكن هناك طلاب نشطين بعد</p>';
-                }
-            } catch (error) {
-                console.error("خطأ في تحميل لوحة المنافسة:", error);
-            }
-        }
-
-        // ملء مواد المساعد الذكي
-        function populateTutorSubjects() {
-            const select = document.getElementById("tutorSubject");
-            const subjects = subjectsByGrade[currentStudent.grade] || [];
-            subjects.forEach(subject => {
-                const option = document.createElement("option");
-                option.value = subject;
-                option.textContent = subject;
-                select.appendChild(option);
-            });
-        }
-
-        // ملء مواد ملخص PDF
-        function populatePdfSubjects() {
-            const select = document.getElementById("pdfSubject");
-            const subjects = subjectsByGrade[currentStudent.grade] || [];
-            subjects.forEach(subject => {
-                const option = document.createElement("option");
-                option.value = subject;
-                option.textContent = subject;
-                select.appendChild(option);
-            });
-        }
-
-        // سؤال المساعد الذكي
-        async function askTutor() {
-            const subject = document.getElementById("tutorSubject").value;
-            const question = document.getElementById("tutorQuestion").value.trim();
-
-            if (!subject || !question) {
-                alert("الرجاء اختيار مادة وكتابة سؤالك");
-                return;
             }
 
-            // هنا سيتم استدعاء Claude API
-            // للآن سنعرض رسالة توضيحية
-            const response = "تم استقبال سؤالك في المادة: " + subject + "\n\n" +
-                           "سيتم الإجابة عليه من خلال Claude API في النسخة الكاملة";
-
-            document.getElementById("tutorResponseText").textContent = response;
-            document.getElementById("tutorResponse").style.display = "block";
+            document.getElementById("todayContent").innerHTML = content;
         }
 
-        // إنشاء ملخص PDF
-        function generatePdfSummary() {
-            const subject = document.getElementById("pdfSubject").value;
-            const fromPage = document.getElementById("pdfFromPage").value;
-            const toPage = document.getElementById("pdfToPage").value;
+        // Load Subjects
+        function loadSubjects() {
+            const subjects = {
+                "5": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
+                "6": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
+                "7": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
+                "8": ["رياضيات", "علوم", "عربي", "إنجليزي", "إسلامية", "دراسات"],
+                "9": ["رياضيات", "فيزياء", "كيمياء", "أحياء", "عربي", "إنجليزي", "إسلامية", "دراسات"],
+                "10": ["رياضيات", "فيزياء", "كيمياء", "أحياء", "عربي", "إنجليزي", "إسلامية", "دراسات"]
+            };
 
-            if (!subject || !fromPage || !toPage) {
-                alert("الرجاء ملء جميع الحقول");
-                return;
-            }
+            const grade = currentStudent.grade;
+            const gradeSubjects = subjects[grade] || [];
 
-            const summary = `تم استقبال طلبك:\n المادة: ${subject}\n من الصفحة ${fromPage} إلى ${toPage}\n\n سيتم معالجة الملف من خلال Claude API في النسخة الكاملة`;
-            const questions = `1. سؤال اختبار 1\n 2. سؤال اختبار 2\n 3. سؤال اختبار 3`;
-
-            document.getElementById("pdfSummaryText").textContent = summary;
-            document.getElementById("pdfQuestionsText").textContent = questions;
-            document.getElementById("pdfSummaryResponse").style.display = "block";
+            let content = gradeSubjects.map(s => `<p style="margin: 10px 0;">📖 ${s}</p>`).join("");
+            document.getElementById("subjectsContent").innerHTML = content;
         }
 
-        // جدول المذاكرة الذكي
-        function generateSmartSchedule() {
-            const schedule = document.getElementById("scheduleContent");
-            schedule.innerHTML = `
-                <div style="background: var(--cream); padding: 20px; border-radius: 12px; margin-top: 15px;">
-                    <h4 style="color: var(--gold); margin-bottom: 15px;">📅 جدولك الموصى به هذا الأسبوع:</h4>
-                    <ul style="list-style: none; padding: 0;">
-                        <li style="padding: 10px 0; border-bottom: 1px solid var(--light-border);">
-                            <strong>السبت:</strong> مراجعة عامة (30 دقيقة)
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid var(--light-border);">
-                            <strong>الأحد:</strong> حل تمارين الرياضيات (45 دقيقة)
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid var(--light-border);">
-                            <strong>الاثنين:</strong> مراجعة العلوم (30 دقيقة)
-                        </li>
-                        <li style="padding: 10px 0; border-bottom: 1px solid var(--light-border);">
-                            <strong>الثلاثاء:</strong> كتابة الإنشاء (45 دقيقة)
-                        </li>
-                        <li style="padding: 10px 0;">
-                            <strong>الأربعاء:</strong> اختبار تجريبي (60 دقيقة)
-                        </li>
-                    </ul>
-                </div>
-            `;
-        }
+        // Switch Tab
+        function switchTab(tabName) {
+            document.querySelectorAll(".tab-content").forEach(el => el.classList.remove("active"));
+            document.querySelectorAll(".tab-btn").forEach(el => el.classList.remove("active"));
 
-        // تغيير كلمة المرور
-        async function changePassword() {
-            const newPassword = document.getElementById("newPassword").value;
-            if (!newPassword) {
-                alert("الرجاء إدخال كلمة مرور جديدة");
-                return;
-            }
-
-            try {
-                await db.collection("students").doc(currentStudent.code).update({
-                    password: newPassword
-                });
-                alert("✅ تم تحديث كلمة المرور");
-                document.getElementById("newPassword").value = "";
-            } catch (error) {
-                alert("❌ خطأ: " + error.message);
-            }
-        }
-
-        // تغيير البريد
-        async function changeEmail() {
-            const newEmail = document.getElementById("newEmail").value;
-            if (!newEmail) {
-                alert("الرجاء إدخال بريد جديد");
-                return;
-            }
-
-            try {
-                await db.collection("students").doc(currentStudent.code).update({
-                    email: newEmail
-                });
-                alert("✅ تم تحديث البريد\n⚠️ تحذير: قد يؤثر على الدخول المستقبلي");
-                document.getElementById("newEmail").value = "";
-            } catch (error) {
-                alert("❌ خطأ: " + error.message);
-            }
-        }
-
-        // طلب تغيير الأرقام
-        async function requestPhoneChange() {
-            const newParentPhone = document.getElementById("newParentPhone").value;
-            const newStudentPhone = document.getElementById("newStudentPhone").value;
-
-            if (!newParentPhone && !newStudentPhone) {
-                alert("الرجاء إدخال رقم واحد على الأقل");
-                return;
-            }
-
-            alert("✅ تم إرسال طلبك\n\nسيتم الاتصال بولي الأمر للموافقة عليه");
-        }
-
-        // تبديل التبويبات
-        function switchTab(event, tabName) {
-            // إخفاء جميع التبويبات
-            const tabs = document.querySelectorAll(".tab-content");
-            tabs.forEach(tab => tab.classList.remove("active"));
-
-            // إزالة الفئة active من جميع الأزرار
-            const buttons = document.querySelectorAll(".tab-btn");
-            buttons.forEach(btn => btn.classList.remove("active"));
-
-            // إظهار التبويب المختار وتفعيل الزر
             document.getElementById(tabName).classList.add("active");
             event.target.classList.add("active");
         }
 
-        // تسجيل الخروج
+        // Logout
         function logout() {
             localStorage.removeItem("studentCode");
             currentStudent = null;
-            document.getElementById("studentPortal").style.display = "none";
-            document.getElementById("landingPage").style.display = "block";
-            document.getElementById("registerForm").reset();
-            document.getElementById("codeForm").reset();
+            location.reload();
         }
 
-        // دوال مساعدة
+        // Show Error
         function showError(elementId, message) {
             const element = document.getElementById(elementId);
             element.textContent = message;
@@ -2556,35 +1252,20 @@
             setTimeout(() => element.classList.remove("show"), 5000);
         }
 
-        function showSuccess(elementId, message) {
-            const element = document.getElementById(elementId);
-            element.innerHTML = message;
-            element.classList.add("show");
-        }
-
-        // التحقق من تسجيل الدخول عند تحميل الصفحة
+        // Check Login on Load
         window.addEventListener("load", () => {
-            const savedCode = localStorage.getItem("studentCode");
-            if (savedCode) {
-                db.collection("students").doc(savedCode).get().then(doc => {
-                    if (doc.exists) {
-                        const student = doc.data();
-                        if (student.status === "active") {
-                            currentStudent = { code: savedCode, ...student };
-                            showPortal();
-                        } else {
-                            localStorage.removeItem("studentCode");
-                        }
+            const code = localStorage.getItem("studentCode");
+            if (code) {
+                db.collection("students").doc(code).get().then(doc => {
+                    if (doc.exists && doc.data().status === "active") {
+                        currentStudent = { code, ...doc.data() };
+                        showPortal();
+                    } else {
+                        localStorage.removeItem("studentCode");
                     }
-                }).catch(error => {
-                    console.error("خطأ:", error);
-                    localStorage.removeItem("studentCode");
                 });
             }
         });
-    </script>
-</body>
-</html>
     </script>
 </body>
 </html>
