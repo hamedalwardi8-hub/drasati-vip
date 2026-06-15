@@ -316,6 +316,138 @@
             line-height: 1.6;
         }
 
+        /* Success Code Modal */
+        .success-code-modal {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .success-code-modal .modal-close {
+            display: none;
+        }
+
+        .success-icon-large {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        .success-code-modal h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--black);
+        }
+
+        .code-display-box {
+            background: linear-gradient(135deg, var(--gold) 0%, #B8955E 100%);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(201, 168, 76, 0.25);
+        }
+
+        .code-display-box .label {
+            font-size: 0.9rem;
+            opacity: 0.95;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .code-display-box .code {
+            font-size: 3rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .copy-code-btn {
+            background: rgba(255,255,255,0.2);
+            color: var(--white);
+            border: 2px solid var(--white);
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .copy-code-btn:hover {
+            background: var(--white);
+            color: var(--gold);
+        }
+
+        .success-message-box {
+            background: var(--cream);
+            padding: 25px;
+            border-radius: 10px;
+            border-right: 4px solid var(--gold);
+            margin: 25px 0;
+            text-align: right;
+        }
+
+        .success-message-box h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .success-message-box p {
+            color: #666;
+            margin: 10px 0;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .success-message-box strong {
+            color: var(--black);
+            display: block;
+            margin: 5px 0;
+        }
+
+        .success-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .success-actions button {
+            flex: 1;
+            min-width: 150px;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .btn-success-primary {
+            background: var(--gold);
+            color: var(--white);
+        }
+
+        .btn-success-primary:hover {
+            background: #B8955E;
+            transform: translateY(-2px);
+        }
+
+        .btn-success-secondary {
+            background: transparent;
+            color: var(--gold);
+            border: 2px solid var(--gold);
+        }
+
+        .btn-success-secondary:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
+
         /* Stats Section */
         .hero-stats {
             display: grid;
@@ -1270,6 +1402,51 @@
         </div>
     </div>
 
+    <!-- Success Code Modal (بعد التسجيل) -->
+    <div class="modal-overlay" id="successCodeModal">
+        <div class="modal success-code-modal">
+            <div class="success-icon-large">🎉</div>
+            <h2>تم التسجيل بنجاح!</h2>
+
+            <p style="color: #666; margin-bottom: 10px; font-size: 0.95rem;">هذا كودك الشخصي الفريد</p>
+
+            <div class="code-display-box">
+                <div class="label">احتفظ بهذا الكود بعناية</div>
+                <div class="code" id="displayCode">DV-XXXXXX</div>
+                <button class="copy-code-btn" onclick="copyCode()">📋 انسخ الكود</button>
+            </div>
+
+            <div class="success-message-box">
+                <h3>✅ ما الخطوة التالية؟</h3>
+                <p>
+                    <strong>1. احتفظ بالكود:</strong>
+                    احفظ هذا الكود في مكان آمن (ملاحظة أو صورة)
+                </p>
+                <p>
+                    <strong>2. انتظر التأكيد:</strong>
+                    سيتم التحقق من التحويل البنكي خلال 24 ساعة
+                </p>
+                <p>
+                    <strong>3. الكود سيصل لك:</strong>
+                    ستتلقى رسالة واتساب بتأكيد التفعيل
+                </p>
+                <p>
+                    <strong>4. ادخل بكودك:</strong>
+                    استخدم هذا الكود للدخول إلى حسابك
+                </p>
+            </div>
+
+            <div class="success-actions">
+                <button class="btn-success-primary" onclick="closeSuccessCodeModal(); openCodeHelpModal();">
+                    🔐 كيف أستخدم الكود؟
+                </button>
+                <button class="btn-success-secondary" onclick="closeSuccessCodeModal();">
+                    ✓ تم، فهمت
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Code Help Modal -->
     <div class="modal-overlay" id="codeHelpModal">
         <div class="modal code-help-modal">
@@ -1417,6 +1594,14 @@
             document.getElementById("codeHelpModal").classList.remove("show");
         }
 
+        function openSuccessCodeModal() {
+            document.getElementById("successCodeModal").classList.add("show");
+        }
+
+        function closeSuccessCodeModal() {
+            document.getElementById("successCodeModal").classList.remove("show");
+        }
+
         function openCodeModal() {
             document.getElementById("codeModal").classList.add("show");
         }
@@ -1425,6 +1610,20 @@
             document.getElementById("codeModal").classList.remove("show");
             document.getElementById("codeForm").reset();
             document.getElementById("codeError").classList.remove("show");
+        }
+
+        function copyCode() {
+            const code = document.getElementById("displayCode").textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = event.target;
+                const originalText = btn.textContent;
+                btn.textContent = "✅ تم النسخ!";
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                }, 2000);
+            }).catch(err => {
+                alert("خطأ في النسخ: " + err);
+            });
         }
 
         // Close modal on outside click
@@ -1469,7 +1668,10 @@
                     grades: {}
                 });
 
-                showSuccess("registerSuccess", `✅ تم استلام طلبك! كودك: <strong>${code}</strong><br>انتظر التفعيل عبر واتساب`);
+                // عرض الكود في modal جديد
+                closeRegisterModal();
+                document.getElementById("displayCode").textContent = code;
+                document.getElementById("successCodeModal").classList.add("show");
                 document.getElementById("registerForm").reset();
             } catch (error) {
                 showError("registerError", "خطأ: " + error.message);
