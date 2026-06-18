@@ -26,6 +26,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);
 .dash.show{display:flex;}
 .topbar{background:var(--deep2);border-bottom:1px solid var(--faint);padding:14px 28px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
 .tlogo{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-size:17px;font-weight:900;color:var(--deep);}
+.tlogo img{height:40px;width:auto;object-fit:contain;}
 .tbrand{font-size:15px;font-weight:700;}.tbrand span{color:var(--gold);}
 .trole{font-size:12px;background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.25);padding:3px 11px;border-radius:20px;}
 .tright{margin-right:auto;display:flex;align-items:center;gap:10px;}
@@ -138,7 +139,7 @@ tr:hover td{background:rgba(255,255,255,.015);}
 <!-- DASHBOARD -->
 <div class="dash" id="dash">
   <div class="topbar">
-    <div class="tlogo">د</div>
+    <img src="logo.png" alt="دراستي VIP" class="tlogo" />
     <div class="tbrand">دراستي <span>VIP</span></div>
     <span class="trole" id="t-role">معلم</span>
     <div class="tright">

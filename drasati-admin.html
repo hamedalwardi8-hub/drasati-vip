@@ -29,6 +29,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);
 .dash.show{display:flex;}
 .topbar{background:#FFFFFF;border-bottom:1px solid #EDE8DF;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
 .tb-logo{display:flex;align-items:center;gap:10px;}
+.tb-logo img{height:40px;width:auto;object-fit:contain;}
 .tb-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--deep);font-family:'Cairo',sans-serif;}
 .tb-name{font-size:16px;font-weight:700;color:#1C1C2E;}
 .tb-name span{color:var(--gold);}
@@ -143,8 +144,8 @@ window.dispatchEvent(new Event('firebase-ready'));
 <div class="dash" id="dash">
   <div class="topbar">
     <div class="tb-logo">
-      <div class="tb-icon">د</div>
-      <div class="tb-name">دراستي <span>VIP</span> — لوحة التحكم</div>
+      <img src="logo.png" alt="دراستي VIP" />
+      <div class="tb-name">— لوحة التحكم</div>
     </div>
     <div class="tb-right">
       <div class="tb-date" id="tb-date"></div>

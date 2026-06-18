@@ -25,6 +25,7 @@ body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);
 .dash.show{display:flex;}
 .topbar{background:var(--deep2);border-bottom:1px solid var(--faint);padding:14px 28px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
 .tlogo{width:36px;height:36px;background:linear-gradient(135deg,var(--teal),#0D9488);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--deep);}
+.tlogo img{height:40px;width:auto;object-fit:contain;}
 .tbrand{font-size:15px;font-weight:700;}.tbrand span{color:var(--teal);}
 .trole{font-size:12px;background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.25);padding:3px 11px;border-radius:20px;}
 .tright{margin-right:auto;display:flex;align-items:center;gap:10px;}
@@ -116,8 +117,8 @@ window.dispatchEvent(new Event('firebase-ready'));
 <!-- DASH -->
 <div class="dash" id="dash">
   <div class="topbar">
-    <div class="tlogo">💬</div>
-    <div class="tbrand">دراستي <span>VIP</span> — خدمة العملاء</div>
+    <img src="logo.png" alt="دراستي VIP" class="tlogo" />
+    <div class="tbrand">— خدمة العملاء</div>
     <span class="trole">موظف خدمة عملاء</span>
     <div class="tright">
       <span class="tnbadge" id="pend-count" onclick="nav('pending')" style="display:none">⏳ 0 بانتظار التفعيل</span>
