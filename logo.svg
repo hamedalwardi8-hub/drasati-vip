@@ -1,0 +1,53 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="none"/>
+
+  <!-- Graduation Cap -->
+  <g transform="translate(100, 60)">
+    <!-- Cap Top -->
+    <path d="M -45 -5 L 0 -25 L 45 -5 Z" fill="#C9A84C" stroke="#C9A84C" stroke-width="3" stroke-linejoin="round"/>
+    <!-- Cap Brim -->
+    <ellipse cx="0" cy="0" rx="50" ry="8" fill="#C9A84C" stroke="#C9A84C" stroke-width="2"/>
+    <!-- Tassel -->
+    <line x1="0" y1="0" x2="0" y2="20" stroke="#C9A84C" stroke-width="2"/>
+    <circle cx="0" cy="22" r="3" fill="#C9A84C"/>
+  </g>
+
+  <!-- Book -->
+  <g transform="translate(100, 100)">
+    <!-- Left Page -->
+    <path d="M -25 -20 L -5 -20 L -5 25 L -25 25 Q -30 20 -30 2.5 Q -30 -15 -25 -20 Z" fill="none" stroke="#C9A84C" stroke-width="3" stroke-linejoin="round"/>
+    <!-- Right Page -->
+    <path d="M 5 -20 L 25 -20 Q 30 -15 30 2.5 Q 30 20 25 25 L 5 25 Z" fill="none" stroke="#C9A84C" stroke-width="3" stroke-linejoin="round"/>
+    <!-- Spine -->
+    <line x1="-5" y1="-20" x2="-5" y2="25" stroke="#C9A84C" stroke-width="2"/>
+    <line x1="5" y1="-20" x2="5" y2="25" stroke="#C9A84C" stroke-width="2"/>
+    <!-- Page lines -->
+    <line x1="-18" y1="-10" x2="-8" y2="-10" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+    <line x1="-18" y1="0" x2="-8" y2="0" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+    <line x1="-18" y1="10" x2="-8" y2="10" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+    <line x1="8" y1="-10" x2="18" y2="-10" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+    <line x1="8" y1="0" x2="18" y2="0" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+    <line x1="8" y1="10" x2="18" y2="10" stroke="#C9A84C" stroke-width="1.5" opacity="0.6"/>
+  </g>
+
+  <!-- Left Laurel -->
+  <g transform="translate(35, 100)">
+    <path d="M 0 0 Q -5 10 -3 20 Q 0 25 3 20 Q 5 10 0 0" fill="none" stroke="#C9A84C" stroke-width="2" opacity="0.7"/>
+    <circle cx="-4" cy="8" r="2" fill="#C9A84C" opacity="0.7"/>
+    <circle cx="-2" cy="14" r="2" fill="#C9A84C" opacity="0.7"/>
+    <circle cx="0" cy="18" r="2" fill="#C9A84C" opacity="0.7"/>
+    <circle cx="2" cy="14" r="2" fill="#C9A84C" opacity="0.7"/>
+    <circle cx="4" cy="8" r="2" fill="#C9A84C" opacity="0.7"/>
+  </g>
+
+  <!-- Right Laurel -->
+  <g transform="translate(165, 100)">
+    <path d="M 0 0 Q 5 10 3 20 Q 0 25 -3 20 Q -5 10 0 0" fill="none" stroke="#C9A84C" stroke-width="2" opacity="0.7"/>
+    <circle cx="4" cy="8" r="2" fill="#C9A84C" opacity="0.7"/>
+    <circle cx="2" cy="14" r="2" fill="#C9A84C" opacity="0.7"/>
+    <circle cx="0" cy="18" r="2" fill="#C9A84C" opacity="0.7"/>
+    <circle cx="-2" cy="14" r="2" fill="#C9A84C" opacity="0.7"/>
+    <circle cx="-4" cy="8" r="2" fill="#C9A84C" opacity="0.7"/>
+  </g>
+</svg>
