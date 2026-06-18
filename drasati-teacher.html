@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة المعلم — دراستي VIP</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A84C;--gold-dark:#8B6914;--gl:rgba(201,168,76,.12);--deep:#0A0A0F;--deep2:#12121A;--sur:#1C1C2A;--sur2:#242436;--white:#F5F3EE;--mut:rgba(245,243,238,.62);--faint:rgba(245,243,238,.08);--teal:#2DD4BF;--red:#F87171;--blue:#60A5FA;--r:12px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);min-height:100vh;}
+/* LOGIN */
+.lw{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(ellipse 60% 60% at 50% 40%,rgba(201,168,76,.06),transparent);}
+.lcard{background:var(--sur);border:1px solid rgba(201,168,76,.2);border-radius:22px;padding:44px 38px;width:100%;max-width:400px;text-align:center;}
+.llogo{width:54px;height:54px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:14px;display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-size:26px;font-weight:900;color:var(--deep);margin:0 auto 18px;box-shadow:0 0 30px rgba(201,168,76,.3);}
+.ltitle{font-family:'Cairo',sans-serif;font-size:24px;font-weight:900;margin-bottom:5px;}
+.lsub{font-size:13px;color:var(--mut);margin-bottom:28px;}
+.inp{width:100%;background:var(--deep2);border:1.5px solid var(--faint);border-radius:10px;padding:12px 14px;color:var(--white);font-size:14px;font-family:'Tajawal',sans-serif;outline:none;transition:border-color .2s;margin-bottom:12px;}
+.inp:focus{border-color:var(--gold);}
+.inp::placeholder{color:rgba(245,243,238,.28);}
+.btn-g{width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep);padding:13px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:'Tajawal',sans-serif;box-shadow:0 4px 20px rgba(201,168,76,.3);transition:transform .2s;}
+.btn-g:hover{transform:translateY(-2px);}
+.err{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.3);color:var(--red);border-radius:9px;padding:9px 13px;font-size:13px;margin-bottom:12px;display:none;}
+/* DASH */
+.dash{display:none;min-height:100vh;flex-direction:column;}
+.dash.show{display:flex;}
+.topbar{background:var(--deep2);border-bottom:1px solid var(--faint);padding:14px 28px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
+.tlogo{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:9px;display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-size:17px;font-weight:900;color:var(--deep);}
+.tbrand{font-size:15px;font-weight:700;}.tbrand span{color:var(--gold);}
+.trole{font-size:12px;background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.25);padding:3px 11px;border-radius:20px;}
+.tright{margin-right:auto;display:flex;align-items:center;gap:10px;}
+.tname{font-size:13px;color:var(--mut);}
+.tav{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--teal));display:flex;align-items:center;justify-content:center;font-family:'Cairo',sans-serif;font-size:13px;font-weight:900;color:var(--deep);}
+.tbtn{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);color:var(--red);padding:7px 14px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:600;}
+/* LAYOUT */
+.layout{display:flex;flex:1;}
+.sidebar{width:200px;background:var(--deep2);border-left:1px solid var(--faint);padding:18px 10px;flex-shrink:0;display:flex;flex-direction:column;gap:3px;}
+.ni{display:flex;align-items:center;gap:9px;padding:10px 11px;border-radius:9px;cursor:pointer;font-size:13px;color:var(--mut);transition:all .2s;border:none;background:none;width:100%;text-align:right;font-family:'Tajawal',sans-serif;}
+.ni:hover{background:var(--faint);color:var(--white);}
+.ni.active{background:var(--gl);color:var(--gold);font-weight:600;}
+.ni svg{width:16px;height:16px;flex-shrink:0;}
+.nd{height:1px;background:var(--faint);margin:6px 0;}
+.content{flex:1;padding:24px;overflow-y:auto;}
+/* CARDS */
+.sum-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px;}
+.scard{background:var(--sur);border:1px solid var(--faint);border-radius:var(--r);padding:16px;}
+.scard.g{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.07);}
+.scard.t{border-color:rgba(45,212,191,.3);background:rgba(45,212,191,.06);}
+.sn{font-family:'Cairo',sans-serif;font-size:26px;font-weight:900;color:var(--gold);}
+.scard.t .sn{color:var(--teal);}
+.sl{font-size:11px;color:var(--mut);margin-top:3px;}
+/* TABLE */
+.twrap{background:var(--sur);border:1px solid var(--faint);border-radius:var(--r);overflow:hidden;margin-bottom:16px;}
+.thead2{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--faint);}
+.ttitle{font-size:14px;font-weight:700;}
+table{width:100%;border-collapse:collapse;}
+th{background:var(--sur2);padding:10px 14px;text-align:right;font-size:11px;font-weight:700;color:var(--mut);}
+td{padding:10px 14px;font-size:13px;border-bottom:1px solid var(--faint);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
+.b-act{background:rgba(45,212,191,.12);color:var(--teal);}
+.b-pend{background:rgba(248,180,0,.1);color:#F8B400;}
+.spill{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600;}
+.sp-ex{background:rgba(45,212,191,.12);color:var(--teal);}
+.sp-gd{background:var(--gl);color:var(--gold);}
+.sp-wk{background:rgba(248,113,113,.1);color:var(--red);}
+/* FORM */
+.form-section{background:var(--sur);border:1px solid var(--faint);border-radius:var(--r);padding:20px;margin-bottom:14px;}
+.fs-title{font-size:14px;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px;}
+.fs-sub{font-size:12px;color:var(--mut);margin-bottom:16px;}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.frow1{margin-bottom:12px;}
+.flabel{font-size:12px;font-weight:600;color:var(--mut);margin-bottom:6px;display:block;}
+.finp{width:100%;background:var(--deep2);border:1px solid var(--faint);border-radius:9px;padding:10px 13px;color:var(--white);font-size:13px;font-family:'Tajawal',sans-serif;outline:none;transition:border-color .2s;}
+.finp:focus{border-color:var(--gold);}
+.finp::placeholder{color:rgba(245,243,238,.25);}
+.fsel{width:100%;background:var(--deep2);border:1px solid var(--faint);border-radius:9px;padding:10px 13px;color:var(--white);font-size:13px;font-family:'Tajawal',sans-serif;outline:none;}
+.fsel option{background:var(--deep2);}
+.btn-add{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep);padding:10px 22px;border-radius:9px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:'Tajawal',sans-serif;transition:transform .2s;}
+.btn-add:hover{transform:translateY(-1px);}
+.btn-del{background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2);padding:5px 11px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Tajawal',sans-serif;}
+.btn-del:hover{background:rgba(248,113,113,.2);}
+.hint{font-size:11px;color:var(--mut);margin-top:6px;display:flex;align-items:center;gap:5px;}
+/* CONTENT ITEMS */
+.ci{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--faint);}
+.ci:last-child{border-bottom:none;}
+.ci-icon{font-size:20px;flex-shrink:0;}
+.ci-info{flex:1;}
+.ci-title{font-size:13px;font-weight:600;}
+.ci-meta{font-size:11px;color:var(--mut);margin-top:2px;}
+.ci-link{font-size:11px;color:var(--teal);direction:ltr;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px;}
+/* TODAY LINK */
+.today-card{background:linear-gradient(135deg,rgba(201,168,76,.12),rgba(45,212,191,.08));border:1.5px solid rgba(201,168,76,.3);border-radius:var(--r);padding:20px;margin-bottom:14px;}
+.tc-title{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.tc-slots{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.tc-slot{background:var(--deep2);border:1px solid var(--faint);border-radius:10px;padding:14px;}
+.tc-time{font-size:11px;color:var(--gold);background:var(--gl);padding:3px 9px;border-radius:20px;display:inline-block;margin-bottom:10px;}
+.tc-current{font-size:12px;color:var(--mut);margin-bottom:8px;}
+.tc-inp{width:100%;background:var(--sur);border:1.5px solid var(--faint);border-radius:8px;padding:9px 12px;color:var(--white);font-size:12px;font-family:'Tajawal',sans-serif;outline:none;transition:border-color .2s;direction:ltr;margin-bottom:8px;}
+.tc-inp:focus{border-color:var(--gold);}
+.tc-inp::placeholder{color:rgba(245,243,238,.25);direction:rtl;}
+/* MODAL */
+.mo{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.8);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .25s;}
+.mo.show{opacity:1;pointer-events:all;}
+.mc{background:var(--sur);border:1px solid rgba(201,168,76,.2);border-radius:18px;padding:28px;width:100%;max-width:380px;text-align:center;transform:translateY(14px);transition:transform .25s;}
+.mo.show .mc{transform:translateY(0);}
+.mi{font-size:42px;margin-bottom:12px;}
+.mt{font-family:'Cairo',sans-serif;font-size:18px;font-weight:900;margin-bottom:8px;}
+.md{font-size:13px;color:var(--mut);line-height:1.7;margin-bottom:22px;}
+.mbtns{display:flex;gap:8px;}
+.mbtns button{flex:1;padding:11px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;font-family:'Tajawal',sans-serif;border:none;}
+.mb-g{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep);}
+.mb-s{background:var(--faint);color:var(--white);}
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--sur2);border:1px solid rgba(201,168,76,.3);color:var(--white);padding:10px 20px;border-radius:100px;font-size:13px;z-index:999;transition:transform .3s;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+/* EMPTY */
+.empty{text-align:center;padding:36px;color:var(--mut);font-size:13px;}
+@media(max-width:700px){.sidebar{display:none;}.sum-grid{grid-template-columns:1fr 1fr;}.frow{grid-template-columns:1fr;}.tc-slots{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="lw" id="lw">
+  <div class="lcard">
+    <div class="llogo">أ</div>
+    <div class="ltitle">لوحة المعلم</div>
+    <div class="lsub">أكاديمية دراستي VIP</div>
+    <div class="err" id="lerr"></div>
+    <input class="inp" id="l-user" type="text" placeholder="اسم المستخدم" onkeydown="if(event.key==='Enter')doLogin()">
+    <input class="inp" id="l-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn-g" onclick="doLogin()">دخول ←</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash" id="dash">
+  <div class="topbar">
+    <div class="tlogo">د</div>
+    <div class="tbrand">دراستي <span>VIP</span></div>
+    <span class="trole" id="t-role">معلم</span>
+    <div class="tright">
+      <div class="tname" id="t-name"></div>
+      <div class="tav" id="t-av"></div>
+      <button class="tbtn" onclick="doLogout()">خروج</button>
+    </div>
+  </div>
+  <div class="layout">
+    <div class="sidebar">
+      <button class="ni active" id="ni-home" onclick="nav('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>الرئيسية</button>
+      <button class="ni" id="ni-today" onclick="nav('today')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>حصة اليوم</button>
+      <button class="ni" id="ni-content" onclick="nav('content')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>المحتوى</button>
+      <button class="ni" id="ni-students" onclick="nav('students')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>طلابي</button>
+      <button class="ni" id="ni-scores" onclick="nav('scores')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>الدرجات</button>
+      <div class="nd"></div>
+      <button class="ni" id="ni-settings" onclick="nav('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>الإعدادات</button>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="mo" id="modal">
+  <div class="mc">
+    <div class="mi" id="m-icon"></div>
+    <div class="mt" id="m-title"></div>
+    <div class="md" id="m-desc"></div>
+    <div class="mbtns" id="m-btns"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ── TEACHERS DB ──
+// كلمة المرور لكل معلم — المدير يغيرها من لوحة التحكم
+const TEACHERS = {
+  'math_low':    {pass:'math1234',   name:'أ. خالد الحارثي',   subject:'الرياضيات',    grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن'],    icon:'🔢'},
+  'math_high':   {pass:'math5678',   name:'أ. ماجد السعدي',    subject:'الرياضيات',    grades:['الصف التاسع','الصف العاشر'],                                  icon:'🔢'},
+  'science':     {pass:'sci1234',    name:'أ. سارة المعمرية',  subject:'العلوم',        grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن'],    icon:'🔬'},
+  'physics':     {pass:'phy1234',    name:'أ. عمر الكيومي',    subject:'الفيزياء',      grades:['الصف التاسع','الصف العاشر'],                                  icon:'⚡'},
+  'chemistry':   {pass:'chem1234',   name:'أ. نورة الفارسية',  subject:'الكيمياء',      grades:['الصف التاسع','الصف العاشر'],                                  icon:'🧪'},
+  'biology':     {pass:'bio1234',    name:'أ. ليلى الشيدية',   subject:'الأحياء',       grades:['الصف التاسع','الصف العاشر'],                                  icon:'🌿'},
+  'arabic_low':  {pass:'ara1234',    name:'أ. فاطمة البلوشية', subject:'اللغة العربية', grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن'],    icon:'📖'},
+  'arabic_high': {pass:'ara5678',    name:'أ. سلطان الغافري',  subject:'اللغة العربية', grades:['الصف التاسع','الصف العاشر'],                                  icon:'📖'},
+  'english':     {pass:'eng1234',    name:'أ. أحمد الرحبي',    subject:'اللغة الإنجليزية',grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن','الصف التاسع','الصف العاشر'],icon:'🌍'},
+  'islamic_low': {pass:'isl1234',    name:'أ. راشد النبهاني',  subject:'التربية الإسلامية',grades:['الصف الخامس','الصف السادس','الصف السابع'],               icon:'☪️'},
+  'islamic_high':{pass:'isl5678',    name:'أ. يوسف الكندي',    subject:'التربية الإسلامية',grades:['الصف الثامن','الصف التاسع','الصف العاشر'],               icon:'☪️'},
+  'social_low':  {pass:'soc1234',    name:'أ. مريم الزدجالية', subject:'الدراسات الاجتماعية',grades:['الصف الخامس','الصف السادس','الصف السابع'],            icon:'🗺️'},
+  'social_high': {pass:'soc5678',    name:'أ. هلال الحسني',    subject:'الدراسات الاجتماعية',grades:['الصف الثامن','الصف التاسع','الصف العاشر'],            icon:'🗺️'},
+};
+
+let CT = null; // current teacher
+let CK = null; // current teacher key
+
+function getStudents(){ return JSON.parse(localStorage.getItem('drasati_students')||'[]'); }
+function getContent(){ return JSON.parse(localStorage.getItem('drasati_content')||'{}'); }
+function saveContent(c){ localStorage.setItem('drasati_content',JSON.stringify(c)); }
+function getScores(){ return JSON.parse(localStorage.getItem('drasati_scores')||'{}'); }
+function saveScores(s){ localStorage.setItem('drasati_scores',JSON.stringify(s)); }
+function getTodayLinks(){ return JSON.parse(localStorage.getItem('drasati_today_links')||'{}'); }
+function saveTodayLinks(t){ localStorage.setItem('drasati_today_links',JSON.stringify(t)); }
+
+// ── LOGIN ──
+function doLogin(){
+  const user = document.getElementById('l-user').value.trim().toLowerCase();
+  const pass = document.getElementById('l-pass').value;
+  const err  = document.getElementById('lerr');
+  const t = TEACHERS[user];
+  if(!t || t.pass !== pass){
+    err.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+    err.style.display = 'block';
+    return;
+  }
+  CT = t; CK = user;
+  err.style.display = 'none';
+  document.getElementById('lw').style.display = 'none';
+  document.getElementById('dash').classList.add('show');
+  document.getElementById('t-name').textContent = t.name;
+  document.getElementById('t-av').textContent   = t.name[3] || 'أ';
+  document.getElementById('t-role').textContent = t.subject;
+  nav('home');
+}
+
+function doLogout(){ CT=null; CK=null; location.reload(); }
+
+// ── NAV ──
+function nav(page){
+  document.querySelectorAll('.ni').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById('ni-'+page);
+  if(el) el.classList.add('active');
+  const pages={home:renderHome,today:renderToday,content:renderContent,students:renderStudents,scores:renderScores,settings:renderSettings};
+  document.getElementById('content').innerHTML = pages[page] ? pages[page]() : '';
+}
+
+// ── HOME ──
+function renderHome(){
+  const myStudents = getStudents().filter(s=>CT.grades.includes(s.grade)&&s.status==='active');
+  const scores = getScores();
+  const totalTests = myStudents.reduce((a,s)=>(scores[s.id]||[]).filter(sc=>sc.subject===CT.subject).length+a,0);
+  const content = getContent()[CK]||{recordings:[],tests:[],summaries:[],questions:[]};
+  const dayName = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'][new Date().getDay()];
+  const hasClass = !['الخميس','الجمعة'].includes(dayName);
+  return `
+    <div class="sum-grid">
+      <div class="scard g"><div style="font-size:20px;margin-bottom:8px">${CT.icon}</div><div class="sn">${CT.subject}</div><div class="sl">مادتك</div></div>
+      <div class="scard t"><div style="font-size:20px;margin-bottom:8px">👥</div><div class="sn">${myStudents.length}</div><div class="sl">طلابي النشطون</div></div>
+      <div class="scard"><div style="font-size:20px;margin-bottom:8px">📹</div><div class="sn">${content.recordings.length}</div><div class="sl">حصة مسجّلة</div></div>
+      <div class="scard"><div style="font-size:20px;margin-bottom:8px">📝</div><div class="sn">${totalTests}</div><div class="sl">اختبار أجراه الطلاب</div></div>
+    </div>
+
+    <div style="background:${hasClass?'rgba(201,168,76,.08)':'rgba(45,212,191,.06)'};border:1.5px solid ${hasClass?'rgba(201,168,76,.3)':'rgba(45,212,191,.25)'};border-radius:var(--r);padding:18px;margin-bottom:16px;display:flex;align-items:center;gap:14px;">
+      <div style="font-size:32px">${hasClass?'📅':'🏖️'}</div>
+      <div>
+        <div style="font-size:15px;font-weight:700">اليوم: ${dayName}</div>
+        <div style="font-size:13px;color:var(--mut);margin-top:3px">${hasClass?'عندك حصتين اليوم — أضف روابط Google Meet':'لا توجد حصص اليوم — يوم راحة'}</div>
+      </div>
+      ${hasClass?`<button onclick="nav('today')" style="margin-right:auto;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep);padding:9px 18px;border-radius:9px;font-size:13px;font-weight:700;border:none;cursor:pointer;font-family:'Tajawal',sans-serif;">أضف رابط الحصة</button>`:''}
+    </div>
+
+    <div style="font-size:15px;font-weight:700;margin-bottom:12px;">📚 صفوفك</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+      ${CT.grades.map(g=>{
+        const cnt=getStudents().filter(s=>s.grade===g&&s.status==='active').length;
+        return `<div style="background:var(--sur);border:1px solid var(--faint);border-radius:var(--r);padding:16px;text-align:center;">
+          <div style="font-family:'Cairo',sans-serif;font-size:28px;font-weight:900;color:var(--gold)">${cnt}</div>
+          <div style="font-size:12px;color:var(--mut);margin-top:3px">${g}</div>
+        </div>`;
+      }).join('')}
+    </div>
+  `;
+}
+
+// ── TODAY'S CLASSES ──
+function renderToday(){
+  const dayName = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'][new Date().getDay()];
+  const isSat   = dayName==='السبت';
+  const isOff   = ['الخميس','الجمعة'].includes(dayName);
+  const slots   = isSat
+    ? [{label:'الصباح',time:'10ص – 12م',key:'morning'}]
+    : [{label:'العصر',time:'4م – 6م',key:'afternoon'},{label:'الليل',time:'8م – 10م',key:'evening'}];
+  if(!isSat && !isOff) slots; // already set
+  const links = getTodayLinks();
+  const todayKey = `${CK}_${new Date().toDateString()}`;
+
+  if(isOff) return `<div style="text-align:center;padding:60px 20px;"><div style="font-size:56px;margin-bottom:16px">🏖️</div><div style="font-size:18px;font-weight:700">يوم ${dayName} — لا توجد حصص</div><div style="font-size:13px;color:var(--mut);margin-top:6px">استرح وانبسط 😊</div></div>`;
+
+  return `
+    <div style="font-size:15px;font-weight:700;margin-bottom:16px;">📅 حصة اليوم — ${dayName}</div>
+    <div style="background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.2);border-radius:var(--r);padding:14px 16px;margin-bottom:16px;font-size:13px;color:var(--mut);">
+      💡 <strong style="color:var(--white)">كيف تضيف رابط الحصة:</strong>
+      افتح Google Meet → ابدأ اجتماع جديد → انسخ الرابط → الصقه هنا
+    </div>
+    <div style="display:grid;grid-template-columns:${isSat?'1fr 1fr':'1fr 1fr'};gap:14px;">
+      ${(isSat?[{label:'الصباح',time:'10ص – 12م',key:'morning'},{label:'العصر',time:'4م – 6م',key:'afternoon'}]:slots).map(sl=>{
+        const saved = links[`${todayKey}_${sl.key}`]||'';
+        return `<div class="tc-slot">
+          <div class="tc-time">🕐 ${sl.time}</div>
+          <div style="font-size:13px;font-weight:700;margin-bottom:10px">${sl.label}</div>
+          ${CT.grades.map(g=>`
+            <div style="font-size:11px;color:var(--mut);margin-bottom:5px">${g}</div>
+            <input class="tc-inp" id="link_${sl.key}_${g.replace(/\s/g,'')}" placeholder="https://meet.google.com/xxx-xxxx-xxx" value="${links[`${todayKey}_${sl.key}_${g.replace(/\s/g,'')}`]||''}">
+          `).join('')}
+          <button onclick="saveLinks_${sl.key}()" style="width:100%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep);padding:9px;border-radius:8px;font-size:12px;font-weight:700;border:none;cursor:pointer;font-family:'Tajawal',sans-serif;margin-top:6px;">حفظ الرابط ✓</button>
+        </div>`;
+      }).join('')}
+    </div>
+    <script>
+      ${(isSat?[{label:'الصباح',time:'10ص – 12م',key:'morning'},{label:'العصر',time:'4م – 6م',key:'afternoon'}]:slots).map(sl=>`
+        function saveLinks_${sl.key}(){
+          const links=getTodayLinks();
+          const todayKey='${todayKey}';
+          ${CT.grades.map(g=>`
+            const v_${g.replace(/\s/g,'')}=document.getElementById('link_${sl.key}_${g.replace(/\s/g,'')}').value.trim();
+            if(v_${g.replace(/\s/g,'')}) links[todayKey+'_${sl.key}_${g.replace(/\s/g,'')}'] = v_${g.replace(/\s/g,'')};
+          `).join('')}
+          saveTodayLinks(links);
+          showToast('✓ تم حفظ الروابط');
+        }
+      `).join('')}
+    <\/script>
+  `;
+}
+
+// ── CONTENT ──
+function renderContent(){
+  const c = getContent();
+  if(!c[CK]) c[CK]={recordings:[],tests:[],summaries:[],questions:[]};
+  const d = c[CK];
+  const gradeOpts = CT.grades.map(g=>`<option>${g}</option>`).join('');
+
+  return `
+    <!-- RECORDINGS -->
+    <div class="form-section">
+      <div class="fs-title">📹 إضافة حصة مسجّلة</div>
+      <div class="fs-sub">ارفع الفيديو على YouTube أو Google Drive وانسخ الرابط هنا</div>
+      <div class="frow">
+        <div><label class="flabel">عنوان الحصة</label><input class="finp" id="r-title" placeholder="مثال: الوحدة 1 — المقدمة"></div>
+        <div><label class="flabel">الصف</label><select class="fsel" id="r-grade">${gradeOpts}</select></div>
+      </div>
+      <div class="frow1"><label class="flabel">رابط الفيديو (YouTube / Google Drive)</label>
+        <input class="finp" id="r-link" placeholder="https://youtube.com/watch?v=..." style="direction:ltr">
+        <div class="hint">💡 YouTube: شارك → انسخ الرابط | Drive: انقر بزر اليمين → احصل على رابط</div>
+      </div>
+      <div class="frow">
+        <div><label class="flabel">الوحدة</label><input class="finp" id="r-unit" placeholder="الوحدة 1"></div>
+        <div><label class="flabel">مدة الفيديو</label><input class="finp" id="r-dur" placeholder="1:45 ساعة"></div>
+      </div>
+      <button class="btn-add" onclick="addRecording()">إضافة الحصة ✓</button>
+    </div>
+
+    <div class="twrap">
+      <div class="thead2"><div class="ttitle">📹 الحصص المسجّلة (${d.recordings.length})</div></div>
+      <div style="padding:0 16px;">
+        ${d.recordings.length===0?'<div class="empty">لا توجد حصص مسجّلة بعد</div>':d.recordings.map((r,i)=>`
+          <div class="ci">
+            <div class="ci-icon">📹</div>
+            <div class="ci-info">
+              <div class="ci-title">${r.title}</div>
+              <div class="ci-meta">${r.grade} · ${r.unit} · ${r.duration} · ${r.date}</div>
+              <a href="${r.link}" target="_blank" class="ci-link">${r.link}</a>
+            </div>
+            <button class="btn-del" onclick="delContent('recordings',${i})">حذف</button>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- TESTS -->
+    <div class="form-section">
+      <div class="fs-title">📝 إضافة اختبار</div>
+      <div class="fs-sub">اصنع الاختبار على Google Forms وانسخ رابطه هنا</div>
+      <div class="frow">
+        <div><label class="flabel">عنوان الاختبار</label><input class="finp" id="t-title" placeholder="مثال: اختبار الوحدة 1"></div>
+        <div><label class="flabel">الصف</label><select class="fsel" id="t-grade">${gradeOpts}</select></div>
+      </div>
+      <div class="frow1"><label class="flabel">رابط Google Forms</label>
+        <input class="finp" id="t-link" placeholder="https://forms.google.com/..." style="direction:ltr">
+        <div class="hint">💡 Google Forms: إرسال → انسخ الرابط</div>
+      </div>
+      <div class="frow">
+        <div><label class="flabel">الوحدة</label><input class="finp" id="t-unit" placeholder="الوحدة 1"></div>
+        <div><label class="flabel">الدرجة الكاملة</label><input class="finp" id="t-total" placeholder="10" type="number"></div>
+      </div>
+      <button class="btn-add" onclick="addTest()">إضافة الاختبار ✓</button>
+    </div>
+
+    <div class="twrap">
+      <div class="thead2"><div class="ttitle">📝 الاختبارات (${d.tests.length})</div></div>
+      <div style="padding:0 16px;">
+        ${d.tests.length===0?'<div class="empty">لا توجد اختبارات بعد</div>':d.tests.map((t,i)=>`
+          <div class="ci">
+            <div class="ci-icon">📝</div>
+            <div class="ci-info">
+              <div class="ci-title">${t.title}</div>
+              <div class="ci-meta">${t.grade} · ${t.unit} · من ${t.total} · ${t.date}</div>
+              <a href="${t.link}" target="_blank" class="ci-link">${t.link}</a>
+            </div>
+            <button class="btn-del" onclick="delContent('tests',${i})">حذف</button>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- SUMMARIES -->
+    <div class="form-section">
+      <div class="fs-title">📄 إضافة ملخص</div>
+      <div class="fs-sub">ارفع الملخص على Google Drive (PDF) وانسخ رابط المشاركة</div>
+      <div class="frow">
+        <div><label class="flabel">عنوان الملخص</label><input class="finp" id="s-title" placeholder="مثال: ملخص الوحدة 1"></div>
+        <div><label class="flabel">الصف</label><select class="fsel" id="s-grade">${gradeOpts}</select></div>
+      </div>
+      <div class="frow1"><label class="flabel">رابط Google Drive (PDF)</label>
+        <input class="finp" id="s-link" placeholder="https://drive.google.com/file/..." style="direction:ltr">
+        <div class="hint">💡 Drive: انقر بزر اليمين → مشاركة → انسخ الرابط</div>
+      </div>
+      <div class="frow">
+        <div><label class="flabel">الوحدة</label><input class="finp" id="s-unit" placeholder="الوحدة 1"></div>
+        <div><label class="flabel">عدد الصفحات</label><input class="finp" id="s-pages" placeholder="3" type="number"></div>
+      </div>
+      <button class="btn-add" onclick="addSummary()">إضافة الملخص ✓</button>
+    </div>
+
+    <div class="twrap">
+      <div class="thead2"><div class="ttitle">📄 الملخصات (${d.summaries.length})</div></div>
+      <div style="padding:0 16px;">
+        ${d.summaries.length===0?'<div class="empty">لا توجد ملخصات بعد</div>':d.summaries.map((s,i)=>`
+          <div class="ci">
+            <div class="ci-icon">📄</div>
+            <div class="ci-info">
+              <div class="ci-title">${s.title}</div>
+              <div class="ci-meta">${s.grade} · ${s.unit} · ${s.pages} صفحات · ${s.date}</div>
+              <a href="${s.link}" target="_blank" class="ci-link">${s.link}</a>
+            </div>
+            <button class="btn-del" onclick="delContent('summaries',${i})">حذف</button>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- QUESTIONS -->
+    <div class="form-section">
+      <div class="fs-title">❓ إضافة سؤال وجواب</div>
+      <div class="fs-sub">أسئلة مراجعة يشوفها الطلاب في موادهم</div>
+      <div class="frow">
+        <div><label class="flabel">الصف</label><select class="fsel" id="q-grade">${gradeOpts}</select></div>
+        <div><label class="flabel">الوحدة</label><input class="finp" id="q-unit" placeholder="الوحدة 1"></div>
+      </div>
+      <div class="frow1"><label class="flabel">السؤال</label><input class="finp" id="q-q" placeholder="اكتب السؤال هنا..."></div>
+      <div class="frow1"><label class="flabel">الجواب</label><input class="finp" id="q-a" placeholder="اكتب الجواب هنا..."></div>
+      <button class="btn-add" onclick="addQuestion()">إضافة السؤال ✓</button>
+    </div>
+
+    <div class="twrap">
+      <div class="thead2"><div class="ttitle">❓ الأسئلة (${d.questions.length})</div></div>
+      <div style="padding:0 16px;">
+        ${d.questions.length===0?'<div class="empty">لا توجد أسئلة بعد</div>':d.questions.map((q,i)=>`
+          <div class="ci">
+            <div class="ci-icon">❓</div>
+            <div class="ci-info">
+              <div class="ci-title">${q.q}</div>
+              <div class="ci-meta">${q.grade} · ${q.unit} · الجواب: ${q.a}</div>
+            </div>
+            <button class="btn-del" onclick="delContent('questions',${i})">حذف</button>
+          </div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// Content actions
+function addRecording(){
+  const title=document.getElementById('r-title').value.trim();
+  const grade=document.getElementById('r-grade').value;
+  const link=document.getElementById('r-link').value.trim();
+  const unit=document.getElementById('r-unit').value.trim()||'عام';
+  const dur=document.getElementById('r-dur').value.trim()||'—';
+  if(!title||!link){ showToast('أكمل العنوان والرابط'); return; }
+  if(!link.startsWith('http')){ showToast('الرابط غير صحيح'); return; }
+  const c=getContent(); if(!c[CK]) c[CK]={recordings:[],tests:[],summaries:[],questions:[]};
+  c[CK].recordings.unshift({title,grade,link,unit,duration:dur,date:new Date().toLocaleDateString('ar-OM'),teacher:CT.name,subject:CT.subject});
+  saveContent(c); showToast('✓ تمت إضافة الحصة'); nav('content');
+}
+
+function addTest(){
+  const title=document.getElementById('t-title').value.trim();
+  const grade=document.getElementById('t-grade').value;
+  const link=document.getElementById('t-link').value.trim();
+  const unit=document.getElementById('t-unit').value.trim()||'عام';
+  const total=document.getElementById('t-total').value||'10';
+  if(!title||!link){ showToast('أكمل العنوان والرابط'); return; }
+  const c=getContent(); if(!c[CK]) c[CK]={recordings:[],tests:[],summaries:[],questions:[]};
+  c[CK].tests.unshift({title,grade,link,unit,total,date:new Date().toLocaleDateString('ar-OM'),teacher:CT.name,subject:CT.subject});
+  saveContent(c); showToast('✓ تمت إضافة الاختبار'); nav('content');
+}
+
+function addSummary(){
+  const title=document.getElementById('s-title').value.trim();
+  const grade=document.getElementById('s-grade').value;
+  const link=document.getElementById('s-link').value.trim();
+  const unit=document.getElementById('s-unit').value.trim()||'عام';
+  const pages=document.getElementById('s-pages').value||'—';
+  if(!title||!link){ showToast('أكمل العنوان والرابط'); return; }
+  const c=getContent(); if(!c[CK]) c[CK]={recordings:[],tests:[],summaries:[],questions:[]};
+  c[CK].summaries.unshift({title,grade,link,unit,pages,date:new Date().toLocaleDateString('ar-OM'),teacher:CT.name,subject:CT.subject});
+  saveContent(c); showToast('✓ تمت إضافة الملخص'); nav('content');
+}
+
+function addQuestion(){
+  const grade=document.getElementById('q-grade').value;
+  const unit=document.getElementById('q-unit').value.trim()||'عام';
+  const q=document.getElementById('q-q').value.trim();
+  const a=document.getElementById('q-a').value.trim();
+  if(!q||!a){ showToast('أكمل السؤال والجواب'); return; }
+  const c=getContent(); if(!c[CK]) c[CK]={recordings:[],tests:[],summaries:[],questions:[]};
+  c[CK].questions.unshift({grade,unit,q,a,date:new Date().toLocaleDateString('ar-OM'),subject:CT.subject});
+  saveContent(c); showToast('✓ تمت إضافة السؤال'); nav('content');
+}
+
+function delContent(type,idx){
+  const c=getContent();
+  if(!c[CK]) return;
+  c[CK][type].splice(idx,1);
+  saveContent(c); nav('content');
+}
+
+// ── STUDENTS ──
+function renderStudents(){
+  const all=getStudents().filter(s=>CT.grades.includes(s.grade));
+  const active=all.filter(s=>s.status==='active');
+  const scores=getScores();
+
+  return `
+    <div class="sum-grid">
+      <div class="scard g"><div class="sn">${active.length}</div><div class="sl">طلاب نشطون</div></div>
+      <div class="scard"><div class="sn">${all.filter(s=>s.status==='pending').length}</div><div class="sl">بانتظار التفعيل</div></div>
+      ${CT.grades.map(g=>`<div class="scard"><div class="sn" style="font-size:18px">${getStudents().filter(s=>s.grade===g&&s.status==='active').length}</div><div class="sl">${g}</div></div>`).join('')}
+    </div>
+    ${CT.grades.map(g=>{
+      const gs=active.filter(s=>s.grade===g);
+      if(!gs.length) return `<div class="twrap"><div class="thead2"><div class="ttitle">${g}</div></div><div class="empty">لا يوجد طلاب نشطون</div></div>`;
+      return `<div class="twrap" style="margin-bottom:14px">
+        <div class="thead2"><div class="ttitle">${g} — ${gs.length} طالب</div></div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>#</th><th>اسم الطالب</th><th>رقم ولي الأمر</th><th>رقم الطالب</th><th>الإيميل</th><th>عدد الاختبارات</th><th>واتساب</th></tr></thead>
+          <tbody>
+            ${gs.map((s,i)=>{
+              const cnt=(scores[s.id]||[]).filter(sc=>sc.subject===CT.subject).length;
+              return `<tr>
+                <td>${i+1}</td>
+                <td><strong>${s.name}</strong></td>
+                <td style="direction:ltr">${s.parent}</td>
+                <td style="direction:ltr">${s.student||'—'}</td>
+                <td style="font-size:11px;direction:ltr">${s.email}</td>
+                <td><span class="badge ${cnt>0?'b-act':'b-pend'}">${cnt} اختبار</span></td>
+                <td><button onclick="openWA('${s.parent}','${s.name}')" style="background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.2);padding:5px 11px;border-radius:6px;font-size:11px;cursor:pointer;font-family:'Tajawal',sans-serif;">واتساب</button></td>
+              </tr>`;
+            }).join('')}
+          </tbody>
+        </table>
+        </div>
+      </div>`;
+    }).join('')}
+  `;
+}
+
+function openWA(phone,name){
+  window.open(`https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent(`السلام عليكم ${name}، معك ${CT.name} من أكاديمية دراستي VIP`)}`, '_blank');
+}
+
+// ── SCORES ──
+function renderScores(){
+  const myStudents=getStudents().filter(s=>CT.grades.includes(s.grade)&&s.status==='active');
+  const allScores=getScores();
+  const gradeOpts=CT.grades.map(g=>`<option>${g}</option>`).join('');
+  const subjectStudents=myStudents.map(s=>({...s,scores:(allScores[s.id]||[]).filter(sc=>sc.subject===CT.subject)}));
+
+  return `
+    <div class="form-section">
+      <div class="fs-title">📝 إضافة درجة اختبار</div>
+      <div class="fs-sub">أضف نتيجة طالب بعد انتهاء الاختبار</div>
+      <div class="frow">
+        <div><label class="flabel">الطالب</label>
+          <select class="fsel" id="sc-st">
+            <option value="">اختر الطالب</option>
+            ${myStudents.map(s=>`<option value="${s.id}">${s.name} — ${s.grade}</option>`).join('')}
+          </select>
+        </div>
+        <div><label class="flabel">الاختبار</label><input class="finp" id="sc-exam" placeholder="مثال: اختبار الوحدة 1"></div>
+      </div>
+      <div class="frow">
+        <div><label class="flabel">الدرجة</label><input class="finp" id="sc-score" type="number" min="0" max="10" placeholder="من 10"></div>
+        <div><label class="flabel">الوحدة</label><input class="finp" id="sc-unit" placeholder="الوحدة 1"></div>
+      </div>
+      <button class="btn-add" onclick="addScore()">إضافة الدرجة ✓</button>
+    </div>
+
+    ${CT.grades.map(g=>{
+      const gs=subjectStudents.filter(s=>s.grade===g);
+      if(!gs.length) return '';
+      return `<div class="twrap" style="margin-bottom:14px">
+        <div class="thead2"><div class="ttitle">${g} — ${CT.subject}</div></div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>اسم الطالب</th><th>الاختبار</th><th>الدرجة</th><th>التقدير</th><th>التاريخ</th></tr></thead>
+          <tbody>
+            ${gs.flatMap(s=>s.scores.length?s.scores.map(sc=>`<tr>
+              <td><strong>${s.name}</strong></td>
+              <td>${sc.exam}</td>
+              <td><strong style="color:${sc.score>=8?'var(--teal)':sc.score>=5?'var(--gold)':'var(--red)'}">${sc.score}/10</strong></td>
+              <td><span class="spill ${sc.score>=8?'sp-ex':sc.score>=5?'sp-gd':'sp-wk'}">${sc.score>=9?'ممتاز 🌟':sc.score>=8?'جيد جداً':sc.score>=6?'جيد':sc.score>=5?'مقبول':'يحتاج تحسين'}</span></td>
+              <td style="font-size:11px;color:var(--mut)">${sc.date}</td>
+            </tr>`):[`<tr><td><strong>${s.name}</strong></td><td colspan="4" style="color:var(--mut)">لا توجد درجات بعد</td></tr>`]).join('')}
+          </tbody>
+        </table>
+        </div>
+      </div>`;
+    }).join('')}
+  `;
+}
+
+function addScore(){
+  const sid=document.getElementById('sc-st').value;
+  const exam=document.getElementById('sc-exam').value.trim();
+  const score=document.getElementById('sc-score').value;
+  const unit=document.getElementById('sc-unit').value.trim()||'عام';
+  if(!sid||!exam||score===''){ showToast('أكمل جميع الحقول'); return; }
+  const all=getScores();
+  if(!all[sid]) all[sid]=[];
+  all[sid].push({subject:CT.subject,exam,score:parseFloat(score),unit,date:new Date().toLocaleDateString('ar-OM'),teacher:CT.name});
+  saveScores(all);
+  showToast('✓ تمت إضافة الدرجة');
+  nav('scores');
+}
+
+
+// ── SETTINGS ──
+function renderSettings(){
+  const saved = getTeacherProfile(CK);
+  return `
+    <div style="font-size:15px;font-weight:700;margin-bottom:16px;">⚙️ إعداداتي</div>
+    <div class="form-section">
+      <div class="fs-title">👤 معلوماتي الشخصية</div>
+      <div class="fs-sub">يمكنك تغيير اسمك وكلمة مرورك — سيصل إشعار للمدير فور التغيير</div>
+      <div class="frow1">
+        <label class="flabel">الاسم الظاهر</label>
+        <input class="finp" id="set-name" value="${saved.name||CT.name}" placeholder="اسمك الكامل">
+      </div>
+      <div class="frow1">
+        <label class="flabel">كلمة المرور الحالية</label>
+        <input class="finp" id="set-oldpass" type="password" placeholder="أدخل كلمة المرورك الحالية">
+      </div>
+      <div class="frow">
+        <div>
+          <label class="flabel">كلمة المرور الجديدة</label>
+          <input class="finp" id="set-newpass" type="password" placeholder="اتركه فارغاً إذا لا تريد التغيير">
+        </div>
+        <div>
+          <label class="flabel">تأكيد كلمة المرور الجديدة</label>
+          <input class="finp" id="set-confirmpass" type="password" placeholder="أعد كتابة كلمة المرور الجديدة">
+        </div>
+      </div>
+      <button class="btn-add" onclick="saveTeacherSettings()">حفظ التغييرات ✓</button>
+    </div>
+
+    <div class="form-section">
+      <div class="fs-title">ℹ️ معلومات حسابي</div>
+      <div class="fs-sub">هذه المعلومات لا يمكن تغييرها</div>
+      <div style="display:grid;gap:10px;">
+        <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--faint);">
+          <span style="font-size:13px;color:var(--mut)">المادة</span>
+          <span style="font-size:13px;font-weight:600">${CT.subject} ${CT.icon}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--faint);">
+          <span style="font-size:13px;color:var(--mut)">الصفوف المسؤول عنها</span>
+          <span style="font-size:13px;font-weight:600">${CT.grades.join(' · ')}</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;padding:10px 0;">
+          <span style="font-size:13px;color:var(--mut)">اسم المستخدم</span>
+          <span style="font-size:13px;font-weight:600;color:var(--gold)">${CK}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function getTeacherProfile(key){
+  const profiles = JSON.parse(localStorage.getItem('drasati_teacher_profiles')||'{}');
+  return profiles[key] || {};
+}
+
+function saveTeacherSettings(){
+  const newName    = document.getElementById('set-name').value.trim();
+  const oldPass    = document.getElementById('set-oldpass').value;
+  const newPass    = document.getElementById('set-newpass').value;
+  const confirmPass= document.getElementById('set-confirmpass').value;
+
+  // Verify old password
+  const profiles = JSON.parse(localStorage.getItem('drasati_teacher_profiles')||'{}');
+  const currentPass = profiles[CK]?.pass || CT.pass;
+  if(oldPass !== currentPass){ showToast('❌ كلمة المرور الحالية غير صحيحة'); return; }
+
+  // Validate new password if provided
+  if(newPass && newPass !== confirmPass){ showToast('❌ كلمة المرور الجديدة غير متطابقة'); return; }
+  if(newPass && newPass.length < 6){ showToast('❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل'); return; }
+
+  const oldName = profiles[CK]?.name || CT.name;
+  const changes = [];
+  if(newName !== oldName) changes.push(`الاسم: "${oldName}" ← "${newName}"`);
+  if(newPass) changes.push('كلمة المرور: تم التغيير');
+
+  if(!changes.length){ showToast('لا يوجد تغييرات'); return; }
+
+  // Save
+  if(!profiles[CK]) profiles[CK] = {};
+  profiles[CK].name = newName;
+  if(newPass) profiles[CK].pass = newPass;
+  profiles[CK].lastChanged = new Date().toLocaleString('ar-OM');
+  profiles[CK].subject = CT.subject;
+  profiles[CK].grades  = CT.grades;
+  localStorage.setItem('drasati_teacher_profiles', JSON.stringify(profiles));
+
+  // Save notification for admin
+  const notifs = JSON.parse(localStorage.getItem('drasati_teacher_notifs')||'[]');
+  notifs.unshift({
+    teacherKey: CK,
+    teacherName: newName,
+    subject: CT.subject,
+    changes: changes.join(' | '),
+    time: new Date().toLocaleString('ar-OM'),
+    read: false
+  });
+  localStorage.setItem('drasati_teacher_notifs', JSON.stringify(notifs));
+
+  // Update UI
+  CT.name = newName;
+  document.getElementById('t-name').textContent = newName;
+  document.getElementById('t-av').textContent   = newName[3] || 'أ';
+
+  showToast('✓ تم حفظ التغييرات وإشعار المدير');
+  nav('settings');
+}
+
+// ── UTILS ──
+let _mcbs=[];
+function showModal(icon,title,desc,btns){
+  document.getElementById('m-icon').textContent=icon;
+  document.getElementById('m-title').textContent=title;
+  document.getElementById('m-desc').textContent=desc;
+  _mcbs=btns;
+  document.getElementById('m-btns').innerHTML=btns.map((b,i)=>`<button class="${b.c}" onclick="_mcbs[${i}].f()">${b.l}</button>`).join('');
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){ document.getElementById('modal').classList.remove('show'); }
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2600);
+}
+</script>
+</body>
+</html>

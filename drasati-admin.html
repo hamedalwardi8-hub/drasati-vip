@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم — دراستي VIP</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{--gold:#C9A84C;--gold-dark:#8B6914;--cream:#F5F0E8;--deep:#FAFAF7;--deep2:#F5F0E8;--surface:#FFFFFF;--surface2:#F8F5F0;--white:#1C1C2E;--white-dim:rgba(28,28,46,0.55);--white-faint:rgba(28,28,46,0.08);--teal:#0D9488;--red:#DC2626;--border:#EDE8DF;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);min-height:100vh;}
+
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#1C1C2E 0%,#2D2D44 100%);}
+.login-card{background:#FFFFFF;border:1px solid #EDE8DF;border-radius:24px;padding:48px 40px;width:100%;max-width:400px;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,0.2);}
+.login-logo{width:56px;height:56px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:var(--deep);font-family:'Cairo',sans-serif;margin:0 auto 20px;box-shadow:0 0 30px rgba(201,168,76,.35);}
+.login-title{font-family:'Cairo',sans-serif;font-size:26px;font-weight:900;margin-bottom:6px;color:#1C1C2E;}
+.login-sub{font-size:13px;color:rgba(28,28,46,.5);margin-bottom:32px;}
+.form-label{font-size:12px;font-weight:600;color:rgba(28,28,46,.6);margin-bottom:7px;display:block;text-align:right;}
+.form-input{width:100%;background:#F5F0E8;border:1.5px solid #EDE8DF;border-radius:10px;padding:13px 15px;color:#1C1C2E;font-size:15px;font-family:'Tajawal',sans-serif;outline:none;transition:border-color .2s;margin-bottom:16px;}
+.form-input:focus{border-color:var(--gold);}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--deep);padding:14px 32px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:'Tajawal',sans-serif;width:100%;box-shadow:0 4px 20px rgba(201,168,76,.3);transition:transform .2s;}
+.btn-primary:hover{transform:translateY(-2px);}
+.error-box{background:#FEE2E2;border:1px solid #FCA5A5;color:#DC2626;border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none;}
+
+/* DASHBOARD */
+.dash{display:none;flex-direction:column;min-height:100vh;}
+.dash.show{display:flex;}
+.topbar{background:#FFFFFF;border-bottom:1px solid #EDE8DF;padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;}
+.tb-logo{display:flex;align-items:center;gap:10px;}
+.tb-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--gold),var(--gold-dark));border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:900;color:var(--deep);font-family:'Cairo',sans-serif;}
+.tb-name{font-size:16px;font-weight:700;color:#1C1C2E;}
+.tb-name span{color:var(--gold);}
+.tb-right{display:flex;align-items:center;gap:12px;}
+.tb-date{font-size:12px;color:rgba(28,28,46,.5);}
+.btn-logout{background:#FEE2E2;border:1px solid #FCA5A5;color:#DC2626;padding:7px 16px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:600;}
+.btn-logout:hover{background:rgba(248,113,113,.22);}
+
+.main{display:flex;flex:1;}
+.sidebar{width:220px;background:#F5F0E8;border-left:1px solid #EDE8DF;padding:24px 16px;flex-shrink:0;}
+.sidebar-label{font-size:10px;font-weight:700;letter-spacing:.1em;color:rgba(28,28,46,.4);text-transform:uppercase;margin:20px 0 8px;padding:0 8px;}
+.sidebar-label:first-child{margin-top:0;}
+.nav-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;cursor:pointer;font-size:14px;color:rgba(28,28,46,.55);transition:all .2s;margin-bottom:2px;}
+.nav-item:hover{background:rgba(28,28,46,.06);color:#1C1C2E;}
+.nav-item.active{background:rgba(201,168,76,.12);color:#8B6914;font-weight:700;}
+.nav-item i{font-size:16px;width:18px;text-align:center;}
+.nav-badge{margin-right:auto;background:rgba(201,168,76,.15);color:#8B6914;font-size:11px;font-weight:700;padding:2px 7px;border-radius:10px;}
+
+.content{flex:1;padding:28px 32px;overflow-y:auto;background:#FAFAF7;}
+
+/* SUMMARY CARDS */
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+.sum-card{background:#FFFFFF;border:1px solid #EDE8DF;border-radius:14px;padding:20px;}
+.sum-card.gold{border-color:rgba(201,168,76,.4);background:rgba(201,168,76,.05);}
+.sum-card.teal{border-color:rgba(13,148,136,.3);background:rgba(13,148,136,.05);}
+.sum-card.red{border-color:rgba(220,38,38,.3);background:rgba(220,38,38,.05);}
+.sum-icon{font-size:22px;margin-bottom:10px;}
+.sum-num{font-family:'Cairo',sans-serif;font-size:30px;font-weight:900;color:var(--gold);}
+.sum-card.teal .sum-num{color:var(--teal);}
+.sum-card.red .sum-num{color:var(--red);}
+.sum-label{font-size:12px;color:rgba(28,28,46,.55);margin-top:3px;}
+
+/* TABLE */
+.table-wrap{background:#FFFFFF;border-radius:14px;border:1px solid #EDE8DF;overflow:hidden;}
+.table-header{padding:18px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #EDE8DF;background:#F5F0E8;}
+.table-title{font-size:15px;font-weight:700;color:#1C1C2E;}
+.table-actions{display:flex;gap:8px;}
+.tbl-btn{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.08);color:#8B6914;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:600;transition:all .2s;}
+.tbl-btn:hover{background:rgba(201,168,76,.15);}
+.tbl-btn.red-btn{border-color:rgba(248,113,113,.25);background:rgba(248,113,113,.07);color:var(--red);}
+.tbl-btn.red-btn:hover{background:rgba(248,113,113,.15);}
+.search-input{background:#F5F0E8;border:1.5px solid #EDE8DF;border-radius:8px;padding:8px 14px;color:#1C1C2E;font-size:13px;font-family:'Tajawal',sans-serif;outline:none;width:220px;}
+.search-input:focus{border-color:var(--gold);}
+table{width:100%;border-collapse:collapse;}
+th{background:#F5F0E8;padding:11px 16px;text-align:right;font-size:11px;font-weight:700;color:rgba(28,28,46,.55);white-space:nowrap;}
+td{padding:11px 16px;font-size:13px;border-bottom:1px solid #EDE8DF;vertical-align:middle;color:#1C1C2E;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(201,168,76,.04);}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600;}
+.badge-pending{background:#FEF3C7;color:#92400E;}
+.badge-active{background:#D1FAE5;color:#065F46;}
+.code-chip{font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;color:#8B6914;background:rgba(201,168,76,.1);padding:3px 9px;border-radius:6px;letter-spacing:.08em;}
+.act-btn{padding:5px 11px;border-radius:6px;border:none;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:11px;font-weight:600;transition:all .2s;}
+.act-activate{background:#D1FAE5;color:#065F46;}
+.act-activate:hover{background:#A7F3D0;}
+.act-delete{background:rgba(248,113,113,.1);color:var(--red);}
+.act-delete:hover{background:rgba(248,113,113,.22);}
+
+/* GRADE TABS */
+.grade-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px;}
+.grade-tab{padding:7px 16px;border-radius:8px;border:1px solid #EDE8DF;background:#FFFFFF;color:rgba(28,28,46,.55);cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:600;transition:all .2s;}
+.grade-tab:hover{border-color:rgba(201,168,76,.3);color:var(--gold);}
+.grade-tab.active{background:#1C1C2E;border-color:#1C1C2E;color:#C9A84C;}
+
+.empty{text-align:center;padding:48px;color:rgba(28,28,46,.4);font-size:14px;}
+
+/* WHATSAPP PANEL */
+.wa-card{background:#FFFFFF;border:1px solid #EDE8DF;border-radius:14px;padding:24px;margin-bottom:16px;}
+.wa-title{font-size:15px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.wa-desc{font-size:13px;color:rgba(28,28,46,.55);margin-bottom:16px;}
+.wa-grade-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.wa-btn{padding:9px 16px;border-radius:8px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);color:#8B6914;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:600;transition:all .2s;}
+.wa-btn:hover{background:rgba(45,212,191,.2);}
+</style>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBcj-6Fvtk2oyxvTnFJayYJLlgZesKckxs",
+  authDomain: "drasati-vip.firebaseapp.com",
+  projectId: "drasati-vip",
+  storageBucket: "drasati-vip.firebasestorage.app",
+  messagingSenderId: "500718965745",
+  appId: "1:500718965745:web:d4ba21467e00714902aa50"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.db = db;
+window.fbFuncs = { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy };
+window.firebaseReady = true;
+window.dispatchEvent(new Event('firebase-ready'));
+</script>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="login-wrap" id="login-wrap">
+  <div class="login-card">
+    <div class="login-logo">د</div>
+    <div class="login-title">لوحة التحكم</div>
+    <div class="login-sub">أكاديمية دراستي VIP — للمدير فقط</div>
+    <div class="error-box" id="err">كلمة المرور غير صحيحة</div>
+    <label class="form-label">كلمة المرور</label>
+    <input class="form-input" type="password" id="pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
+    <button class="btn-primary" onclick="login()">دخول ←</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dash" id="dash">
+  <div class="topbar">
+    <div class="tb-logo">
+      <div class="tb-icon">د</div>
+      <div class="tb-name">دراستي <span>VIP</span> — لوحة التحكم</div>
+    </div>
+    <div class="tb-right">
+      <div class="tb-date" id="tb-date"></div>
+      <button class="btn-logout" onclick="logout()">خروج</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="sidebar-label">القائمة</div>
+      <div class="nav-item active" onclick="showPage('overview',this)"><i>📊</i> نظرة عامة</div>
+      <div class="nav-item" onclick="showPage('students',this)"><i>👥</i> الطلاب <span class="nav-badge" id="pending-badge">0</span></div>
+      <div class="nav-item" onclick="showPage('grades',this)"><i>📚</i> حسب الصف</div>
+      <div class="nav-item" onclick="showPage('export',this)"><i>📥</i> تصدير Excel</div>
+      <div class="nav-item" onclick="showPage('whatsapp',this)"><i>💬</i> واتساب</div>
+      <div class="nav-item" onclick="showPage('change-pass',this)"><i>🔐</i> تغيير كلمة المرور</div>
+      <div class="nav-item" onclick="showPage('activity',this)"><i>📋</i> سجل العمليات</div>
+      <div class="nav-item" onclick="showPage('cs-report',this)"><i>📞</i> أداء خدمة العملاء</div>
+      <div class="nav-item" onclick="showPage('smart-alerts',this)"><i>🔔</i> تنبيهات ذكية</div>
+      <div class="nav-item" onclick="showPage('teachers',this)" id="nav-teachers-btn"><i>👨‍🏫</i> المعلمون <span id="notif-badge" style="display:none;background:rgba(248,113,113,.2);color:var(--red);font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;margin-right:auto;">جديد</span></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content" id="content"></div>
+  </div>
+</div>
+
+<script>
+let PASS = localStorage.getItem('admin_pass') || 'admin123';
+const GRADES = ['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن','الصف التاسع','الصف العاشر'];
+let currentGradeFilter = 'all';
+
+// Load students from localStorage (shared with main site)
+function getStudents() { return JSON.parse(localStorage.getItem('drasati_students')||'[]'); }
+function saveStudents(arr) { localStorage.setItem('drasati_students', JSON.stringify(arr)); }
+
+// ── AUTH ──
+function login() {
+  if (document.getElementById('pass').value === PASS) {
+    document.getElementById('login-wrap').style.display = 'none';
+    document.getElementById('dash').classList.add('show');
+    document.getElementById('tb-date').textContent = new Date().toLocaleDateString('ar-OM',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    updatePendingBadge();
+    showPage('overview', document.querySelector('.nav-item'));
+  } else {
+    document.getElementById('err').style.display = 'block';
+  }
+}
+
+// ── ACTIVITY LOG ──
+function getActivityLog(){ return JSON.parse(localStorage.getItem('drasati_activity')||'[]'); }
+function addActivity(action, details){ 
+  var log = getActivityLog();
+  log.unshift({action:action,details:details,time:new Date().toLocaleString('ar-OM'),date:new Date().toLocaleDateString('ar-OM')});
+  if(log.length>100) log.pop();
+  localStorage.setItem('drasati_activity', JSON.stringify(log));
+}
+
+function renderActivity(){
+  var log = getActivityLog();
+  var rows = log.map(function(l){ return '<tr><td><strong>'+l.action+'</strong></td><td style="font-size:12px">'+l.details+'</td><td style="font-size:12px;color:rgba(28,28,46,.5)">'+l.time+'</td></tr>'; }).join('');
+  return '<div class="table-wrap"><div class="table-header"><div class="table-title">📋 سجل العمليات الكامل</div><button class="tbl-btn" onclick="localStorage.removeItem(\'drasati_activity\');document.getElementById(\'content\').innerHTML=renderActivity()">🗑️ مسح</button></div>'+(log.length===0?'<div class="empty">لا توجد عمليات مسجّلة</div>':'<table><thead><tr><th>العملية</th><th>التفاصيل</th><th>الوقت</th></tr></thead><tbody>'+rows+'</tbody></table>')+'</div>';
+}
+
+function renderCSReport(){
+  var log = getActivityLog();
+  var today = new Date().toLocaleDateString('ar-OM');
+  var todayAct = log.filter(function(l){return l.action==='تفعيل طالب'&&l.date===today;}).length;
+  var todayMsg = log.filter(function(l){return l.action==='إرسال واتساب'&&l.date===today;}).length;
+  var totalAct = log.filter(function(l){return l.action==='تفعيل طالب';}).length;
+  var csLogs = log.filter(function(l){return l.action==='تفعيل طالب'||l.action==='إرسال واتساب';});
+  var rows = csLogs.slice(0,20).map(function(l){ return '<tr><td><strong>'+l.action+'</strong></td><td style="font-size:12px">'+l.details+'</td><td style="font-size:12px;color:rgba(28,28,46,.5)">'+l.time+'</td></tr>'; }).join('');
+  return '<div class="summary-grid"><div class="sum-card gold"><div class="sum-icon">✅</div><div class="sum-num">'+todayAct+'</div><div class="sum-label">تفعيل اليوم</div></div><div class="sum-card teal"><div class="sum-icon">💬</div><div class="sum-num">'+todayMsg+'</div><div class="sum-label">رسائل اليوم</div></div><div class="sum-card"><div class="sum-icon">📊</div><div class="sum-num">'+totalAct+'</div><div class="sum-label">إجمالي التفعيلات</div></div><div class="sum-card"><div class="sum-icon">⏱️</div><div class="sum-num">~5د</div><div class="sum-label">متوسط التفعيل</div></div></div><div class="table-wrap"><div class="table-header"><div class="table-title">📞 سجل أداء خدمة العملاء</div></div>'+(csLogs.length===0?'<div class="empty">لا توجد بيانات بعد</div>':'<table><thead><tr><th>العملية</th><th>التفاصيل</th><th>الوقت</th></tr></thead><tbody>'+rows+'</tbody></table>')+'</div>';
+}
+
+function renderSmartAlerts(){
+  var s = getStudents();
+  var active = s.filter(function(x){return x.status==='active';}).length;
+  var pending = s.filter(function(x){return x.status==='pending';}).length;
+  var revenue = active * 85;
+  var profit = Math.round((revenue/4) - 1770);
+  var needed = Math.max(0, 79 - active);
+  var pct = Math.min(Math.round((active/79)*100),100);
+  var html = '<div style="display:flex;flex-direction:column;gap:12px;">';
+  if(pending>0) html += '<div style="background:#FEF3C7;border:1.5px solid #FCD34D;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center;"><span style="font-size:2rem;">⏳</span><div><div style="font-size:14px;font-weight:700;color:#92400E;margin-bottom:3px;">'+pending+' طالب ينتظر التفعيل</div><div style="font-size:13px;color:#92400E;">تحقق من التحويلات البنكية</div></div></div>';
+  if(needed>0){
+    html += '<div style="background:#EDE9FE;border:1.5px solid #C4B5FD;border-radius:14px;padding:18px;"><div style="display:flex;justify-content:space-between;margin-bottom:10px;"><span style="font-size:14px;font-weight:700;color:#5B21B6;">🎯 التقدم نحو نقطة التعادل</span><span style="font-size:14px;font-weight:700;color:#5B21B6;">'+pct+'%</span></div><div style="height:8px;background:#DDD6FE;border-radius:4px;overflow:hidden;margin-bottom:8px;"><div style="width:'+pct+'%;height:100%;background:#7C3AED;border-radius:4px;"></div></div><div style="font-size:13px;color:#5B21B6;">باقي <strong>'+needed+'</strong> طالب للوصول لـ 79 طالب</div></div>';
+  } else {
+    html += '<div style="background:#D1FAE5;border:1.5px solid #6EE7B7;border-radius:14px;padding:18px;display:flex;gap:14px;align-items:center;"><span style="font-size:2rem;">🎉</span><div><div style="font-size:14px;font-weight:700;color:#065F46;">تجاوزت نقطة التعادل!</div><div style="font-size:13px;color:#065F46;">أنت في المنطقة الربحية</div></div></div>';
+  }
+  html += '<div style="background:#FFFFFF;border:1.5px solid #EDE8DF;border-radius:14px;padding:18px;"><div style="font-size:14px;font-weight:700;color:#1C1C2E;margin-bottom:12px;">💰 الوضع المالي</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"><div style="background:#F5F0E8;border-radius:10px;padding:12px;text-align:center;"><div style="font-size:22px;font-weight:700;color:#C9A84C;">'+revenue+' ر.ع</div><div style="font-size:12px;color:rgba(28,28,46,.5);">إيراد الفصل</div></div><div style="background:#F5F0E8;border-radius:10px;padding:12px;text-align:center;"><div style="font-size:22px;font-weight:700;color:'+(profit>=0?'#059669':'#DC2626')+';">'+(profit>0?'+':'')+profit+' ر.ع</div><div style="font-size:12px;color:rgba(28,28,46,.5);">ربح/خسارة شهري</div></div></div></div>';
+  html += '</div>';
+  return html;
+}
+
+function logout() { document.getElementById('dash').classList.remove('show'); document.getElementById('login-wrap').style.display='flex'; }
+
+function updatePendingBadge() {
+  const n = getStudents().filter(s=>s.status==='pending').length;
+  document.getElementById('pending-badge').textContent = n;
+  document.getElementById('pending-badge').style.display = n>0 ? 'inline' : 'none';
+}
+
+// ── PAGES ──
+function showPage(page, el) {
+  document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+  if(el) el.classList.add('active');
+  const c = document.getElementById('content');
+  if (page==='overview')   c.innerHTML = renderOverview();
+  if (page==='students')   c.innerHTML = renderStudents('all');
+  if (page==='grades')     { c.innerHTML = renderGradePage(); }
+  if (page==='export')     c.innerHTML = renderExport();
+  if (page==='whatsapp')   c.innerHTML = renderWhatsapp();
+  if (page==='teachers')   c.innerHTML = renderTeachers();
+  if (page==='activity')    c.innerHTML = renderActivity();
+  if (page==='cs-report')   c.innerHTML = renderCSReport();
+  if (page==='smart-alerts') c.innerHTML = renderSmartAlerts();
+  if (page==='change-pass') c.innerHTML = renderChangePass();
+}
+
+// ── OVERVIEW ──
+function renderOverview() {
+  const s = getStudents();
+  const active = s.filter(x=>x.status==='active').length;
+  const pending = s.filter(x=>x.status==='pending').length;
+  const revenue = s.length * 85;
+  const costs = 1770;
+  const profit = revenue - costs;
+
+  let gradeCounts = GRADES.map(g=>({ grade:g, count:s.filter(x=>x.grade===g).length }));
+
+  return `
+    <div class="summary-grid">
+      <div class="sum-card gold"><div class="sum-icon">👥</div><div class="sum-num">${s.length}</div><div class="sum-label">إجمالي الطلاب</div></div>
+      <div class="sum-card teal"><div class="sum-icon">✅</div><div class="sum-num">${active}</div><div class="sum-label">طلاب نشطون</div></div>
+      <div class="sum-card red"><div class="sum-icon">⏳</div><div class="sum-num">${pending}</div><div class="sum-label">بانتظار التأكيد</div></div>
+      <div class="sum-card"><div class="sum-icon">💰</div><div class="sum-num">${revenue}</div><div class="sum-label">إجمالي الإيراد (ر.ع)</div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+      <div class="table-wrap">
+        <div class="table-header"><div class="table-title">📊 توزيع الطلاب حسب الصف</div></div>
+        <table>
+          <thead><tr><th>الصف</th><th>عدد الطلاب</th><th>الإيراد</th></tr></thead>
+          <tbody>
+            ${gradeCounts.map(g=>`<tr><td>${g.grade}</td><td><strong>${g.count}</strong></td><td>${g.count*85} ر.ع</td></tr>`).join('')}
+          </tbody>
+        </table>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header"><div class="table-title">💵 الوضع المالي</div></div>
+        <table>
+          <thead><tr><th>البند</th><th>المبلغ</th></tr></thead>
+          <tbody>
+            <tr><td>إجمالي الإيراد (فصل)</td><td style="color:var(--teal)">${revenue} ر.ع</td></tr>
+            <tr><td>المصاريف الشهرية</td><td style="color:var(--red)">${costs} ر.ع</td></tr>
+            <tr><td>مصاريف الفصل (×4)</td><td style="color:var(--red)">${costs*4} ر.ع</td></tr>
+            <tr><td><strong>صافي الربح (فصل)</strong></td><td style="color:${profit>=0?'var(--teal)':'var(--red)'}"><strong>${profit} ر.ع</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  `;
+}
+
+// ── STUDENTS ──
+function renderStudents(filter, search='') {
+  let s = getStudents();
+  if (filter==='pending') s = s.filter(x=>x.status==='pending');
+  if (filter==='active')  s = s.filter(x=>x.status==='active');
+  if (search) s = s.filter(x=>x.name.includes(search)||x.code.includes(search)||x.email.includes(search));
+
+  return `
+    <div class="table-wrap">
+      <div class="table-header">
+        <div class="table-title">جميع الطلاب (${s.length})</div>
+        <div class="table-actions">
+          <input class="search-input" placeholder="🔍 بحث بالاسم أو الكود..." oninput="document.getElementById('content').innerHTML=renderStudents('${filter}',this.value)">
+          <button class="tbl-btn" onclick="document.getElementById('content').innerHTML=renderStudents('all')">الكل</button>
+          <button class="tbl-btn" onclick="document.getElementById('content').innerHTML=renderStudents('pending')">⏳ انتظار</button>
+          <button class="tbl-btn" onclick="document.getElementById('content').innerHTML=renderStudents('active')">✅ نشط</button>
+        </div>
+      </div>
+      ${s.length===0 ? '<div class="empty">لا يوجد طلاب 📭</div>' : `
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>#</th><th>اسم الطالب</th><th>الصف</th><th>الإيميل</th><th>رقم ولي الأمر</th><th>رقم الطالب</th><th>رقم التحويل</th><th>الكود</th><th>الحالة</th><th>التاريخ</th><th>إجراء</th></tr></thead>
+        <tbody>
+          ${s.map((st,i)=>`
+            <tr>
+              <td>${i+1}</td>
+              <td><strong>${st.name}</strong></td>
+              <td>${st.grade}</td>
+              <td style="direction:ltr;font-size:12px">${st.email}</td>
+              <td style="direction:ltr">${st.parent}</td>
+              <td style="direction:ltr">${st.student||'—'}</td>
+              <td>${st.transfer}</td>
+              <td><span class="code-chip">${st.code}</span></td>
+              <td><span class="badge ${st.status==='active'?'badge-active':'badge-pending'}">${st.status==='active'?'نشط':'انتظار'}</span></td>
+              <td style="font-size:12px">${st.date}</td>
+              <td style="display:flex;gap:5px;flex-wrap:wrap">
+                ${st.status==='pending'?`<button class="act-btn act-activate" onclick="activateStudent(${st.id})">تفعيل</button>`:''}
+                <button class="act-btn act-delete" onclick="deleteStudent(${st.id})">حذف</button>
+              </td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      </div>`}
+    </div>
+  `;
+}
+
+function activateStudent(id) {
+  const arr = getStudents();
+  const s = arr.find(x=>x.id===id);
+  if(s){ s.status='active'; saveStudents(arr); addActivity('تفعيل طالب','الطالب: '+s.name+' — '+s.grade+' — الكود: '+s.code); updatePendingBadge(); document.getElementById('content').innerHTML=renderStudents('all'); }
+}
+function deleteStudent(id) {
+  if(!confirm('هل أنت متأكد من الحذف؟')) return;
+  saveStudents(getStudents().filter(x=>x.id!==id));
+  updatePendingBadge();
+  document.getElementById('content').innerHTML=renderStudents('all');
+}
+
+// ── GRADES PAGE ──
+function renderGradePage() {
+  return `
+    <div class="grade-tabs">
+      ${GRADES.map((g,i)=>`<button class="grade-tab ${i===0?'active':''}" onclick="filterGrade('${g}',this)">${g}</button>`).join('')}
+    </div>
+    <div id="grade-table-wrap">${renderGradeTable(GRADES[0])}</div>
+  `;
+}
+function filterGrade(grade, el) {
+  document.querySelectorAll('.grade-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('grade-table-wrap').innerHTML = renderGradeTable(grade);
+}
+function renderGradeTable(grade) {
+  const s = getStudents().filter(x=>x.grade===grade);
+  if (!s.length) return `<div class="empty">لا يوجد طلاب في ${grade} 📭</div>`;
+  return `
+    <div class="table-wrap">
+      <div class="table-header">
+        <div class="table-title">${grade} — ${s.length} طالب</div>
+        <div class="table-actions">
+          <button class="tbl-btn" onclick="exportGrade('${grade}')">📥 تصدير Excel</button>
+        </div>
+      </div>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>#</th><th>اسم الطالب</th><th>رقم ولي الأمر</th><th>رقم الطالب</th><th>الإيميل</th><th>الكود</th><th>الحالة</th></tr></thead>
+        <tbody>
+          ${s.map((st,i)=>`
+            <tr>
+              <td>${i+1}</td>
+              <td><strong>${st.name}</strong></td>
+              <td style="direction:ltr">${st.parent}</td>
+              <td style="direction:ltr">${st.student||'—'}</td>
+              <td style="direction:ltr;font-size:12px">${st.email}</td>
+              <td><span class="code-chip">${st.code}</span></td>
+              <td><span class="badge ${st.status==='active'?'badge-active':'badge-pending'}">${st.status==='active'?'نشط':'انتظار'}</span></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  `;
+}
+
+// ── EXPORT ──
+function renderExport() {
+  return `
+    <div style="display:grid;gap:14px;">
+      <div class="table-wrap">
+        <div class="table-header"><div class="table-title">📥 تصدير ملفات Excel</div></div>
+        <div style="padding:20px;display:grid;gap:12px;">
+          <button class="tbl-btn" style="width:fit-content;padding:10px 20px;font-size:14px;" onclick="exportAll()">📊 تصدير جميع الطلاب — ملف واحد</button>
+          <div style="font-size:13px;color:var(--white-dim);margin:4px 0 8px;">أو تصدير كل صف في ملف منفصل:</div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap;">
+            ${GRADES.map(g=>`<button class="tbl-btn" onclick="exportGrade('${g}')">${g}</button>`).join('')}
+          </div>
+        </div>
+      </div>
+      <div class="wa-card" style="border-color:rgba(201,168,76,.2);">
+        <div style="font-size:13px;color:var(--white-dim);">
+          💡 <strong style="color:var(--gold)">كيف تستخدم الملفات:</strong><br><br>
+          كل ملف Excel يحتوي على: اسم الطالب، رقم ولي الأمر، رقم الطالب، الإيميل، الكود، الحالة.<br>
+          يمكنك فتحه في Excel أو Google Sheets مباشرة.
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function exportGrade(grade) {
+  const s = getStudents().filter(x=>x.grade===grade);
+  if (!s.length) { alert(`لا يوجد طلاب في ${grade}`); return; }
+  const data = [
+    ['اسم الطالب','رقم ولي الأمر','رقم الطالب','الإيميل','رقم التحويل','الكود','الحالة','تاريخ التسجيل'],
+    ...s.map(st=>[st.name, st.parent, st.student||'—', st.email, st.transfer, st.code, st.status==='active'?'نشط':'بانتظار التأكيد', st.date])
+  ];
+  const wb = XLSX.utils.book_new();
+  const ws = XLSX.utils.aoa_to_sheet(data);
+  ws['!cols'] = [{wch:25},{wch:16},{wch:16},{wch:28},{wch:18},{wch:16},{wch:18},{wch:14}];
+  XLSX.utils.book_append_sheet(wb, ws, grade);
+  XLSX.writeFile(wb, `دراستي_VIP_${grade}.xlsx`);
+}
+
+function exportAll() {
+  const s = getStudents();
+  if (!s.length) { alert('لا يوجد طلاب'); return; }
+  const wb = XLSX.utils.book_new();
+  // Sheet for all students
+  const allData = [
+    ['اسم الطالب','الصف','رقم ولي الأمر','رقم الطالب','الإيميل','رقم التحويل','الكود','الحالة','تاريخ التسجيل'],
+    ...s.map(st=>[st.name, st.grade, st.parent, st.student||'—', st.email, st.transfer, st.code, st.status==='active'?'نشط':'بانتظار التأكيد', st.date])
+  ];
+  const wsAll = XLSX.utils.aoa_to_sheet(allData);
+  wsAll['!cols'] = [{wch:25},{wch:14},{wch:16},{wch:16},{wch:28},{wch:18},{wch:16},{wch:18},{wch:14}];
+  XLSX.utils.book_append_sheet(wb, wsAll, 'جميع الطلاب');
+  // Sheet per grade
+  GRADES.forEach(grade => {
+    const gs = s.filter(x=>x.grade===grade);
+    if (!gs.length) return;
+    const gData = [
+      ['اسم الطالب','رقم ولي الأمر','رقم الطالب','الإيميل','الكود','الحالة'],
+      ...gs.map(st=>[st.name, st.parent, st.student||'—', st.email, st.code, st.status==='active'?'نشط':'بانتظار'])
+    ];
+    const ws = XLSX.utils.aoa_to_sheet(gData);
+    ws['!cols'] = [{wch:25},{wch:16},{wch:16},{wch:28},{wch:16},{wch:16}];
+    XLSX.utils.book_append_sheet(wb, ws, grade);
+  });
+  XLSX.writeFile(wb, 'دراستي_VIP_جميع_الطلاب.xlsx');
+}
+
+// ── WHATSAPP ──
+function renderWhatsapp() {
+  return `
+    <div style="display:grid;gap:14px;">
+      <div class="wa-card">
+        <div class="wa-title">💬 إرسال رسالة ترحيب بعد التفعيل</div>
+        <div class="wa-desc">اختر طالباً من قائمة المنتظرين لإرسال رسالة واتساب مع الكود بعد تأكيد الدفع</div>
+        <div style="overflow-x:auto">
+        <table style="width:100%">
+          <thead><tr><th>اسم الطالب</th><th>الصف</th><th>رقم ولي الأمر</th><th>الكود</th><th>إرسال</th></tr></thead>
+          <tbody>
+            ${getStudents().filter(s=>s.status==='pending').map(s=>`
+              <tr>
+                <td><strong>${s.name}</strong></td>
+                <td>${s.grade}</td>
+                <td style="direction:ltr">${s.parent}</td>
+                <td><span class="code-chip">${s.code}</span></td>
+                <td><button class="wa-btn" onclick="sendWA('${s.parent}','${s.name}','${s.grade}','${s.code}')">📤 إرسال</button></td>
+              </tr>
+            `).join('') || '<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--white-dim)">لا يوجد طلاب بانتظار التأكيد</td></tr>'}
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <div class="wa-card">
+        <div class="wa-title">📣 إرسال رسالة لكل صف</div>
+        <div class="wa-desc">أرسل رسالة جماعية لأولياء أمور صف معين (يفتح واتساب لكل رقم على حدة)</div>
+        <div class="wa-grade-btns">
+          ${GRADES.map(g=>`<button class="wa-btn" onclick="sendGradeWA('${g}')">${g}</button>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function sendWA(phone, name, grade, code) {
+  const msg = `السلام عليكم ورحمة الله 🌟\n\nأهلاً بك في أكاديمية دراستي VIP!\n\nتم تفعيل اشتراك ${name} في ${grade} بنجاح ✅\n\nكودك السري للدخول:\n*${code}*\n\nادخل الموقع واضغط "بوابة الطالب" وأدخل الكود.\n\nنتمنى لكم رحلة تعليمية مميزة 🎓\nفريق دراستي VIP`;
+  window.open(`https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+function sendGradeWA(grade) {
+  const s = getStudents().filter(x=>x.grade===grade&&x.status==='active');
+  if (!s.length) { alert(`لا يوجد طلاب نشطون في ${grade}`); return; }
+  s.forEach((st,i) => setTimeout(()=>{ window.open(`https://wa.me/${st.parent.replace(/\D/g,'')}?text=${encodeURIComponent(`مرحباً ${st.name} 👋\nرسالة من أكاديمية دراستي VIP`)}`, '_blank'); }, i*500));
+}
+
+// ── TEACHERS PAGE ──
+const TEACHERS_LIST = {
+  'math_low':    {name:'أ. خالد الحارثي',   subject:'الرياضيات',    grades:'الصف 5-8', icon:'🔢'},
+  'math_high':   {name:'أ. ماجد السعدي',    subject:'الرياضيات',    grades:'الصف 9-10',icon:'🔢'},
+  'science':     {name:'أ. سارة المعمرية',  subject:'العلوم',        grades:'الصف 5-8', icon:'🔬'},
+  'physics':     {name:'أ. عمر الكيومي',    subject:'الفيزياء',      grades:'الصف 9-10',icon:'⚡'},
+  'chemistry':   {name:'أ. نورة الفارسية',  subject:'الكيمياء',      grades:'الصف 9-10',icon:'🧪'},
+  'biology':     {name:'أ. ليلى الشيدية',   subject:'الأحياء',       grades:'الصف 9-10',icon:'🌿'},
+  'arabic_low':  {name:'أ. فاطمة البلوشية', subject:'اللغة العربية', grades:'الصف 5-8', icon:'📖'},
+  'arabic_high': {name:'أ. سلطان الغافري',  subject:'اللغة العربية', grades:'الصف 9-10',icon:'📖'},
+  'english':     {name:'أ. أحمد الرحبي',    subject:'اللغة الإنجليزية',grades:'5-10',  icon:'🌍'},
+  'islamic_low': {name:'أ. راشد النبهاني',  subject:'التربية الإسلامية',grades:'الصف 5-7',icon:'☪️'},
+  'islamic_high':{name:'أ. يوسف الكندي',    subject:'التربية الإسلامية',grades:'الصف 8-10',icon:'☪️'},
+  'social_low':  {name:'أ. مريم الزدجالية', subject:'الدراسات الاجتماعية',grades:'الصف 5-7',icon:'🗺️'},
+  'social_high': {name:'أ. هلال الحسني',    subject:'الدراسات الاجتماعية',grades:'الصف 8-10',icon:'🗺️'},
+};
+
+// Default passwords (same as in teacher panel)
+const DEFAULT_PASSES = {
+  'math_low':'math1234','math_high':'math5678','science':'sci1234','physics':'phy1234',
+  'chemistry':'chem1234','biology':'bio1234','arabic_low':'ara1234','arabic_high':'ara5678',
+  'english':'eng1234','islamic_low':'isl1234','islamic_high':'isl5678',
+  'social_low':'soc1234','social_high':'soc5678'
+};
+
+function getTeacherProfiles(){ return JSON.parse(localStorage.getItem('drasati_teacher_profiles')||'{}'); }
+function getTeacherNotifs(){ return JSON.parse(localStorage.getItem('drasati_teacher_notifs')||'[]'); }
+
+function renderTeachers(){
+  const profiles = getTeacherProfiles();
+  const notifs   = getTeacherNotifs();
+  const unread   = notifs.filter(n=>!n.read);
+
+  // Mark all as read
+  notifs.forEach(n=>n.read=true);
+  localStorage.setItem('drasati_teacher_notifs', JSON.stringify(notifs));
+  const badge = document.getElementById('notif-badge');
+  if(badge) badge.style.display='none';
+
+  return `
+    <!-- NOTIFICATIONS -->
+    ${unread.length>0?`
+    <div style="background:rgba(248,113,113,.08);border:1.5px solid rgba(248,113,113,.25);border-radius:14px;padding:18px;margin-bottom:18px;">
+      <div style="font-size:14px;font-weight:700;color:var(--red);margin-bottom:12px;">🔔 تغييرات جديدة من المعلمين (${unread.length})</div>
+      ${unread.map(n=>`
+        <div style="background:rgba(248,113,113,.06);border-radius:9px;padding:12px 14px;margin-bottom:8px;display:flex;align-items:center;gap:12px;">
+          <div style="font-size:22px">👨‍🏫</div>
+          <div>
+            <div style="font-size:13px;font-weight:700">${n.teacherName} — ${n.subject}</div>
+            <div style="font-size:12px;color:var(--mut)">${n.changes}</div>
+            <div style="font-size:11px;color:var(--mut);margin-top:2px">🕐 ${n.time}</div>
+          </div>
+        </div>
+      `).join('')}
+    </div>`:''}
+
+    <!-- TEACHERS TABLE -->
+    <div class="table-wrap">
+      <div class="table-header">
+        <div class="table-title">👨‍🏫 جميع المعلمين (${Object.keys(TEACHERS_LIST).length})</div>
+      </div>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>المعلم</th><th>المادة</th><th>الصفوف</th><th>اسم المستخدم</th><th>كلمة المرور الحالية</th><th>آخر تغيير</th><th>الحالة</th></tr></thead>
+        <tbody>
+          ${Object.entries(TEACHERS_LIST).map(([key,t])=>{
+            const p = profiles[key]||{};
+            const currentName = p.name||t.name;
+            const currentPass = p.pass||DEFAULT_PASSES[key]||'—';
+            const lastChanged = p.lastChanged||'لم يغيّر';
+            const changed = !!p.pass || (p.name && p.name!==t.name);
+            return `<tr>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:18px">${t.icon}</span>
+                  <strong>${currentName}</strong>
+                  ${p.name&&p.name!==t.name?`<span style="font-size:10px;background:rgba(248,180,0,.1);color:#F8B400;padding:2px 6px;border-radius:10px">اسم معدّل</span>`:''}
+                </div>
+              </td>
+              <td>${t.subject}</td>
+              <td style="font-size:12px;color:var(--mut)">${t.grades}</td>
+              <td><code style="background:var(--deep2);padding:3px 8px;border-radius:6px;font-size:12px;color:var(--gold)">${key}</code></td>
+              <td>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <code style="background:var(--deep2);padding:3px 8px;border-radius:6px;font-size:12px" id="pass-${key}">••••••••</code>
+                  <button onclick="togglePass('${key}','${currentPass}')" style="background:var(--faint);border:none;color:var(--mut);padding:4px 8px;border-radius:5px;font-size:11px;cursor:pointer;font-family:'Tajawal',sans-serif;">عرض</button>
+                </div>
+              </td>
+              <td style="font-size:12px;color:var(--mut)">${lastChanged}</td>
+              <td><span class="status-badge ${changed?'status-pending':'status-active'}">${changed?'معدّل':'أصلي'}</span></td>
+            </tr>`;
+          }).join('')}
+        </tbody>
+      </table>
+      </div>
+    </div>
+
+    <!-- ALL NOTIFICATIONS -->
+    ${notifs.length>0?`
+    <div class="table-wrap" style="margin-top:14px">
+      <div class="table-header"><div class="table-title">📋 سجل التغييرات الكاملة</div></div>
+      <table>
+        <thead><tr><th>المعلم</th><th>المادة</th><th>التغييرات</th><th>الوقت</th></tr></thead>
+        <tbody>
+          ${notifs.map(n=>`<tr>
+            <td><strong>${n.teacherName}</strong></td>
+            <td>${n.subject}</td>
+            <td style="font-size:12px">${n.changes}</td>
+            <td style="font-size:12px;color:var(--mut)">${n.time}</td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`:''}
+  `;
+}
+
+function changeAdminPass(){
+  var curr = document.getElementById('curr-pass').value;
+  var newp = document.getElementById('new-pass').value;
+  var conf = document.getElementById('conf-pass').value;
+  if(curr !== PASS){ alert('كلمة المرور الحالية غير صحيحة'); return; }
+  if(!newp || newp.length < 4){ alert('كلمة المرور الجديدة قصيرة جداً'); return; }
+  if(newp !== conf){ alert('كلمة المرور الجديدة غير متطابقة'); return; }
+  PASS = newp;
+  localStorage.setItem('admin_pass', newp);
+  alert('✅ تم تغيير كلمة المرور بنجاح');
+  document.getElementById('curr-pass').value = '';
+  document.getElementById('new-pass').value = '';
+  document.getElementById('conf-pass').value = '';
+}
+
+function renderChangePass(){
+  return '<div class="table-wrap" style="margin-top:16px;"><div class="table-header"><div class="table-title">🔐 تغيير كلمة مرور المدير</div></div><div style="padding:20px;display:grid;gap:12px;max-width:400px;"><div><label class="form-label">كلمة المرور الحالية</label><input class="form-input" type="password" id="curr-pass" placeholder="••••••••" style="margin:0"></div><div><label class="form-label">كلمة المرور الجديدة</label><input class="form-input" type="password" id="new-pass" placeholder="••••••••" style="margin:0"></div><div><label class="form-label">تأكيد كلمة المرور الجديدة</label><input class="form-input" type="password" id="conf-pass" placeholder="••••••••" style="margin:0"></div><button class="btn-primary" style="padding:12px;font-size:14px;" onclick="changeAdminPass()">حفظ كلمة المرور الجديدة ✓</button></div></div>';
+}
+
+function togglePass(key, pass){
+  const el = document.getElementById('pass-'+key);
+  el.textContent = el.textContent === '••••••••' ? pass : '••••••••';
+}
+
+// Check for unread notifs on load
+function checkNotifBadge(){
+  const n = getTeacherNotifs().filter(x=>!x.read).length;
+  const badge = document.getElementById('notif-badge');
+  if(badge && n>0){
+    badge.textContent = n + ' جديد';
+    badge.style.display='inline';
+  }
+}
+setTimeout(checkNotifBadge, 500);
+setInterval(checkNotifBadge, 10000);
+</script>
+</body>
+</html>
+<!-- SCORES ADDITION - injected via script -->
+<script>
+// ── SCORES SYSTEM ──
+function getScores() { return JSON.parse(localStorage.getItem('drasati_scores')||'{}'); }
+function saveScores(obj) { localStorage.setItem('drasati_scores', JSON.stringify(obj)); }
+
+function addScorePage() {
+  const s = getStudents();
+  if(!s.length) return '<div class="empty">لا يوجد طلاب 📭</div>';
+  return `
+    <div class="table-wrap" style="margin-bottom:16px;">
+      <div class="table-header"><div class="table-title">📝 إضافة درجة اختبار</div></div>
+      <div style="padding:20px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr auto;gap:12px;align-items:end;">
+        <div>
+          <label class="form-label">الطالب</label>
+          <select class="form-input" id="sc-student" style="margin:0">
+            <option value="">اختر طالب</option>
+            ${s.map(st=>`<option value="${st.id}">${st.name} — ${st.grade}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label class="form-label">المادة</label>
+          <select class="form-input" id="sc-subject" style="margin:0">
+            ${['الرياضيات','العلوم','الفيزياء','الكيمياء','الأحياء','اللغة العربية','اللغة الإنجليزية','التربية الإسلامية','الدراسات الاجتماعية'].map(m=>`<option>${m}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label class="form-label">الاختبار / الوحدة</label>
+          <input class="form-input" id="sc-exam" placeholder="مثال: اختبار الوحدة 1" style="margin:0">
+        </div>
+        <div>
+          <label class="form-label">الدرجة (من 10)</label>
+          <input class="form-input" id="sc-score" type="number" min="0" max="10" placeholder="8" style="margin:0">
+        </div>
+        <button class="btn-primary" style="padding:13px 20px;width:auto;" onclick="addScore()">إضافة ✓</button>
+      </div>
+    </div>
+    <div id="scores-table">${renderScoresTable()}</div>
+  `;
+}
+
+function addScore() {
+  const sid   = document.getElementById('sc-student').value;
+  const subj  = document.getElementById('sc-subject').value;
+  const exam  = document.getElementById('sc-exam').value.trim();
+  const score = document.getElementById('sc-score').value;
+  if(!sid||!exam||score==='') { alert('أكمل جميع الحقول'); return; }
+  const scores = getScores();
+  if(!scores[sid]) scores[sid]=[];
+  scores[sid].push({ subject:subj, exam, score:parseFloat(score), date:new Date().toLocaleDateString('ar-OM') });
+  saveScores(scores);
+  document.getElementById('scores-table').innerHTML = renderScoresTable();
+  document.getElementById('sc-exam').value='';
+  document.getElementById('sc-score').value='';
+}
+
+function renderScoresTable() {
+  const scores = getScores();
+  const students = getStudents();
+  let rows = [];
+  students.forEach(st => {
+    (scores[st.id]||[]).forEach(sc => {
+      rows.push({ ...sc, name:st.name, grade:st.grade, sid:st.id });
+    });
+  });
+  if(!rows.length) return '<div class="empty">لا توجد درجات مضافة بعد</div>';
+  return `
+    <div class="table-wrap">
+      <div class="table-header">
+        <div class="table-title">📊 سجل الدرجات (${rows.length})</div>
+        <button class="tbl-btn" onclick="exportScores()">📥 تصدير Excel</button>
+      </div>
+      <div style="overflow-x:auto">
+      <table>
+        <thead><tr><th>اسم الطالب</th><th>الصف</th><th>المادة</th><th>الاختبار</th><th>الدرجة</th><th>التقدير</th><th>التاريخ</th><th>حذف</th></tr></thead>
+        <tbody>
+          ${rows.map((r,i)=>`
+            <tr>
+              <td><strong>${r.name}</strong></td>
+              <td>${r.grade}</td>
+              <td>${r.subject}</td>
+              <td>${r.exam}</td>
+              <td><strong style="font-size:16px;color:${r.score>=8?'var(--teal)':r.score>=5?'var(--gold)':'var(--red)'}">${r.score}/10</strong></td>
+              <td><span class="badge ${r.score>=8?'badge-active':r.score>=5?'badge-pending':'badge-pending'}" style="${r.score<5?'background:rgba(248,113,113,.12);color:var(--red)':''}">
+                ${r.score>=9?'ممتاز 🌟':r.score>=8?'جيد جداً':r.score>=6?'جيد':r.score>=5?'مقبول':'ضعيف'}
+              </span></td>
+              <td style="font-size:12px">${r.date}</td>
+              <td><button class="act-btn act-delete" onclick="deleteScore(${r.sid},${i})">حذف</button></td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      </div>
+    </div>
+  `;
+}
+
+function deleteScore(sid, globalIdx) {
+  if(!confirm('حذف هذه الدرجة؟')) return;
+  const scores = getScores();
+  const students = getStudents();
+  let counter = 0;
+  for(const st of students) {
+    const arr = scores[st.id]||[];
+    for(let i=0;i<arr.length;i++) {
+      if(counter===globalIdx) { arr.splice(i,1); scores[st.id]=arr; saveScores(scores); document.getElementById('scores-table').innerHTML=renderScoresTable(); return; }
+      counter++;
+    }
+  }
+}
+
+function exportScores() {
+  const scores = getScores();
+  const students = getStudents();
+  const wb = XLSX.utils.book_new();
+
+  // All scores sheet
+  const allRows = [['اسم الطالب','الصف','المادة','الاختبار','الدرجة','التقدير','التاريخ']];
+  students.forEach(st => {
+    (scores[st.id]||[]).forEach(sc => {
+      const grade = sc.score>=9?'ممتاز':sc.score>=8?'جيد جداً':sc.score>=6?'جيد':sc.score>=5?'مقبول':'ضعيف';
+      allRows.push([st.name, st.grade, sc.subject, sc.exam, sc.score+'/10', grade, sc.date]);
+    });
+  });
+  const ws1 = XLSX.utils.aoa_to_sheet(allRows);
+  ws1['!cols']=[{wch:25},{wch:14},{wch:20},{wch:22},{wch:10},{wch:12},{wch:14}];
+  XLSX.utils.book_append_sheet(wb, ws1, 'جميع الدرجات');
+
+  // Per grade sheets
+  GRADES.forEach(g => {
+    const gradeStudents = students.filter(s=>s.grade===g);
+    const gRows = [['اسم الطالب','المادة','الاختبار','الدرجة','التقدير','التاريخ']];
+    gradeStudents.forEach(st => {
+      (scores[st.id]||[]).forEach(sc => {
+        const grade = sc.score>=9?'ممتاز':sc.score>=8?'جيد جداً':sc.score>=6?'جيد':sc.score>=5?'مقبول':'ضعيف';
+        gRows.push([st.name, sc.subject, sc.exam, sc.score+'/10', grade, sc.date]);
+      });
+    });
+    if(gRows.length>1) {
+      const ws = XLSX.utils.aoa_to_sheet(gRows);
+      XLSX.utils.book_append_sheet(wb, ws, g);
+    }
+  });
+
+  XLSX.writeFile(wb, 'دراستي_VIP_الدرجات.xlsx');
+}
+
+// ── OVERRIDE exportAll to include scores ──
+const _origExportAll = exportAll;
+window.exportAll = function() {
+  const s = getStudents();
+  const scores = getScores();
+  if(!s.length){ alert('لا يوجد طلاب'); return; }
+  const wb = XLSX.utils.book_new();
+
+  // All students sheet
+  const allData = [['اسم الطالب','الصف','رقم ولي الأمر','رقم الطالب','الإيميل','رقم التحويل','الكود','الحالة','تاريخ التسجيل']];
+  s.forEach(st=>allData.push([st.name,st.grade,st.parent,st.student||'—',st.email,st.transfer,st.code,st.status==='active'?'نشط':'بانتظار',st.date]));
+  const wsAll = XLSX.utils.aoa_to_sheet(allData);
+  wsAll['!cols']=[{wch:25},{wch:14},{wch:16},{wch:16},{wch:28},{wch:18},{wch:16},{wch:18},{wch:14}];
+  XLSX.utils.book_append_sheet(wb, wsAll, 'جميع الطلاب');
+
+  // Per grade: students + scores
+  GRADES.forEach(grade => {
+    const gs = s.filter(x=>x.grade===grade);
+    if(!gs.length) return;
+    const gData = [['اسم الطالب','رقم ولي الأمر','رقم الطالب','الإيميل','الكود','الحالة']];
+    gs.forEach(st=>gData.push([st.name,st.parent,st.student||'—',st.email,st.code,st.status==='active'?'نشط':'بانتظار']));
+    const ws = XLSX.utils.aoa_to_sheet(gData);
+    ws['!cols']=[{wch:25},{wch:16},{wch:16},{wch:28},{wch:16},{wch:14}];
+    XLSX.utils.book_append_sheet(wb, ws, grade);
+
+    // Scores for this grade
+    const scRows = [['اسم الطالب','المادة','الاختبار','الدرجة','التقدير','التاريخ']];
+    gs.forEach(st=>{
+      (scores[st.id]||[]).forEach(sc=>{
+        const tq = sc.score>=9?'ممتاز':sc.score>=8?'جيد جداً':sc.score>=6?'جيد':sc.score>=5?'مقبول':'ضعيف';
+        scRows.push([st.name,sc.subject,sc.exam,sc.score+'/10',tq,sc.date]);
+      });
+    });
+    if(scRows.length>1){
+      const ws2 = XLSX.utils.aoa_to_sheet(scRows);
+      XLSX.utils.book_append_sheet(wb, ws2, grade+'_درجات');
+    }
+  });
+
+  XLSX.writeFile(wb, 'دراستي_VIP_كامل.xlsx');
+};
+
+// ── ADD SCORES TO SIDEBAR ──
+document.addEventListener('DOMContentLoaded', ()=>{
+  const sidebar = document.querySelector('.sidebar');
+  const newItem = document.createElement('div');
+  newItem.className = 'nav-item';
+  newItem.innerHTML = '<i>📝</i> الدرجات';
+  newItem.onclick = function(){ showPage('scores', this); };
+  sidebar.appendChild(newItem);
+
+  const origShow = window.showPage;
+  window.showPage = function(page, el) {
+    if(page==='scores') {
+      document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
+      if(el) el.classList.add('active');
+      document.getElementById('content').innerHTML = addScorePage();
+      return;
+    }
+    origShow(page, el);
+  };
+});
+</script>

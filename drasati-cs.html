@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>خدمة العملاء — دراستي VIP</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A84C;--gold-dark:#8B6914;--gl:rgba(201,168,76,.12);--deep:#0A0A0F;--deep2:#12121A;--sur:#1C1C2A;--sur2:#242436;--white:#F5F3EE;--mut:rgba(245,243,238,.62);--faint:rgba(245,243,238,.08);--teal:#2DD4BF;--red:#F87171;--r:12px;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Tajawal',sans-serif;background:var(--deep);color:var(--white);min-height:100vh;}
+.lw{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:radial-gradient(ellipse 60% 60% at 50% 40%,rgba(45,212,191,.05),transparent);}
+.lcard{background:var(--sur);border:1px solid rgba(45,212,191,.2);border-radius:22px;padding:44px 38px;width:100%;max-width:380px;text-align:center;}
+.llogo{width:54px;height:54px;background:linear-gradient(135deg,var(--teal),#0D9488);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:var(--deep);margin:0 auto 18px;box-shadow:0 0 30px rgba(45,212,191,.25);}
+.ltitle{font-family:'Cairo',sans-serif;font-size:24px;font-weight:900;margin-bottom:5px;}
+.lsub{font-size:13px;color:var(--mut);margin-bottom:28px;}
+.inp{width:100%;background:var(--deep2);border:1.5px solid var(--faint);border-radius:10px;padding:12px 14px;color:var(--white);font-size:14px;font-family:'Tajawal',sans-serif;outline:none;transition:border-color .2s;margin-bottom:12px;}
+.inp:focus{border-color:var(--teal);}
+.inp::placeholder{color:rgba(245,243,238,.28);}
+.btn-t{width:100%;background:linear-gradient(135deg,var(--teal),#0D9488);color:var(--deep);padding:13px;border-radius:10px;font-size:15px;font-weight:700;border:none;cursor:pointer;font-family:'Tajawal',sans-serif;box-shadow:0 4px 20px rgba(45,212,191,.25);transition:transform .2s;}
+.btn-t:hover{transform:translateY(-2px);}
+.err{background:rgba(248,113,113,.12);border:1px solid rgba(248,113,113,.3);color:var(--red);border-radius:9px;padding:9px 13px;font-size:13px;margin-bottom:12px;display:none;}
+/* DASH */
+.dash{display:none;min-height:100vh;flex-direction:column;}
+.dash.show{display:flex;}
+.topbar{background:var(--deep2);border-bottom:1px solid var(--faint);padding:14px 28px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;}
+.tlogo{width:36px;height:36px;background:linear-gradient(135deg,var(--teal),#0D9488);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:var(--deep);}
+.tbrand{font-size:15px;font-weight:700;}.tbrand span{color:var(--teal);}
+.trole{font-size:12px;background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.25);padding:3px 11px;border-radius:20px;}
+.tright{margin-right:auto;display:flex;align-items:center;gap:10px;}
+.tnbadge{background:rgba(248,113,113,.15);color:var(--red);border:1px solid rgba(248,113,113,.25);padding:5px 12px;border-radius:20px;font-size:12px;font-weight:700;cursor:pointer;}
+.tbtn{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);color:var(--red);padding:7px 14px;border-radius:8px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:12px;font-weight:600;}
+.layout{display:flex;flex:1;}
+.sidebar{width:200px;background:var(--deep2);border-left:1px solid var(--faint);padding:18px 10px;flex-shrink:0;display:flex;flex-direction:column;gap:3px;}
+.ni{display:flex;align-items:center;gap:9px;padding:10px 11px;border-radius:9px;cursor:pointer;font-size:13px;color:var(--mut);transition:all .2s;border:none;background:none;width:100%;text-align:right;font-family:'Tajawal',sans-serif;}
+.ni:hover{background:var(--faint);color:var(--white);}
+.ni.active{background:rgba(45,212,191,.1);color:var(--teal);font-weight:600;}
+.ni svg{width:16px;height:16px;flex-shrink:0;}
+.nd{height:1px;background:var(--faint);margin:6px 0;}
+.content{flex:1;padding:22px;overflow-y:auto;}
+/* CARDS */
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px;}
+.sc{background:var(--sur);border:1px solid var(--faint);border-radius:var(--r);padding:14px;}
+.sc.t{border-color:rgba(45,212,191,.3);background:rgba(45,212,191,.06);}
+.sc.g{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.07);}
+.sc.r{border-color:rgba(248,113,113,.3);background:rgba(248,113,113,.06);}
+.sn{font-family:'Cairo',sans-serif;font-size:24px;font-weight:900;color:var(--gold);}
+.sc.t .sn{color:var(--teal);}.sc.r .sn{color:var(--red);}
+.sl{font-size:11px;color:var(--mut);margin-top:3px;}
+/* TABLE */
+.tw{background:var(--sur);border:1px solid var(--faint);border-radius:var(--r);overflow:hidden;margin-bottom:14px;}
+.th2{padding:14px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--faint);}
+.tt{font-size:14px;font-weight:700;}
+table{width:100%;border-collapse:collapse;}
+th{background:var(--sur2);padding:10px 14px;text-align:right;font-size:11px;font-weight:700;color:var(--mut);}
+td{padding:10px 14px;font-size:13px;border-bottom:1px solid var(--faint);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:600;}
+.b-act{background:rgba(45,212,191,.12);color:var(--teal);}
+.b-pend{background:rgba(248,180,0,.1);color:#F8B400;}
+/* BUTTONS */
+.btn-act{background:rgba(45,212,191,.12);color:var(--teal);border:1px solid rgba(45,212,191,.2);padding:5px 11px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Tajawal',sans-serif;}
+.btn-wa{background:rgba(37,211,102,.12);color:#25D366;border:1px solid rgba(37,211,102,.2);padding:5px 11px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Tajawal',sans-serif;}
+.btn-del{background:rgba(248,113,113,.1);color:var(--red);border:1px solid rgba(248,113,113,.2);padding:5px 11px;border-radius:6px;font-size:11px;font-weight:600;cursor:pointer;font-family:'Tajawal',sans-serif;}
+.search-inp{background:var(--deep2);border:1px solid var(--faint);border-radius:8px;padding:8px 13px;color:var(--white);font-size:13px;font-family:'Tajawal',sans-serif;outline:none;width:200px;}
+.search-inp:focus{border-color:var(--teal);}
+/* NOTIF CARD */
+.notif-card{background:rgba(248,113,113,.07);border:1.5px solid rgba(248,113,113,.25);border-radius:var(--r);padding:16px;margin-bottom:10px;display:flex;align-items:center;gap:12px;}
+.notif-new{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.25);}
+/* PENDING ALERT */
+.pending-alert{background:rgba(248,180,0,.08);border:1.5px solid rgba(248,180,0,.25);border-radius:var(--r);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;gap:12px;}
+/* TOAST */
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(60px);background:var(--sur2);border:1px solid rgba(45,212,191,.3);color:var(--white);padding:10px 20px;border-radius:100px;font-size:13px;z-index:999;transition:transform .3s;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.empty{text-align:center;padding:36px;color:var(--mut);font-size:13px;}
+@media(max-width:700px){.sidebar{display:none;}.sg{grid-template-columns:1fr 1fr;}}
+</style>
+
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBcj-6Fvtk2oyxvTnFJayYJLlgZesKckxs",
+  authDomain: "drasati-vip.firebaseapp.com",
+  projectId: "drasati-vip",
+  storageBucket: "drasati-vip.firebasestorage.app",
+  messagingSenderId: "500718965745",
+  appId: "1:500718965745:web:d4ba21467e00714902aa50"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.db = db;
+window.fbFuncs = { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, where, orderBy };
+window.firebaseReady = true;
+window.dispatchEvent(new Event('firebase-ready'));
+</script>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div class="lw" id="lw">
+  <div class="lcard">
+    <div class="llogo">💬</div>
+    <div class="ltitle">خدمة العملاء</div>
+    <div class="lsub">أكاديمية دراستي VIP</div>
+    <div class="err" id="lerr"></div>
+    <input class="inp" id="l-user" type="text" placeholder="اسم المستخدم" onkeydown="if(event.key==='Enter')doLogin()">
+    <input class="inp" id="l-pass" type="password" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn-t" onclick="doLogin()">دخول ←</button>
+    <div style="font-size:12px;color:var(--mut);margin-top:16px;">للموظفين فقط</div>
+  </div>
+</div>
+
+<!-- DASH -->
+<div class="dash" id="dash">
+  <div class="topbar">
+    <div class="tlogo">💬</div>
+    <div class="tbrand">دراستي <span>VIP</span> — خدمة العملاء</div>
+    <span class="trole">موظف خدمة عملاء</span>
+    <div class="tright">
+      <span class="tnbadge" id="pend-count" onclick="nav('pending')" style="display:none">⏳ 0 بانتظار التفعيل</span>
+      <button class="tbtn" onclick="doLogout()">خروج</button>
+    </div>
+  </div>
+  <div class="layout">
+    <div class="sidebar">
+      <button class="ni active" id="ni-home"     onclick="nav('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>الرئيسية</button>
+      <button class="ni"        id="ni-pending"  onclick="nav('pending')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>بانتظار التفعيل <span id="pend-badge" style="display:none;background:rgba(248,180,0,.15);color:#F8B400;font-size:10px;font-weight:700;padding:2px 6px;border-radius:10px;margin-right:auto;">0</span></button>
+      <button class="ni"        id="ni-students" onclick="nav('students')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>جميع الطلاب</button>
+      <button class="ni"        id="ni-search"   onclick="nav('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>بحث عن طالب</button>
+      <button class="ni"        id="ni-wa"        onclick="nav('wa')"<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>إرسال واتساب</button>
+      <button class="ni" id="ni-settings" onclick="nav('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>الإعدادات</button>
+    </div>
+    <div class="content" id="content"></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const CS_USERS = {
+  'cs': {pass: localStorage.getItem('cs_pass') || 'cs2025', name:'موظفة خدمة العملاء'}
+};
+
+
+// ── FIREBASE HELPERS ──
+async function fbGetStudents(){
+  try{
+    const {collection,getDocs}=window.fbFuncs;
+    const snap=await getDocs(collection(window.db,'students'));
+    return snap.docs.map(d=>({...d.data(),_docId:d.id}));
+  }catch(e){console.error(e);return[];}
+}
+async function fbUpdateStudent(docId, data){
+  try{
+    const {doc,updateDoc}=window.fbFuncs;
+    await updateDoc(doc(window.db,'students',docId),data);
+    return true;
+  }catch(e){console.error(e);return false;}
+}
+async function fbDeleteStudent(docId){
+  try{
+    const {doc,deleteDoc}=window.fbFuncs;
+    await deleteDoc(doc(window.db,'students',docId));
+    return true;
+  }catch(e){return false;}
+}
+async function fbGetScores(){
+  try{
+    const {collection,getDocs}=window.fbFuncs;
+    const snap=await getDocs(collection(window.db,'scores'));
+    return snap.docs.map(d=>({...d.data(),_docId:d.id}));
+  }catch(e){return[];}
+}
+async function fbAddScore(data){
+  try{
+    const {collection,addDoc}=window.fbFuncs;
+    await addDoc(collection(window.db,'scores'),data);
+    return true;
+  }catch(e){return false;}
+}
+
+function getStudents(){ return window._cachedStudents||[]; }
+function saveStudents(a){ window._cachedStudents=a; }
+
+window.addEventListener('firebase-ready', async()=>{
+  window._cachedStudents = await fbGetStudents();
+  updatePendingBadge();
+  setInterval(async()=>{ window._cachedStudents=await fbGetStudents(); updatePendingBadge(); }, 15000);
+});
+
+function saveStudents(a){ localStorage.setItem('drasati_students',JSON.stringify(a)); }
+
+// ── LOGIN ──
+
+// ── SETTINGS IN FIREBASE ──
+async function getSettingFromDB(key){
+  try{
+    const {doc,getDoc}=window.fbFuncs;
+    const snap=await getDoc(doc(window.db,'settings',key));
+    if(snap.exists()) return snap.data().value;
+    return null;
+  }catch(e){ return null; }
+}
+
+async function saveSettingToDB(key, value){
+  try{
+    const {doc,setDoc}=window.fbFuncs;
+    await setDoc(doc(window.db,'settings',key),{value:value,updatedAt:new Date().toISOString()});
+    return true;
+  }catch(e){ console.error(e); return false; }
+}
+
+async function doLogin(){
+  const user=document.getElementById('l-user').value.trim();
+  const pass=document.getElementById('l-pass').value;
+  const savedPass = await getSettingFromDB('cs_pass') || 'cs2025';
+  const u=CS_USERS[user];
+  if(!u||savedPass!==pass){ document.getElementById('lerr').textContent='اسم المستخدم أو كلمة المرور غير صحيحة'; document.getElementById('lerr').style.display='block'; return; }
+  document.getElementById('lw').style.display='none';
+  document.getElementById('dash').classList.add('show');
+  updatePendingBadge();
+  nav('home');
+  setInterval(updatePendingBadge, 8000);
+}
+function doLogout(){ location.reload(); }
+
+function updatePendingBadge(){
+  const n=getStudents().filter(s=>s.status==='pending').length;
+  const badge=document.getElementById('pend-badge');
+  const count=document.getElementById('pend-count');
+  if(n>0){
+    badge.textContent=n; badge.style.display='inline';
+    count.textContent=`⏳ ${n} بانتظار التفعيل`; count.style.display='inline';
+  } else {
+    badge.style.display='none'; count.style.display='none';
+  }
+}
+
+// ── NAV ──
+async function renderSettings(){
+  var currentName = await getSettingFromDB('cs_name') || 'موظفة خدمة العملاء';
+  document.getElementById('content').innerHTML = buildSettingsHTML(currentName);
+}
+function buildSettingsHTML(currentName){
+  var inp = 'width:100%;padding:12px 14px;border:2px solid #C9A84C;border-radius:9px;font-family:Tajawal,sans-serif;font-size:15px;color:#1C1C2E;background:#FFFFFF;outline:none;';
+  var lbl = 'font-size:13px;font-weight:700;color:#1C1C2E;margin-bottom:8px;display:block;';
+  var btn = 'background:linear-gradient(135deg,#C9A84C,#8B6914);color:#1C1C2E;padding:13px;border:none;border-radius:9px;font-size:15px;font-weight:700;cursor:pointer;font-family:Tajawal,sans-serif;width:100%;';
+  var card = 'background:#FFFFFF;border:2px solid #EDE8DF;border-radius:14px;margin-bottom:16px;overflow:hidden;max-width:500px;';
+  var head = 'padding:14px 20px;font-size:15px;font-weight:800;color:#1C1C2E;border-bottom:2px solid #EDE8DF;background:#F5F0E8;display:flex;align-items:center;gap:8px;';
+  var body = 'padding:20px;display:grid;gap:14px;';
+
+  return '<div style="max-width:500px;">' +
+
+    '<div style="'+card+'">' +
+      '<div style="'+head+'">👤 تغيير الاسم</div>' +
+      '<div style="'+body+'">' +
+        '<div><label style="'+lbl+'">الاسم الحالي</label>' +
+        '<div style="padding:12px 14px;background:#F5F0E8;border-radius:9px;font-size:15px;font-weight:700;color:#C9A84C;border:2px solid #EDE8DF;">'+currentName+'</div></div>' +
+        '<div><label style="'+lbl+'">الاسم الجديد</label>' +
+        '<input id="cs-new-name" placeholder="أدخل اسمك الجديد" style="'+inp+'"></div>' +
+        '<button onclick="changeCsName()" style="'+btn+'">✅ حفظ الاسم</button>' +
+      '</div>' +
+    '</div>' +
+
+    '<div style="'+card+'">' +
+      '<div style="'+head+'">🔐 تغيير كلمة المرور</div>' +
+      '<div style="'+body+'">' +
+        '<div><label style="'+lbl+'">كلمة المرور الحالية</label>' +
+        '<input type="password" id="cs-curr-pass" placeholder="أدخل كلمة المرور الحالية" style="'+inp+'"></div>' +
+        '<div><label style="'+lbl+'">كلمة المرور الجديدة</label>' +
+        '<input type="password" id="cs-new-pass" placeholder="أدخل كلمة المرور الجديدة" style="'+inp+'"></div>' +
+        '<div><label style="'+lbl+'">تأكيد كلمة المرور الجديدة</label>' +
+        '<input type="password" id="cs-conf-pass" placeholder="أعد كتابة كلمة المرور الجديدة" style="'+inp+'"></div>' +
+        '<button onclick="changeCsPass()" style="'+btn+'">✅ حفظ كلمة المرور</button>' +
+      '</div>' +
+    '</div>' +
+
+  '</div>';
+}
+
+async function changeCsName(){
+  var newName = document.getElementById('cs-new-name').value.trim();
+  if(!newName){ alert('أدخل الاسم الجديد'); return; }
+  await saveSettingToDB('cs_name', newName);
+  alert('تم تغيير الاسم إلى: ' + newName);
+  nav('settings');
+}
+
+async function changeCsPass(){
+  var curr = document.getElementById('cs-curr-pass').value;
+  var newp = document.getElementById('cs-new-pass').value;
+  var conf = document.getElementById('cs-conf-pass').value;
+  // Get current pass from Firebase first
+  var savedPass = await getSettingFromDB('cs_pass') || 'cs2025';
+  if(curr !== savedPass){ alert('كلمة المرور الحالية غير صحيحة'); return; }
+  if(!newp || newp.length < 4){ alert('كلمة المرور الجديدة قصيرة جداً'); return; }
+  if(newp !== conf){ alert('كلمة المرور الجديدة غير متطابقة'); return; }
+  await saveSettingToDB('cs_pass', newp);
+  alert('تم تغيير كلمة المرور بنجاح ✅');
+  nav('settings');
+}
+
+function nav(page){
+  document.querySelectorAll('.ni').forEach(b=>b.classList.remove('active'));
+  const el=document.getElementById('ni-'+page);
+  if(el) el.classList.add('active');
+  const pages={home:renderHome,pending:renderPending,students:renderStudents,search:renderSearch,wa:renderWA};
+  if(page==='settings'){ renderSettings(); return; }
+  document.getElementById('content').innerHTML = pages[page]?pages[page]():'';
+}
+
+// ── HOME ──
+function renderHome(){
+  const all=getStudents();
+  const active=all.filter(s=>s.status==='active').length;
+  const pending=all.filter(s=>s.status==='pending').length;
+  const today=all.filter(s=>s.date===new Date().toLocaleDateString('ar-OM')).length;
+  return `
+    <div class="sg">
+      <div class="sc t"><div style="font-size:20px;margin-bottom:8px">✅</div><div class="sn">${active}</div><div class="sl">طلاب نشطون</div></div>
+      <div class="sc r"><div style="font-size:20px;margin-bottom:8px">⏳</div><div class="sn">${pending}</div><div class="sl">بانتظار التفعيل</div></div>
+      <div class="sc g"><div style="font-size:20px;margin-bottom:8px">🆕</div><div class="sn">${today}</div><div class="sl">تسجيل اليوم</div></div>
+      <div class="sc"><div style="font-size:20px;margin-bottom:8px">👥</div><div class="sn">${all.length}</div><div class="sl">إجمالي الطلاب</div></div>
+    </div>
+
+    ${pending>0?`
+    <div class="pending-alert">
+      <div style="font-size:28px">⚠️</div>
+      <div>
+        <div style="font-size:14px;font-weight:700;color:#F8B400">يوجد ${pending} طالب بانتظار التفعيل</div>
+        <div style="font-size:12px;color:var(--mut);margin-top:3px">تحقق من التحويل البنكي وفعّل الطلاب</div>
+      </div>
+      <button onclick="nav('pending')" style="margin-right:auto;background:rgba(248,180,0,.15);color:#F8B400;border:1px solid rgba(248,180,0,.3);padding:8px 16px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Tajawal',sans-serif;">عرض الطلبات →</button>
+    </div>`:''}
+
+    <div style="font-size:14px;font-weight:700;margin-bottom:12px;">📋 آخر التسجيلات</div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>اسم الطالب</th><th>الصف</th><th>رقم ولي الأمر</th><th>التاريخ</th><th>الحالة</th><th>إجراء</th></tr></thead>
+        <tbody>
+          ${all.slice(-10).reverse().map(s=>`<tr>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.grade}</td>
+            <td style="direction:ltr">${s.parent}</td>
+            <td style="font-size:11px;color:var(--mut)">${s.date}</td>
+            <td><span class="badge ${s.status==='active'?'b-act':'b-pend'}">${s.status==='active'?'نشط ✓':'انتظار ⏳'}</span></td>
+            <td style="display:flex;gap:5px">
+              ${s.status==='pending'?`<button class="btn-act" onclick="activateStudent(${s.id})">تفعيل</button>`:''}
+              <button class="btn-wa" onclick="sendCode('${s.parent}','${s.name}','${s.grade}','${s.code}','${s.status}')">واتساب</button>
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+// ── PENDING ──
+function renderPending(){
+  const pending=getStudents().filter(s=>s.status==='pending');
+  return `
+    <div style="font-size:14px;font-weight:700;margin-bottom:14px;">⏳ بانتظار التفعيل (${pending.length})</div>
+    ${pending.length===0?`<div style="text-align:center;padding:60px;"><div style="font-size:48px;margin-bottom:12px">✅</div><div style="font-size:16px;font-weight:700">كل الطلاب مفعّلون!</div></div>`:
+    `<div style="background:rgba(45,212,191,.06);border:1px solid rgba(45,212,191,.2);border-radius:var(--r);padding:14px 16px;margin-bottom:14px;font-size:13px;color:var(--mut);">
+      💡 <strong style="color:var(--white)">قبل التفعيل:</strong> تحقق من رقم التحويل في تطبيق البنك، ثم اضغط تفعيل وأرسل واتساب بالكود.
+    </div>
+    <div class="tw">
+      <table>
+        <thead><tr><th>اسم الطالب</th><th>الصف</th><th>رقم التحويل</th><th>رقم ولي الأمر</th><th>الإيميل</th><th>الكود</th><th>التاريخ</th><th>إجراء</th></tr></thead>
+        <tbody>
+          ${pending.map(s=>`<tr>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.grade}</td>
+            <td><strong style="color:var(--gold)">${s.transfer}</strong></td>
+            <td style="direction:ltr">${s.parent}</td>
+            <td style="font-size:11px;direction:ltr">${s.email}</td>
+            <td><code style="background:var(--deep2);padding:2px 8px;border-radius:5px;font-size:11px;color:var(--gold)">${s.code}</code></td>
+            <td style="font-size:11px;color:var(--mut)">${s.date}</td>
+            <td>
+              <div style="display:flex;gap:5px;flex-wrap:wrap">
+                <button class="btn-act" onclick="activateAndSend(${s.id})">✓ فعّل وأرسل</button>
+                <button class="btn-wa" onclick="sendCode('${s.parent}','${s.name}','${s.grade}','${s.code}','pending')">واتساب فقط</button>
+              </div>
+            </td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>`}
+  `;
+}
+
+// ── STUDENTS ──
+function renderStudents(filter='', search=''){
+  let all=getStudents();
+  if(filter) all=all.filter(s=>s.status===filter);
+  if(search) all=all.filter(s=>s.name.includes(search)||s.parent.includes(search)||s.code.includes(search)||s.transfer.includes(search));
+  const GRADES=['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن','الصف التاسع','الصف العاشر'];
+  return `
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;">
+      <button onclick="document.getElementById('content').innerHTML=renderStudents()" style="padding:7px 14px;border-radius:8px;border:1px solid var(--faint);background:transparent;color:var(--mut);cursor:pointer;font-family:'Tajawal',sans-serif;font-size:12px;">الكل</button>
+      <button onclick="document.getElementById('content').innerHTML=renderStudents('active')" style="padding:7px 14px;border-radius:8px;border:1px solid rgba(45,212,191,.3);background:rgba(45,212,191,.08);color:var(--teal);cursor:pointer;font-family:'Tajawal',sans-serif;font-size:12px;">نشط ✓</button>
+      <button onclick="document.getElementById('content').innerHTML=renderStudents('pending')" style="padding:7px 14px;border-radius:8px;border:1px solid rgba(248,180,0,.3);background:rgba(248,180,0,.08);color:#F8B400;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:12px;">انتظار ⏳</button>
+    </div>
+    ${GRADES.map(g=>{
+      const gs=all.filter(s=>s.grade===g);
+      if(!gs.length) return '';
+      return `<div class="tw" style="margin-bottom:14px">
+        <div class="th2">
+          <div class="tt">${g} — ${gs.length} طالب</div>
+        </div>
+        <div style="overflow-x:auto">
+        <table>
+          <thead><tr><th>#</th><th>اسم الطالب</th><th>رقم ولي الأمر</th><th>رقم الطالب</th><th>رقم التحويل</th><th>الكود</th><th>الحالة</th><th>التاريخ</th><th>إجراء</th></tr></thead>
+          <tbody>
+            ${gs.map((s,i)=>`<tr>
+              <td>${i+1}</td>
+              <td><strong>${s.name}</strong></td>
+              <td style="direction:ltr">${s.parent}</td>
+              <td style="direction:ltr">${s.student||'—'}</td>
+              <td>${s.transfer}</td>
+              <td><code style="background:var(--deep2);padding:2px 7px;border-radius:5px;font-size:11px;color:var(--gold)">${s.code}</code></td>
+              <td><span class="badge ${s.status==='active'?'b-act':'b-pend'}">${s.status==='active'?'نشط':'انتظار'}</span></td>
+              <td style="font-size:11px;color:var(--mut)">${s.date}</td>
+              <td>
+                <div style="display:flex;gap:5px">
+                  ${s.status==='pending'?`<button class="btn-act" onclick="activateStudent(${s.id})">تفعيل</button>`:''}
+                  <button class="btn-wa" onclick="sendCode('${s.parent}','${s.name}','${s.grade}','${s.code}','${s.status}')">واتساب</button>
+                </div>
+              </td>
+            </tr>`).join('')}
+          </tbody>
+        </table>
+        </div>
+      </div>`;
+    }).join('')}
+    ${all.length===0?'<div class="empty">لا يوجد طلاب 📭</div>':''}
+  `;
+}
+
+// ── SEARCH ──
+function renderSearch(){
+  return `
+    <div style="font-size:14px;font-weight:700;margin-bottom:14px;">🔍 بحث عن طالب</div>
+    <div style="display:flex;gap:10px;margin-bottom:16px;">
+      <input class="search-inp" style="width:100%;max-width:400px;" id="srch-inp" placeholder="ابحث بالاسم أو الكود أو رقم التحويل أو رقم ولي الأمر..." oninput="document.getElementById('srch-res').innerHTML=renderStudents('',this.value)" onkeydown="document.getElementById('srch-res').innerHTML=renderStudents('',this.value)">
+    </div>
+    <div id="srch-res"><div style="text-align:center;padding:40px;color:var(--mut);">اكتب للبحث 🔍</div></div>
+  `;
+}
+
+// ── WHATSAPP ──
+function renderWA(){
+  const pending=getStudents().filter(s=>s.status==='pending');
+  const active=getStudents().filter(s=>s.status==='active');
+  const GRADES=['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن','الصف التاسع','الصف العاشر'];
+  return `
+    <!-- PENDING: Send code -->
+    <div class="tw" style="margin-bottom:14px">
+      <div class="th2"><div class="tt">📤 إرسال كود للطلاب المنتظرين</div></div>
+      <table>
+        <thead><tr><th>اسم الطالب</th><th>الصف</th><th>رقم ولي الأمر</th><th>الكود</th><th>إرسال</th></tr></thead>
+        <tbody>
+          ${pending.length===0?'<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--mut)">لا يوجد طلاب بانتظار التأكيد ✅</td></tr>':
+          pending.map(s=>`<tr>
+            <td><strong>${s.name}</strong></td>
+            <td>${s.grade}</td>
+            <td style="direction:ltr">${s.parent}</td>
+            <td><code style="background:var(--deep2);padding:2px 8px;border-radius:5px;font-size:11px;color:var(--gold)">${s.code}</code></td>
+            <td><button class="btn-wa" onclick="sendCode('${s.parent}','${s.name}','${s.grade}','${s.code}','pending')">📤 إرسال</button></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- BULK by grade -->
+    <div class="tw">
+      <div class="th2"><div class="tt">📣 رسالة جماعية لصف كامل</div></div>
+      <div style="padding:16px;display:flex;gap:10px;flex-wrap:wrap;">
+        ${GRADES.map(g=>{
+          const cnt=active.filter(s=>s.grade===g).length;
+          return `<button onclick="bulkWA('${g}')" style="background:${cnt>0?'rgba(45,212,191,.1)':'var(--faint)'};border:1px solid ${cnt>0?'rgba(45,212,191,.25)':'var(--faint)'};color:${cnt>0?'var(--teal)':'var(--mut)'};padding:9px 16px;border-radius:9px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:13px;font-weight:600;">${g} (${cnt})</button>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// ── ACTIONS ──
+async function activateStudent(id){
+  const arr=window._cachedStudents||[];
+  const s=arr.find(x=>x.id===id||x._docId===id);
+  if(!s)return;
+  await fbUpdateStudent(s._docId,{status:'active'});
+  window._cachedStudents=await fbGetStudents();
+  updatePendingBadge();
+  showToast(`✓ تم تفعيل ${s.name}`);
+  nav('pending');
+}
+async function activateStudentOld(id){
+  const arr=getStudents();
+  const s=arr.find(x=>x.id===id);
+  if(!s) return;
+  s.status='active';
+  saveStudents(arr);
+  updatePendingBadge();
+  showToast(`✓ تم تفعيل ${s.name}`);
+  nav('pending');
+}
+
+function activateAndSend(id){
+  const arr=getStudents();
+  const s=arr.find(x=>x.id===id);
+  if(!s) return;
+  s.status='active';
+  saveStudents(arr);
+  updatePendingBadge();
+  // Open WhatsApp
+  const msg=`السلام عليكم ورحمة الله 🌟\n\nأهلاً بكم في أكاديمية دراستي VIP!\n\nتم تفعيل اشتراك ${s.name} في ${s.grade} بنجاح ✅\n\nكود الدخول السري:\n*${s.code}*\n\nادخل الموقع واكتب كودك في خانة "لدي كود" وادخل مباشرة لعالمك التعليمي.\n\nأي استفسار نحن هنا 💬\nفريق دراستي VIP`;
+  window.open(`https://wa.me/${s.parent.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank');
+  showToast(`✓ تم تفعيل ${s.name} وفتح واتساب`);
+  setTimeout(()=>nav('pending'), 800);
+}
+
+function sendCode(phone, name, grade, code, status){
+  let msg;
+  if(status==='pending'){
+    msg=`السلام عليكم ورحمة الله 🌟\n\nأهلاً بكم في أكاديمية دراستي VIP!\n\nتم تفعيل اشتراك ${name} في ${grade} بنجاح ✅\n\nكود الدخول السري:\n*${code}*\n\nادخل الموقع واكتب كودك في خانة "لدي كود".\n\nفريق دراستي VIP 🎓`;
+  } else {
+    msg=`السلام عليكم 👋\n\nهذا تذكير بكود دخول ${name} في ${grade}:\n*${code}*\n\nفريق دراستي VIP`;
+  }
+  window.open(`https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+function bulkWA(grade){
+  const students=getStudents().filter(s=>s.grade===grade&&s.status==='active');
+  if(!students.length){ showToast(`لا يوجد طلاب نشطون في ${grade}`); return; }
+  students.forEach((s,i)=>{
+    setTimeout(()=>{
+      const msg=`مرحباً ${s.name} 👋\nرسالة من أكاديمية دراستي VIP — ${grade}`;
+      window.open(`https://wa.me/${s.parent.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank');
+    }, i*600);
+  });
+  showToast(`جاري فتح واتساب لـ ${students.length} طالب...`);
+}
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2600);
+}
+</script>
+</body>
+</html>
