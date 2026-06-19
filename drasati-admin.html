@@ -174,10 +174,54 @@ window.dispatchEvent(new Event('firebase-ready'));
   </div>
 </div>
 
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBcj-6Fvtk2oyxvTnFJayYJLlgZesKckxs",
+  authDomain: "drasati-vip.firebaseapp.com",
+  projectId: "drasati-vip",
+  storageBucket: "drasati-vip.firebasestorage.app",
+  messagingSenderId: "500718965745",
+  appId: "1:500718965745:web:d4ba21467e00714902aa50"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.db = db;
+window.fbFuncs = { doc, getDoc, setDoc };
+window.firebaseReady = true;
+window.dispatchEvent(new Event('firebase-ready'));
+</script>
+
 <script>
 let PASS = localStorage.getItem('admin_pass') || 'admin123';
 const GRADES = ['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن','الصف التاسع','الصف العاشر'];
 let currentGradeFilter = 'all';
+
+// Firebase Functions
+async function getAdminPassFromDB() {
+  try {
+    const docSnap = await window.fbFuncs.getDoc(window.fbFuncs.doc(window.db, 'settings', 'admin_pass'));
+    return docSnap.exists() ? docSnap.data().value || 'admin123' : 'admin123';
+  } catch {
+    return 'admin123';
+  }
+}
+
+async function saveAdminPassToDB(pass) {
+  try {
+    await window.fbFuncs.setDoc(window.fbFuncs.doc(window.db, 'settings', 'admin_pass'), { value: pass });
+  } catch (e) {
+    console.log('Firebase not ready:', e);
+  }
+}
+
+// Initialize password from Firebase on load
+window.addEventListener('firebase-ready', async () => {
+  PASS = await getAdminPassFromDB();
+  localStorage.setItem('admin_pass', PASS);
+});
 
 // Load students from localStorage (shared with main site)
 function getStudents() { return JSON.parse(localStorage.getItem('drasati_students')||'[]'); }
@@ -646,7 +690,7 @@ function renderTeachers(){
   `;
 }
 
-function changeAdminPass(){
+async function changeAdminPass(){
   var curr = document.getElementById('curr-pass').value;
   var newp = document.getElementById('new-pass').value;
   var conf = document.getElementById('conf-pass').value;
@@ -655,6 +699,7 @@ function changeAdminPass(){
   if(newp !== conf){ alert('كلمة المرور الجديدة غير متطابقة'); return; }
   PASS = newp;
   localStorage.setItem('admin_pass', newp);
+  await saveAdminPassToDB(newp);
   alert('✅ تم تغيير كلمة المرور بنجاح');
   document.getElementById('curr-pass').value = '';
   document.getElementById('new-pass').value = '';

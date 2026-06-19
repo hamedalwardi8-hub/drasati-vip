@@ -173,6 +173,26 @@ tr:hover td{background:rgba(255,255,255,.015);}
 </div>
 <div class="toast" id="toast"></div>
 
+<!-- Firebase -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, doc, getDoc, setDoc, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+const firebaseConfig = {
+  apiKey: "AIzaSyBcj-6Fvtk2oyxvTnFJayYJLlgZesKckxs",
+  authDomain: "drasati-vip.firebaseapp.com",
+  projectId: "drasati-vip",
+  storageBucket: "drasati-vip.firebasestorage.app",
+  messagingSenderId: "500718965745",
+  appId: "1:500718965745:web:d4ba21467e00714902aa50"
+};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+window.db = db;
+window.fbFuncs = { doc, getDoc, setDoc, collection, getDocs };
+window.firebaseReady = true;
+window.dispatchEvent(new Event('firebase-ready'));
+</script>
+
 <script>
 // ── TEACHERS DB ──
 // كلمة المرور لكل معلم — المدير يغيرها من لوحة التحكم
@@ -194,6 +214,43 @@ const TEACHERS = {
 
 let CT = null; // current teacher
 let CK = null; // current teacher key
+let TEACHERS_PASSES = {}; // حفظ كلمات مرور المعلمين من Firebase
+
+// Firebase Functions
+async function getTeacherPassFromDB(teacherId) {
+  try {
+    const docSnap = await window.fbFuncs.getDoc(window.fbFuncs.doc(window.db, 'teachers', teacherId));
+    return docSnap.exists() ? docSnap.data().password : TEACHERS[teacherId]?.pass || null;
+  } catch {
+    return TEACHERS[teacherId]?.pass || null;
+  }
+}
+
+async function saveTeacherPassToDB(teacherId, pass) {
+  try {
+    const docSnap = await window.fbFuncs.getDoc(window.fbFuncs.doc(window.db, 'teachers', teacherId));
+    const data = docSnap.exists() ? docSnap.data() : {};
+    await window.fbFuncs.setDoc(window.fbFuncs.doc(window.db, 'teachers', teacherId), {
+      ...data,
+      password: pass,
+      updatedAt: new Date().toISOString()
+    });
+  } catch (e) {
+    console.log('Firebase not ready:', e);
+  }
+}
+
+// Load all teacher passwords from Firebase on startup
+window.addEventListener('firebase-ready', async () => {
+  try {
+    const querySnapshot = await window.fbFuncs.getDocs(window.fbFuncs.collection(window.db, 'teachers'));
+    querySnapshot.forEach((doc) => {
+      TEACHERS_PASSES[doc.id] = doc.data().password || TEACHERS[doc.id]?.pass;
+    });
+  } catch (e) {
+    console.log('Firebase not ready:', e);
+  }
+});
 
 function getStudents(){ return JSON.parse(localStorage.getItem('drasati_students')||'[]'); }
 function getContent(){ return JSON.parse(localStorage.getItem('drasati_content')||'{}'); }
@@ -204,16 +261,27 @@ function getTodayLinks(){ return JSON.parse(localStorage.getItem('drasati_today_
 function saveTodayLinks(t){ localStorage.setItem('drasati_today_links',JSON.stringify(t)); }
 
 // ── LOGIN ──
-function doLogin(){
+async function doLogin(){
   const user = document.getElementById('l-user').value.trim().toLowerCase();
   const pass = document.getElementById('l-pass').value;
   const err  = document.getElementById('lerr');
   const t = TEACHERS[user];
-  if(!t || t.pass !== pass){
+
+  if(!t){
     err.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
     err.style.display = 'block';
     return;
   }
+
+  // الحصول على كلمة المرور من Firebase أو من TEACHERS
+  const teacherPass = TEACHERS_PASSES[user] || TEACHERS[user].pass;
+
+  if(teacherPass !== pass){
+    err.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
+    err.style.display = 'block';
+    return;
+  }
+
   CT = t; CK = user;
   err.style.display = 'none';
   document.getElementById('lw').style.display = 'none';
@@ -689,7 +757,7 @@ function getTeacherProfile(key){
   return profiles[key] || {};
 }
 
-function saveTeacherSettings(){
+async function saveTeacherSettings(){
   const newName    = document.getElementById('set-name').value.trim();
   const oldPass    = document.getElementById('set-oldpass').value;
   const newPass    = document.getElementById('set-newpass').value;
@@ -697,7 +765,7 @@ function saveTeacherSettings(){
 
   // Verify old password
   const profiles = JSON.parse(localStorage.getItem('drasati_teacher_profiles')||'{}');
-  const currentPass = profiles[CK]?.pass || CT.pass;
+  const currentPass = TEACHERS_PASSES[CK] || profiles[CK]?.pass || CT.pass;
   if(oldPass !== currentPass){ showToast('❌ كلمة المرور الحالية غير صحيحة'); return; }
 
   // Validate new password if provided
@@ -714,7 +782,11 @@ function saveTeacherSettings(){
   // Save
   if(!profiles[CK]) profiles[CK] = {};
   profiles[CK].name = newName;
-  if(newPass) profiles[CK].pass = newPass;
+  if(newPass) {
+    profiles[CK].pass = newPass;
+    TEACHERS_PASSES[CK] = newPass;
+    await saveTeacherPassToDB(CK, newPass);
+  }
   profiles[CK].lastChanged = new Date().toLocaleString('ar-OM');
   profiles[CK].subject = CT.subject;
   profiles[CK].grades  = CT.grades;
