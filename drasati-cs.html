@@ -426,9 +426,10 @@ function renderStudents(filter='', search=''){
               <td><span class="badge ${s.status==='active'?'b-act':'b-pend'}">${s.status==='active'?'نشط':'انتظار'}</span></td>
               <td style="font-size:11px;color:var(--mut)">${s.date}</td>
               <td>
-                <div style="display:flex;gap:5px">
-                  ${s.status==='pending'?`<button class="btn-act" onclick="activateStudent(${s.id})">تفعيل</button>`:''}
-                  <button class="btn-wa" onclick="sendCode('${s.parent}','${s.name}','${s.grade}','${s.code}','${s.status}')">واتساب</button>
+                <div style="display:flex;gap:5px;flex-wrap:wrap">
+                  ${s.status==='pending'?`<button class="btn-act" onclick="acceptStudent('${s._docId}')">✅ قبول</button>`:''}
+                  ${s.status==='pending'?`<button class="btn-wa" onclick="acceptAndSend('${s._docId}')">📲 قبول وأرسل</button>`:''}
+                  <button class="btn-del" onclick="deleteStudent('${s._docId}')">🗑️ حذف</button>
                 </div>
               </td>
             </tr>`).join('')}
