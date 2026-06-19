@@ -382,7 +382,7 @@ function renderPending(){
             <td>
               <div style="display:flex;gap:5px;flex-wrap:wrap">
                 <button class="btn-act" onclick="acceptStudent('${s._docId}')">✅ قبول</button>
-                <button class="btn-wa" onclick="sendCode('${s.parent}','${s.name}','${s.grade}','${s.code}','pending')">واتساب</button>
+                <button class="btn-wa" onclick="acceptAndSend('${s._docId}')">📲 قبول وأرسل</button>
                 <button class="btn-del" onclick="deleteStudent('${s._docId}')">🗑️ حذف</button>
               </div>
             </td>
@@ -499,6 +499,19 @@ async function acceptStudent(id){
   updatePendingBadge();
   showToast(`✓ تم قبول ${s.name} بنجاح`);
   nav('pending');
+}
+
+async function acceptAndSend(id){
+  const arr=window._cachedStudents||[];
+  const s=arr.find(x=>x.id===id||x._docId===id);
+  if(!s)return;
+  await fbUpdateStudent(s._docId,{status:'active'});
+  window._cachedStudents=await fbGetStudents();
+  updatePendingBadge();
+  showToast(`✓ تم قبول ${s.name} وفتح واتساب`);
+  const msg=`السلام عليكم ورحمة الله 🌟\n\nأهلاً بكم في أكاديمية دراستي VIP!\n\nتم تفعيل اشتراك ${s.name} في ${s.grade} بنجاح ✅\n\nكود الدخول السري:\n*${s.code}*\n\nادخل الموقع واكتب كودك في خانة "لدي كود" وادخل مباشرة لعالمك التعليمي.\n\nأي استفسار نحن هنا 💬\nفريق دراستي VIP`;
+  window.open(`https://wa.me/${s.parent.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`,'_blank');
+  setTimeout(()=>nav('pending'), 800);
 }
 
 async function deleteStudent(id){
