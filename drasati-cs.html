@@ -381,8 +381,9 @@ function renderPending(){
             <td style="font-size:11px;color:var(--mut)">${s.date}</td>
             <td>
               <div style="display:flex;gap:5px;flex-wrap:wrap">
-                <button class="btn-act" onclick="activateAndSend(${s.id})">✓ فعّل وأرسل</button>
-                <button class="btn-wa" onclick="sendCode('${s.parent}','${s.name}','${s.grade}','${s.code}','pending')">واتساب فقط</button>
+                <button class="btn-act" onclick="acceptStudent('${s._docId}')">✅ قبول</button>
+                <button class="btn-wa" onclick="sendCode('${s.parent}','${s.name}','${s.grade}','${s.code}','pending')">واتساب</button>
+                <button class="btn-del" onclick="deleteStudent('${s._docId}')">🗑️ حذف</button>
               </div>
             </td>
           </tr>`).join('')}
@@ -489,6 +490,29 @@ function renderWA(){
 }
 
 // ── ACTIONS ──
+async function acceptStudent(id){
+  const arr=window._cachedStudents||[];
+  const s=arr.find(x=>x.id===id||x._docId===id);
+  if(!s)return;
+  await fbUpdateStudent(s._docId,{status:'active'});
+  window._cachedStudents=await fbGetStudents();
+  updatePendingBadge();
+  showToast(`✓ تم قبول ${s.name} بنجاح`);
+  nav('pending');
+}
+
+async function deleteStudent(id){
+  const arr=window._cachedStudents||[];
+  const s=arr.find(x=>x.id===id||x._docId===id);
+  if(!s)return;
+  if(!confirm(`هل تريد حذف ${s.name} نهائياً؟`))return;
+  await fbDeleteStudent(s._docId);
+  window._cachedStudents=await fbGetStudents();
+  updatePendingBadge();
+  showToast(`🗑️ تم حذف ${s.name}`);
+  nav('pending');
+}
+
 async function activateStudent(id){
   const arr=window._cachedStudents||[];
   const s=arr.find(x=>x.id===id||x._docId===id);
