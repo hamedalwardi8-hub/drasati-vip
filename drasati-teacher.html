@@ -142,6 +142,21 @@ tr:hover td{background:rgba(255,255,255,.015);}
     <img src="logo.svg" alt="دراستي VIP" class="tlogo" />
     <div class="tbrand">دراستي <span>VIP</span></div>
     <span class="trole" id="t-role">معلم</span>
+    <!-- Student stats -->
+    <div style="display:flex;gap:12px;margin-right:auto;font-size:11px;">
+      <div style="text-align:center;color:var(--teal);">
+        <div style="font-weight:700;font-size:14px;" id="t-total">0</div>
+        <div style="color:rgba(245,243,238,.5);">الطلاب</div>
+      </div>
+      <div style="text-align:center;color:#10B981;">
+        <div style="font-weight:700;font-size:14px;" id="t-active">0</div>
+        <div style="color:rgba(245,243,238,.5);">نشطون</div>
+      </div>
+      <div style="text-align:center;color:#F8B400;">
+        <div style="font-weight:700;font-size:14px;" id="t-pending">0</div>
+        <div style="color:rgba(245,243,238,.5);">انتظار</div>
+      </div>
+    </div>
     <div class="tright">
       <div class="tname" id="t-name"></div>
       <div class="tav" id="t-av"></div>
@@ -252,6 +267,35 @@ window.addEventListener('firebase-ready', async () => {
   }
 });
 
+// Firebase function to get teacher's students
+async function getTeacherStudents(teacherGrades) {
+  try {
+    const querySnapshot = await window.fbFuncs.getDocs(window.fbFuncs.collection(window.db, 'students'));
+    const students = [];
+    querySnapshot.forEach((doc) => {
+      const student = doc.data();
+      if (student.grade && teacherGrades.includes(student.grade)) {
+        students.push(student);
+      }
+    });
+    return students;
+  } catch (e) {
+    console.log('Firebase error:', e);
+    return [];
+  }
+}
+
+// Update teacher student stats
+async function updateTeacherStats() {
+  if (!CT || !CT.grades) return;
+  const students = await getTeacherStudents(CT.grades);
+  const active = students.filter(s => s.status === 'active').length;
+  const pending = students.filter(s => s.status === 'pending').length;
+  document.getElementById('t-total').textContent = students.length;
+  document.getElementById('t-active').textContent = active;
+  document.getElementById('t-pending').textContent = pending;
+}
+
 function getStudents(){ return JSON.parse(localStorage.getItem('drasati_students')||'[]'); }
 function getContent(){ return JSON.parse(localStorage.getItem('drasati_content')||'{}'); }
 function saveContent(c){ localStorage.setItem('drasati_content',JSON.stringify(c)); }
@@ -289,6 +333,7 @@ async function doLogin(){
   document.getElementById('t-name').textContent = t.name;
   document.getElementById('t-av').textContent   = t.name[3] || 'أ';
   document.getElementById('t-role').textContent = t.subject;
+  await updateTeacherStats();
   nav('home');
 }
 

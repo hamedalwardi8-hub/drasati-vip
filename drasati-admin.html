@@ -323,20 +323,31 @@ function updatePendingBadge() {
 }
 
 // ── PAGES ──
-function showPage(page, el) {
+async function showPage(page, el) {
   document.querySelectorAll('.nav-item').forEach(i=>i.classList.remove('active'));
   if(el) el.classList.add('active');
   const c = document.getElementById('content');
-  if (page==='overview')   c.innerHTML = renderOverview();
-  if (page==='students')   c.innerHTML = renderStudents('all');
-  if (page==='grades')     { c.innerHTML = renderGradePage(); }
-  if (page==='export')     c.innerHTML = renderExport();
-  if (page==='whatsapp')   c.innerHTML = renderWhatsapp();
-  if (page==='teachers')   c.innerHTML = renderTeachers();
-  if (page==='activity')    c.innerHTML = renderActivity();
-  if (page==='cs-report')   c.innerHTML = renderCSReport();
-  if (page==='smart-alerts') c.innerHTML = renderSmartAlerts();
-  if (page==='change-pass') c.innerHTML = renderChangePass();
+  if (page==='overview') {
+    await loadStudentsFromFirebase();
+    c.innerHTML = renderOverview();
+    // تحديث النظرة العامة تلقائياً كل 30 ثانية
+    clearInterval(window.overviewInterval);
+    window.overviewInterval = setInterval(async () => {
+      await loadStudentsFromFirebase();
+      c.innerHTML = renderOverview();
+    }, 30000);
+  } else {
+    clearInterval(window.overviewInterval);
+    if (page==='students')   c.innerHTML = renderStudents('all');
+    if (page==='grades')     { c.innerHTML = renderGradePage(); }
+    if (page==='export')     c.innerHTML = renderExport();
+    if (page==='whatsapp')   c.innerHTML = renderWhatsapp();
+    if (page==='teachers')   c.innerHTML = renderTeachers();
+    if (page==='activity')    c.innerHTML = renderActivity();
+    if (page==='cs-report')   c.innerHTML = renderCSReport();
+    if (page==='smart-alerts') c.innerHTML = renderSmartAlerts();
+    if (page==='change-pass') c.innerHTML = renderChangePass();
+  }
 }
 
 // ── OVERVIEW ──
