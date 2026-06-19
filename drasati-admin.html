@@ -189,9 +189,24 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 window.db = db;
-window.fbFuncs = { doc, getDoc, setDoc };
+window.fbFuncs = { doc, getDoc, setDoc, collection, addDoc, getDocs, query, where, orderBy, updateDoc, deleteDoc };
 window.firebaseReady = true;
 window.dispatchEvent(new Event('firebase-ready'));
+
+// Firebase functions for students
+async function fbGetStudents(){
+  try{
+    const querySnapshot = await getDocs(collection(db,'students'));
+    const students = [];
+    querySnapshot.forEach((doc) => {
+      students.push({...doc.data(), _docId: doc.id, id: doc.data().id});
+    });
+    return students;
+  }catch(e){
+    console.log('Firebase error:', e);
+    return [];
+  }
+}
 </script>
 
 <script>
@@ -223,16 +238,29 @@ window.addEventListener('firebase-ready', async () => {
   localStorage.setItem('admin_pass', PASS);
 });
 
-// Load students from localStorage (shared with main site)
-function getStudents() { return JSON.parse(localStorage.getItem('drasati_students')||'[]'); }
-function saveStudents(arr) { localStorage.setItem('drasati_students', JSON.stringify(arr)); }
+// Load students from localStorage or Firebase
+let CACHED_STUDENTS = [];
+function getStudents() { return CACHED_STUDENTS; }
+function saveStudents(arr) {
+  CACHED_STUDENTS = arr;
+  localStorage.setItem('drasati_students', JSON.stringify(arr));
+}
+
+// Load students from Firebase on startup
+async function loadStudentsFromFirebase(){
+  CACHED_STUDENTS = await fbGetStudents();
+  localStorage.setItem('drasati_students', JSON.stringify(CACHED_STUDENTS));
+  updatePendingBadge();
+  return CACHED_STUDENTS;
+}
 
 // ── AUTH ──
-function login() {
+async function login() {
   if (document.getElementById('pass').value === PASS) {
     document.getElementById('login-wrap').style.display = 'none';
     document.getElementById('dash').classList.add('show');
     document.getElementById('tb-date').textContent = new Date().toLocaleDateString('ar-OM',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+    await loadStudentsFromFirebase();
     updatePendingBadge();
     showPage('overview', document.querySelector('.nav-item'));
   } else {
