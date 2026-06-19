@@ -131,10 +131,11 @@ tr:hover td{background:rgba(255,255,255,.015);}
 
   /* BOTTOM NAV */
   .dash{padding-bottom:60px;}
-  .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--deep2);border-top:1px solid var(--faint);display:flex;gap:0;height:60px;z-index:50;}
+  .bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--deep2);border-top:1px solid var(--faint);display:flex !important;gap:0;height:60px;z-index:50;}
   .bottom-nav button{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:none;border:none;color:var(--mut);cursor:pointer;font-size:10px;font-family:'Tajawal',sans-serif;}
   .bottom-nav button.active{color:var(--teal);background:rgba(45,212,191,.1);}
   .bottom-nav svg{width:18px;height:18px;}
+  @media(min-width:481px){.bottom-nav{display:none !important;}.dash{padding-bottom:0;}}
 
   .th2{padding:10px 12px;margin-bottom:12px;}
   .tt{font-size:13px;}
@@ -211,6 +212,13 @@ window.dispatchEvent(new Event('firebase-ready'));
       <button class="ni" id="ni-settings" onclick="nav('settings')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>الإعدادات</button>
     </div>
     <div class="content" id="content"></div>
+  </div>
+  <!-- BOTTOM NAV FOR MOBILE -->
+  <div class="bottom-nav" style="display:none;">
+    <button class="active" id="bn-home" onclick="nav('home')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>الرئيسية</button>
+    <button id="bn-pending" onclick="nav('pending')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>انتظار</button>
+    <button id="bn-students" onclick="nav('students')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>طلاب</button>
+    <button id="bn-search" onclick="nav('search')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>بحث</button>
   </div>
 </div>
 <div class="toast" id="toast"></div>
@@ -381,8 +389,11 @@ async function changeCsPass(){
 
 function nav(page){
   document.querySelectorAll('.ni').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.bottom-nav button').forEach(b=>b.classList.remove('active'));
   const el=document.getElementById('ni-'+page);
   if(el) el.classList.add('active');
+  const bn=document.getElementById('bn-'+page);
+  if(bn) bn.classList.add('active');
   const pages={home:renderHome,pending:renderPending,students:renderStudents,search:renderSearch,wa:renderWA};
   if(page==='settings'){ renderSettings(); return; }
   document.getElementById('content').innerHTML = pages[page]?pages[page]():'';
