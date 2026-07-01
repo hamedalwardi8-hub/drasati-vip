@@ -210,7 +210,7 @@ async function fbGetStudents(){
 </script>
 
 <script>
-let PASS = localStorage.getItem('admin_pass') || 'admin123';
+let PASS = null; // كلمة المرور تُقرأ من Firebase فقط (آمن)
 const GRADES = ['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن','الصف التاسع','الصف العاشر'];
 let currentGradeFilter = 'all';
 
@@ -218,9 +218,9 @@ let currentGradeFilter = 'all';
 async function getAdminPassFromDB() {
   try {
     const docSnap = await window.fbFuncs.getDoc(window.fbFuncs.doc(window.db, 'settings', 'admin_pass'));
-    return docSnap.exists() ? docSnap.data().value || 'admin123' : 'admin123';
+    return docSnap.exists() ? docSnap.data().value : null;
   } catch {
-    return 'admin123';
+    return null;
   }
 }
 
@@ -232,10 +232,9 @@ async function saveAdminPassToDB(pass) {
   }
 }
 
-// Initialize password from Firebase on load
+// Initialize password from Firebase on load (بدون حفظ في localStorage)
 window.addEventListener('firebase-ready', async () => {
   PASS = await getAdminPassFromDB();
-  localStorage.setItem('admin_pass', PASS);
 });
 
 // Load students from localStorage or Firebase
@@ -737,7 +736,6 @@ async function changeAdminPass(){
   if(!newp || newp.length < 4){ alert('كلمة المرور الجديدة قصيرة جداً'); return; }
   if(newp !== conf){ alert('كلمة المرور الجديدة غير متطابقة'); return; }
   PASS = newp;
-  localStorage.setItem('admin_pass', newp);
   await saveAdminPassToDB(newp);
   alert('✅ تم تغيير كلمة المرور بنجاح');
   document.getElementById('curr-pass').value = '';

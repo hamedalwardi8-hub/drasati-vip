@@ -210,21 +210,21 @@ window.dispatchEvent(new Event('firebase-ready'));
 
 <script>
 // ── TEACHERS DB ──
-// كلمة المرور لكل معلم — المدير يغيرها من لوحة التحكم
+// بيانات المعلمين بدون كلمات المرور (الكلمات تُقرأ من Firebase فقط)
 const TEACHERS = {
-  'math_low':    {pass:'math1234',   name:'أ. خالد الحارثي',   subject:'الرياضيات',    grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن'],    icon:'🔢'},
-  'math_high':   {pass:'math5678',   name:'أ. ماجد السعدي',    subject:'الرياضيات',    grades:['الصف التاسع','الصف العاشر'],                                  icon:'🔢'},
-  'science':     {pass:'sci1234',    name:'أ. سارة المعمرية',  subject:'العلوم',        grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن'],    icon:'🔬'},
-  'physics':     {pass:'phy1234',    name:'أ. عمر الكيومي',    subject:'الفيزياء',      grades:['الصف التاسع','الصف العاشر'],                                  icon:'⚡'},
-  'chemistry':   {pass:'chem1234',   name:'أ. نورة الفارسية',  subject:'الكيمياء',      grades:['الصف التاسع','الصف العاشر'],                                  icon:'🧪'},
-  'biology':     {pass:'bio1234',    name:'أ. ليلى الشيدية',   subject:'الأحياء',       grades:['الصف التاسع','الصف العاشر'],                                  icon:'🌿'},
-  'arabic_low':  {pass:'ara1234',    name:'أ. فاطمة البلوشية', subject:'اللغة العربية', grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن'],    icon:'📖'},
-  'arabic_high': {pass:'ara5678',    name:'أ. سلطان الغافري',  subject:'اللغة العربية', grades:['الصف التاسع','الصف العاشر'],                                  icon:'📖'},
-  'english':     {pass:'eng1234',    name:'أ. أحمد الرحبي',    subject:'اللغة الإنجليزية',grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن','الصف التاسع','الصف العاشر'],icon:'🌍'},
-  'islamic_low': {pass:'isl1234',    name:'أ. راشد النبهاني',  subject:'التربية الإسلامية',grades:['الصف الخامس','الصف السادس','الصف السابع'],               icon:'☪️'},
-  'islamic_high':{pass:'isl5678',    name:'أ. يوسف الكندي',    subject:'التربية الإسلامية',grades:['الصف الثامن','الصف التاسع','الصف العاشر'],               icon:'☪️'},
-  'social_low':  {pass:'soc1234',    name:'أ. مريم الزدجالية', subject:'الدراسات الاجتماعية',grades:['الصف الخامس','الصف السادس','الصف السابع'],            icon:'🗺️'},
-  'social_high': {pass:'soc5678',    name:'أ. هلال الحسني',    subject:'الدراسات الاجتماعية',grades:['الصف الثامن','الصف التاسع','الصف العاشر'],            icon:'🗺️'},
+  'math_low':    {name:'أ. خالد الحارثي',   subject:'الرياضيات',    grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن'],    icon:'🔢'},
+  'math_high':   {name:'أ. ماجد السعدي',    subject:'الرياضيات',    grades:['الصف التاسع','الصف العاشر'],                                  icon:'🔢'},
+  'science':     {name:'أ. سارة المعمرية',  subject:'العلوم',        grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن'],    icon:'🔬'},
+  'physics':     {name:'أ. عمر الكيومي',    subject:'الفيزياء',      grades:['الصف التاسع','الصف العاشر'],                                  icon:'⚡'},
+  'chemistry':   {name:'أ. نورة الفارسية',  subject:'الكيمياء',      grades:['الصف التاسع','الصف العاشر'],                                  icon:'🧪'},
+  'biology':     {name:'أ. ليلى الشيدية',   subject:'الأحياء',       grades:['الصف التاسع','الصف العاشر'],                                  icon:'🌿'},
+  'arabic_low':  {name:'أ. فاطمة البلوشية', subject:'اللغة العربية', grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن'],    icon:'📖'},
+  'arabic_high': {name:'أ. سلطان الغافري',  subject:'اللغة العربية', grades:['الصف التاسع','الصف العاشر'],                                  icon:'📖'},
+  'english':     {name:'أ. أحمد الرحبي',    subject:'اللغة الإنجليزية',grades:['الصف الخامس','الصف السادس','الصف السابع','الصف الثامن','الصف التاسع','الصف العاشر'],icon:'🌍'},
+  'islamic_low': {name:'أ. راشد النبهاني',  subject:'التربية الإسلامية',grades:['الصف الخامس','الصف السادس','الصف السابع'],               icon:'☪️'},
+  'islamic_high':{name:'أ. يوسف الكندي',    subject:'التربية الإسلامية',grades:['الصف الثامن','الصف التاسع','الصف العاشر'],               icon:'☪️'},
+  'social_low':  {name:'أ. مريم الزدجالية', subject:'الدراسات الاجتماعية',grades:['الصف الخامس','الصف السادس','الصف السابع'],            icon:'🗺️'},
+  'social_high': {name:'أ. هلال الحسني',    subject:'الدراسات الاجتماعية',grades:['الصف الثامن','الصف التاسع','الصف العاشر'],            icon:'🗺️'},
 };
 
 let CT = null; // current teacher
@@ -317,8 +317,8 @@ async function doLogin(){
     return;
   }
 
-  // الحصول على كلمة المرور من Firebase أو من TEACHERS
-  const teacherPass = TEACHERS_PASSES[user] || TEACHERS[user].pass;
+  // الحصول على كلمة المرور من Firebase فقط (آمن - بدون كلمات في الكود)
+  const teacherPass = TEACHERS_PASSES[user];
 
   if(teacherPass !== pass){
     err.textContent = 'اسم المستخدم أو كلمة المرور غير صحيحة';
@@ -808,10 +808,10 @@ async function saveTeacherSettings(){
   const newPass    = document.getElementById('set-newpass').value;
   const confirmPass= document.getElementById('set-confirmpass').value;
 
-  // Verify old password
+  // Verify old password (من Firebase فقط - آمن)
   const profiles = JSON.parse(localStorage.getItem('drasati_teacher_profiles')||'{}');
-  const currentPass = TEACHERS_PASSES[CK] || profiles[CK]?.pass || CT.pass;
-  if(oldPass !== currentPass){ showToast('❌ كلمة المرور الحالية غير صحيحة'); return; }
+  const currentPass = TEACHERS_PASSES[CK];
+  if(!currentPass || oldPass !== currentPass){ showToast('❌ كلمة المرور الحالية غير صحيحة'); return; }
 
   // Validate new password if provided
   if(newPass && newPass !== confirmPass){ showToast('❌ كلمة المرور الجديدة غير متطابقة'); return; }
@@ -824,11 +824,10 @@ async function saveTeacherSettings(){
 
   if(!changes.length){ showToast('لا يوجد تغييرات'); return; }
 
-  // Save
+  // Save (بدون حفظ كلمات مرور في localStorage - كل كلمات المرور من Firebase فقط)
   if(!profiles[CK]) profiles[CK] = {};
   profiles[CK].name = newName;
   if(newPass) {
-    profiles[CK].pass = newPass;
     TEACHERS_PASSES[CK] = newPass;
     await saveTeacherPassToDB(CK, newPass);
   }
