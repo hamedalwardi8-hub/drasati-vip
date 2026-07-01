@@ -300,7 +300,7 @@ async function saveSettingToDB(key, value){
 async function doLogin(){
   const user=document.getElementById('l-user').value.trim();
   const pass=document.getElementById('l-pass').value;
-  const savedPass = await getSettingFromDB('cs_pass') || 'cs2025';
+  const savedPass = await getSettingFromDB('cs_pass');
   const u=CS_USERS[user];
   if(!u||savedPass!==pass){ document.getElementById('lerr').textContent='اسم المستخدم أو كلمة المرور غير صحيحة'; document.getElementById('lerr').style.display='block'; return; }
   document.getElementById('lw').style.display='none';
@@ -378,8 +378,8 @@ async function changeCsPass(){
   var newp = document.getElementById('cs-new-pass').value;
   var conf = document.getElementById('cs-conf-pass').value;
   // Get current pass from Firebase first
-  var savedPass = await getSettingFromDB('cs_pass') || 'cs2025';
-  if(curr !== savedPass){ alert('كلمة المرور الحالية غير صحيحة'); return; }
+  var savedPass = await getSettingFromDB('cs_pass');
+  if(!savedPass || curr !== savedPass){ alert('كلمة المرور الحالية غير صحيحة'); return; }
   if(!newp || newp.length < 4){ alert('كلمة المرور الجديدة قصيرة جداً'); return; }
   if(newp !== conf){ alert('كلمة المرور الجديدة غير متطابقة'); return; }
   await saveSettingToDB('cs_pass', newp);
